@@ -12,20 +12,15 @@
     <title>Wypożyczalnia</title>
 </head>
 <body>
-<jsp:include page="naglowek.jsp"></jsp:include> <%--Wklejenie zagłówka na stronę--%>
 
 <%
     Film film = (Film) request.getAttribute("film");
     out.println(film.getTytul());
     List<Gatunek> gatunek = (List<Gatunek>) request.getAttribute("gatunek");
-    for (Gatunek g: gatunek) {
+    for (Gatunek g : gatunek) {
         out.println(g.getNazwa());
     }
     out.println(film.getRokProdukcji() + "<br/><br/>");
-    if (film.isWypozyczony())
-        out.println("Niestety film został wypożyczony<br/><br/>");
-    else
-        out.println("Film jest dostępny<br/><br/>");
     out.println("Średnia ocen : " + film.getSredniaOcena() + "<br/><br/>");
     Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
     OcenaDAO ocenaDAO = new OcenaDAO();
@@ -50,7 +45,8 @@
     <br><br>
 </form>
 <%
-        } else out.println("Twoja ocena : " + ocenaDAO.getOcene(zalogowany.getIdUzytkownika(), film.getIdFilmu()).getOcena());
+        } else
+            out.println("Twoja ocena : " + ocenaDAO.getOcene(zalogowany.getIdUzytkownika(), film.getIdFilmu()).getOcena());
     }
     if (zalogowany != null) {
 %>

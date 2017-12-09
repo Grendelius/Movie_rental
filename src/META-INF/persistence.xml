@@ -8,10 +8,12 @@
         <class>models.Ocena</class>
         <class>models.Recenzja</class>
         <class>models.Gatunek</class>
+        <class>models.Sklep</class>
+        <class>models.SklepFilm</class>
+        <class>models.Wypozyczenie</class>
         <properties>
-           <!--<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/wypozyczalnia?characterEncoding=UTF-8" />-->
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/wypozyczalnia" />
-            <property name="hibernate.connection.characterEncoding" value="UTF-8" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/wypozyczalnia"/>
+            <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.connection.password" value=""/>

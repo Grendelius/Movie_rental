@@ -9,7 +9,6 @@ public class Film {
     private int idFilmu;
     private String tytul;
     private int rokProdukcji;
-    //private boolean wypozyczony;
     private double sredniaOcena;
     private Date dataDodania;
     private String okladka;
@@ -44,16 +43,6 @@ public class Film {
     public void setRokProdukcji(int rokProdukcji) {
         this.rokProdukcji = rokProdukcji;
     }
-
-    /*@Basic
-    @Column(name = "wypozyczony")
-    public boolean isWypozyczony() {
-        return wypozyczony;
-    }
-
-    public void setWypozyczony(boolean wypozyczony) {
-        this.wypozyczony = wypozyczony;
-    }*/
 
     @Basic
     @Column(name = "sredniaOcena")

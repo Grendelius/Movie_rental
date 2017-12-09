@@ -21,7 +21,7 @@ public class Ocena {
     }
 
     @Basic
-    @Column(name = "ocena")
+    @Column(name = "wartosc")
     public int getOcena() {
         return wartosc;
     }

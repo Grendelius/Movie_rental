@@ -6,20 +6,20 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "recenzja")
 public class Recenzja {
-    private int idReceznji;
+    private int idRecenzji;
     private String tresc;
     private Timestamp data;
     private int idUzytkownika;
     private int idFilmu;
 
     @Id
-    @Column(name = "idReceznji")
+    @Column(name = "idRecenzji")
     public int getIdReceznji() {
-        return idReceznji;
+        return idRecenzji;
     }
 
     public void setIdReceznji(int idReceznji) {
-        this.idReceznji = idReceznji;
+        this.idRecenzji = idRecenzji;
     }
 
     @Basic
@@ -69,7 +69,7 @@ public class Recenzja {
 
         Recenzja recenzja = (Recenzja) o;
 
-        if (idReceznji != recenzja.idReceznji) return false;
+        if (idRecenzji != recenzja.idRecenzji) return false;
         if (idUzytkownika != recenzja.idUzytkownika) return false;
         if (idFilmu != recenzja.idFilmu) return false;
         if (tresc != null ? !tresc.equals(recenzja.tresc) : recenzja.tresc != null) return false;
@@ -80,7 +80,7 @@ public class Recenzja {
 
     @Override
     public int hashCode() {
-        int result = idReceznji;
+        int result = idRecenzji;
         result = 31 * result + (tresc != null ? tresc.hashCode() : 0);
         result = 31 * result + (data != null ? data.hashCode() : 0);
         result = 31 * result + idUzytkownika;

@@ -14,9 +14,8 @@ public class RecenzjaDAO {
         em = DBConfig.createEntityManager();
     }
 
-    public List<Recenzja> getKomentarze(int idFilmu) {
-        System.out.println(idFilmu);
-        List<Recenzja> r = this.em.createQuery("select r from Recenzja r where idFilmu = :idFilmu order by data DESC")
+    public List<Recenzja> getRecenzje(int idFilmu) {
+        List<Recenzja> r = this.em.createQuery("select r from Recenzja r where r.idFilmu = :idFilmu order by data DESC")
                 .setParameter("idFilmu", idFilmu)
                 .getResultList();
         return r;

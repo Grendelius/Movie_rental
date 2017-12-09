@@ -15,15 +15,15 @@
         <jsp:include page="right-menu.jsp"></jsp:include>
     </div>
 </div>
-    <!--<h1>Zaloguj się</h1>
-    ${blad}
-    <form method="post">
-        <p>Login:</p>
-        <input type="text" name="login" maxlength="30"/>
-        <p>Hasło:</p>
-        <input type="password" name="haslo" maxlength="20"/><br />
-        <input type="submit" value="Zaloguj"  />
-    </form>-->
+<h1>Zaloguj się</h1>
+${blad}
+<form method="post">
+    <p>Login:</p>
+    <input type="text" name="login" maxlength="30"/>
+    <p>Hasło:</p>
+    <input type="password" name="haslo" maxlength="20"/><br/>
+    <input type="submit" value="Zaloguj"/>
+</form>
 </body>
 </html>
 
