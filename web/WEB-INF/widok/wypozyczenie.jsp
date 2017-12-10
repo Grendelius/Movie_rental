@@ -9,13 +9,12 @@
 </head>
 <body>
 <%
-    int idFilmu = (int) request.getAttribute("idFilmu");
     List<SklepFilm> sklepFilmList = (List<SklepFilm>) request.getAttribute("sklepFilmList");
     SklepDAO sklepDAO = new SklepDAO();
     Sklep sklep;
     out.println("Wybierz sklep: ");
     for (SklepFilm s : sklepFilmList) {
-        sklep = sklepDAO.getSklepPoId(s.getIdSklepu());
+        sklep = sklepDAO.getSklep(s.getIdSklepu());
         out.println("<br>" + sklep.getNazwaSklepu());
         out.println(sklep.getUlica());
         if (s.getIloscFilmow() > 0) {

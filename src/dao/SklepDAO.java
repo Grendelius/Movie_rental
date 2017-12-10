@@ -12,10 +12,13 @@ public class SklepDAO {
         em = DBConfig.createEntityManager();
     }
 
-    public Sklep getSklepPoId(int idSklepu) {
+    // Metoda zwraca wybrany sklep
+    public Sklep getSklep(int idSklepu) {
         Sklep s = (Sklep) em.createQuery("select s from Sklep s where s.idSklepu = :idSklepu")
                 .setParameter("idSklepu", idSklepu)
                 .getSingleResult();
         return s;
     }
+
+
 }

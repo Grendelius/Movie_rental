@@ -15,7 +15,7 @@
         </b>
     </div>
     <%
-        List<Film> film = (List<Film>) request.getAttribute("nowe");
+        List<Film> film = (List<Film>) request.getAttribute("film");
         for (Film f : film) {
     %>
     <div style="background-color:darkred;margin-top:5px">
@@ -27,30 +27,22 @@
             </b></a>
     </div>
     <div style="margin-top:5px;margin-left:10px;">
-        <a href=""><img style="width:130px;height:170px;" src="<% out.println(f.getOkladka()); %>"></a>
+        <a href=""><img style="width:130px;height:170px;" src="<%=f.getOkladka()%>"></a>
 
         <div style="margin-left:10px;position:absolute;display:inline">
-            <%
-                out.println("Reżyser: ");
-            %>
+            <td>Reżyser:</td>
             </br>
-            <%
-                out.println("Czas trwania: ");
-            %>
+            <td>Czas trwania:</td>
             </br>
-            <%
-                out.println("Rok produkcji: " + f.getRokProdukcji());
-            %>
+            <td>Rok produkcji: <%=f.getRokProdukcji()%>
+            </td>
             </br>
-            <%
-                out.println("Średnia Ocena: " + f.getSredniaOcena());
-            %>
+            <td>Średnia Ocena: <%=f.getSredniaOcena()%>
+            </td>
             </br>
-            <%
-                out.println("Obejrzyj zwiastuny ");
-            %>
-            </br>
-            </br>
+            <td>Obejrzyj zwiastuny</td>
+            </br></br>
+
             <form method="post" action="wypozycz" style="display:inline">
                 <input type="hidden" name="idFilmu" value="<%=f.getIdFilmu()%>"/>
                 <input type="submit" value="Wypożycz!"
@@ -59,9 +51,8 @@
         </div>
     </div>
     <div style="margin:5px;margin-left:10px">
-        <%
-            out.println(f.getOpis());
-        %>
+        <td><%=f.getOpis()%>
+        </td>
     </div>
     <%
         }

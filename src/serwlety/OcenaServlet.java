@@ -28,7 +28,7 @@ public class OcenaServlet extends HttpServlet {
             nowaOcena.setOcena(ocena);
             ocenaDAO.addOcene(nowaOcena);
             FilmDAO filmDAO = new FilmDAO();
-            filmDAO.setSredniaOcena(idFilmu);
+            filmDAO.updateSredniaOcena(idFilmu);
         }
         doGet(request, response);
     }

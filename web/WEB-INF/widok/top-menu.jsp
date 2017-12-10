@@ -11,8 +11,8 @@
                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/DVD_logo.svg/1200px-DVD_logo.svg.png"
                                 alt="logo"></a>
     <div style="position:absolute;display:inline;margin:5px">
-        <form method="post" action="listaRezerwacji" style="display:inline">
-            <input type="submit" value="Lista rezerwacji"
+        <form method="post" action="listaWypozyczen" style="display:inline">
+            <input type="submit" value="Wypożyczenia"
                    style="width:120px;height:40px;background-color:red;border-color:red;"></input>
         </form>
         <button type="button" style="width:120px;height:40px;background-color:red;border-color:red;">cos</button>

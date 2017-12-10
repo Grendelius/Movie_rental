@@ -23,10 +23,8 @@ public class StronaGlownaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDAO = new FilmDAO();
         GatunekDAO gatunekDAO = new GatunekDAO();
-        List<Film> film = filmDAO.getFilmy();
+        List<Film> film = filmDAO.getNajnowszeFilmy();
         request.setAttribute("film", film);
-        List<Film> nowe = filmDAO.getNajnowszeFilmy();
-        request.setAttribute("nowe", nowe);
         List<Gatunek> gatunek = gatunekDAO.getWszystkieGatunki();
         request.setAttribute("gatunek", gatunek);
         List<String> gatunekdistinct = gatunekDAO.getGatunki();

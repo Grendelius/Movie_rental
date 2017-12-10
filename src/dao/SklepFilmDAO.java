@@ -14,13 +14,15 @@ public class SklepFilmDAO {
         em = DBConfig.createEntityManager();
     }
 
-    public List<SklepFilm> getSklepFilmPoIdFilmu(int idFilmu) {
+    // Metoda zwraca listę SklepFilm dla wybranego filmu
+    public List<SklepFilm> getWybraneSklepFilmList(int idFilmu) {
         List<SklepFilm> s = this.em.createQuery("select s from SklepFilm s where s.idFilmu = :idFilmu")
                 .setParameter("idFilmu", idFilmu)
                 .getResultList();
         return s;
     }
 
+    // Metoda zwraca wybrany SklepList dla wybranego filmu i sklepu
     private SklepFilm getWybranySklepFilm(int idFilmu, int idSklepu) {
         SklepFilm s = (SklepFilm) em.createQuery("select s from SklepFilm s where s.idFilmu = :idFilmu and s.idSklepu = :idSklepu")
                 .setParameter("idFilmu", idFilmu)
@@ -29,7 +31,8 @@ public class SklepFilmDAO {
         return s;
     }
 
-    public boolean updateIloscFilmow(int idFilmu, int idSklepu) {
+    // Metoda zmniejsza w tabeli ilość sztuk wybranego filmu w wybranym sklepie
+    public boolean zmniejszIloscFilmow(int idFilmu, int idSklepu) {
         SklepFilm sklepFilm = getWybranySklepFilm(idFilmu, idSklepu);
         sklepFilm.setIloscFilmow(sklepFilm.getIloscFilmow() - 1);
         EntityTransaction et = em.getTransaction();
@@ -44,6 +47,25 @@ public class SklepFilmDAO {
             return false;
         }
     }
+
+    // Metoda zmniejsza w tabeli ilość sztuk wybranego filmu w wybranym sklepie
+    public boolean zwiekszIloscFilmow(int idFilmu, int idSklepu) {
+        SklepFilm sklepFilm = getWybranySklepFilm(idFilmu, idSklepu);
+        sklepFilm.setIloscFilmow(sklepFilm.getIloscFilmow() + 1);
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            em.merge(sklepFilm);
+            et.commit();
+            return true;
+        } catch (Exception e) {
+            et.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }
 
 

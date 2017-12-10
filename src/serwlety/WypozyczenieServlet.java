@@ -18,27 +18,40 @@ import java.util.List;
 
 @WebServlet("/wypozycz")
 public class WypozyczenieServlet extends HttpServlet {
+    /**
+     *
+     * Metoda sprawdza czy użytkownik jest zalogowany jeżeli nie to przenosi go do strony logowania.
+     * Następnie wyświetla informacje na temat sklepów w których jest wybrany film.
+     * Jeżeli klient wybrał już sklep to metoda tworzy nowe wypożyczenie i przenosi go do strony logowania.
+     *
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
         int idFilmu = Integer.parseInt(request.getParameter("idFilmu"));
         String idsklepu = request.getParameter("idSklepu");
+        SklepFilmDAO sklepFilmDAO = new SklepFilmDAO();
+
         if (idsklepu != null) {
             int idSklepu = Integer.parseInt(idsklepu);
             Wypozyczenie wypozyczenie = new Wypozyczenie();
+            WypozyczenieDAO wypozyczenieDAO = new WypozyczenieDAO();
+
+            //Wypełnienie pól nowego wypożyczenia
             wypozyczenie.setDataWypozyczenia(new Timestamp(new Date().getTime()));
             wypozyczenie.setIdFilmu(idFilmu);
             wypozyczenie.setIdUzytkownika(zalogowany.getIdUzytkownika());
             wypozyczenie.setIdSklepu(idSklepu);
             wypozyczenie.setStatus("W trakcie realizacji");
-            WypozyczenieDAO wypozyczenieDAO = new WypozyczenieDAO();
+
+            //Utworzenie nowego wypożyczenia i zminiejszenie sztuk danego filmu w sklepie
             wypozyczenieDAO.addWypozyczenie(wypozyczenie);
-            SklepFilmDAO sklepFilmDAO = new SklepFilmDAO();
-            sklepFilmDAO.updateIloscFilmow(idFilmu, idSklepu);
+            sklepFilmDAO.zmniejszIloscFilmow(idFilmu, idSklepu);
+
             response.sendRedirect(request.getContextPath() + "/stronaGlowna");
-        } else if (zalogowany != null && zalogowany.getRola().equals("klient")) {
-            request.setAttribute("idFilmu", idFilmu);
-            SklepFilmDAO sklepFilmDAO = new SklepFilmDAO();
-            List<SklepFilm> sklepFilmList = sklepFilmDAO.getSklepFilmPoIdFilmu(idFilmu);
+        } else if (zalogowany != null) {
+            //Pobranie listy sklepów
+            List<SklepFilm> sklepFilmList = sklepFilmDAO.getWybraneSklepFilmList(idFilmu);
+
             request.setAttribute("sklepFilmList", sklepFilmList);
             doGet(request, response);
         } else

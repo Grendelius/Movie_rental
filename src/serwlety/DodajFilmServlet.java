@@ -39,7 +39,7 @@ public class DodajFilmServlet extends HttpServlet {
             GatunekDAO gatunekDAO;
             for(int i = 0;i<gatunek.length;i++) {
                 gatunekDAO = new GatunekDAO();
-                g.setIdFilmu(filmDAO.getID());
+                g.setIdFilmu(filmDAO.getIdDoPoprawy());  //Do poprawy!!!!!!!!!
                 g.setNazwa(gatunek[i]);
                 gatunekDAO.addGatunek(g);
             }
