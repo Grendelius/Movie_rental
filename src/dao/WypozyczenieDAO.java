@@ -37,6 +37,15 @@ public class WypozyczenieDAO {
         return w;
     }
 
+    // Metoda zwraca aktualne wypożyczenie wybranego klienta danego filmu
+    public Wypozyczenie getAktualneWypozyczenie(int idUzytkownika, int idFilmu) {
+        Wypozyczenie w = (Wypozyczenie) this.em.createQuery("select w from Wypozyczenie w where w.idUzytkownika = :idUzytkownika and w.idFilmu =:idFilmu and w.dataZwrotu IS NULL")
+                .setParameter("idUzytkownika", idUzytkownika)
+                .setParameter("idFilmu", idFilmu)
+                .getSingleResult();
+        return w;
+    }
+
     // Metoda dodaje Wypożyczenie do tabeli
     public boolean addWypozyczenie(Wypozyczenie w) {
         EntityTransaction et = em.getTransaction();

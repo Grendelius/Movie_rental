@@ -1,4 +1,4 @@
-package serwlety;
+package servlets;
 
 import dao.FilmDAO;
 import dao.GatunekDAO;
@@ -29,7 +29,7 @@ public class StronaGlownaServlet extends HttpServlet {
         request.setAttribute("gatunek", gatunek);
         List<String> gatunekdistinct = gatunekDAO.getGatunki();
         request.setAttribute("gatunekdistinct", gatunekdistinct);
-        request.getRequestDispatcher("/WEB-INF/widok/stronaGlowna.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/stronaGlowna.jsp").forward(request, response);
     }
 
 

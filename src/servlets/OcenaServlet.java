@@ -1,4 +1,4 @@
-package serwlety;
+package servlets;
 
 import dao.FilmDAO;
 import dao.OcenaDAO;

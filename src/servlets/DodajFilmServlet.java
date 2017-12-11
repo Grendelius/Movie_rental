@@ -1,4 +1,4 @@
-package serwlety;
+package servlets;
 
 import dao.FilmDAO;
 import dao.GatunekDAO;
@@ -51,6 +51,6 @@ public class DodajFilmServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/widok/dodajFilm.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/dodajFilm.jsp").forward(request, response);
     }
 }

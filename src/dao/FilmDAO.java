@@ -14,13 +14,6 @@ public class FilmDAO {
         em = DBConfig.createEntityManager();
     }
 
-//    // Metoda zwraca listę wszystkich filmów
-//    public List<Film> getAllFilmList() {
-//        List<Film> f = this.em.createQuery("select f from Film f")
-//                .getResultList();
-//        return f;
-//    }
-
     // Metoda zwraca listę filmów posortowanych od najnowszych do najstarszych
     public List<Film> getNajnowszeFilmy(){
         List<Film> film = this.em.createQuery("select f from Film f order by dataDodania desc")

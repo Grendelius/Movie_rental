@@ -1,11 +1,14 @@
-package serwlety;
+package servlets;
 
 import dao.SklepFilmDAO;
 import dao.WypozyczenieDAO;
+import dao.ZamowienieDAO;
 import models.SklepFilm;
 import models.Uzytkownik;
 import models.Wypozyczenie;
+import models.Zamowienie;
 
+import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,11 +22,11 @@ import java.util.List;
 @WebServlet("/wypozycz")
 public class WypozyczenieServlet extends HttpServlet {
     /**
-     *
      * Metoda sprawdza czy użytkownik jest zalogowany jeżeli nie to przenosi go do strony logowania.
      * Następnie wyświetla informacje na temat sklepów w których jest wybrany film.
-     * Jeżeli klient wybrał już sklep to metoda tworzy nowe wypożyczenie i przenosi go do strony logowania.
-     *
+     * Jeżeli klient wybrał już sklep to metoda tworzy nowe wypożyczenie lub nowe zamówienie i przenosi go do strony logowania.
+     * Jeżeli klient wybrał film, który już wypożycza lub zamawia to program blokuje wypożyczenie i przenosi
+     * go do strony logowania
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
@@ -48,17 +51,39 @@ public class WypozyczenieServlet extends HttpServlet {
             sklepFilmDAO.zmniejszIloscFilmow(idFilmu, idSklepu);
 
             response.sendRedirect(request.getContextPath() + "/stronaGlowna");
-        } else if (zalogowany != null) {
-            //Pobranie listy sklepów
-            List<SklepFilm> sklepFilmList = sklepFilmDAO.getWybraneSklepFilmList(idFilmu);
+        } else if (zalogowany != null && zalogowany.getRola().equals("klient")) {
+            int errCounter = 0;
 
-            request.setAttribute("sklepFilmList", sklepFilmList);
-            doGet(request, response);
-        } else
+            // Sprawdzanie czy klient już wypożycza ten film
+            try {
+                WypozyczenieDAO wypozyczenieDAO = new WypozyczenieDAO();
+                Wypozyczenie wypozyczenie = wypozyczenieDAO.getAktualneWypozyczenie(zalogowany.getIdUzytkownika(), idFilmu);
+            } catch (NoResultException | NullPointerException e) {
+                errCounter++;
+            }
+
+            // Sprawdzanie czy klient już zamawia ten film
+            try {
+                ZamowienieDAO zamowienieDAO = new ZamowienieDAO();
+                Zamowienie zamowienie = zamowienieDAO.getAktualneZamowienie(zalogowany.getIdUzytkownika(), idFilmu);
+            } catch (NoResultException | NullPointerException e) {
+                errCounter++;
+            }
+
+            // Jeżeli klient nie wypożyczył i nie zamówił tego filmu to zostaje wyświetlona lista sklepów z tym filmem
+            if (errCounter == 2) {
+                List<SklepFilm> sklepFilmList = sklepFilmDAO.getWybraneSklepFilmList(idFilmu);
+                request.setAttribute("sklepFilmList", sklepFilmList);
+                doGet(request, response);
+            } else
+                response.sendRedirect(request.getContextPath() + "/stronaGlowna");
+        } else if (zalogowany.getRola().equals("pracownik"))
+            response.sendRedirect(request.getContextPath() + "/stronaGlowna");
+        else
             response.sendRedirect(request.getContextPath() + "/login");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/widok/wypozyczenie.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/wypozyczenie.jsp").forward(request, response);
     }
 }

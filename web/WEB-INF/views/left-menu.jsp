@@ -12,7 +12,8 @@
             </div>
             <c:forEach var="gatunekdistinct" items="${gatunekdistinct}">
                 <div style="margin-left:10px">
-                    <a href="${gatunekdistinct}" style="text-decoration:none;color:black">${gatunekdistinct}</a></br>
+                    <button name="wybranyGatunek" type="submit" value="${gatunekdistinct}" style="background-color: transparent; border-color: transparent">${gatunekdistinct}
+                    </button>
                 </div>
             </c:forEach>
         </form>

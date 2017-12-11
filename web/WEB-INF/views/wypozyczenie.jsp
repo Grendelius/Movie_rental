@@ -20,15 +20,24 @@
         if (s.getIloscFilmow() > 0) {
             out.println("<br>Ilość dostępnych sztuk: " + s.getIloscFilmow());
 %>
-<form method="post" action="" style="display:inline">
+<form method="post" action="wypozycz" style="display:inline">
     <input type="hidden" name="idSklepu" value="<%=s.getIdSklepu()%>"/>
     <input type="hidden" name="idFilmu" value="<%=s.getIdFilmu()%>"/>
     <input type="submit" value="Wypożycz!"
            style="width:90px;height:30px;background-color:lightgrey;border-color:lightgrey;"></input>
 </form>
 <%
-        } else
+        } else {
             out.println("<br>Wszystkie sztuki wypożyczone");
+        %>
+<form method="post" action="zamow" style="display:inline">
+    <input type="hidden" name="idSklepu" value="<%=s.getIdSklepu()%>"/>
+    <input type="hidden" name="idFilmu" value="<%=s.getIdFilmu()%>"/>
+    <input type="submit" value="Zamów!"
+           style="width:90px;height:30px;background-color:lightgrey;border-color:lightgrey;"></input>
+</form>
+<%
+        }
     }
 %>
 </body>

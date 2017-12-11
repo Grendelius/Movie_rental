@@ -48,6 +48,14 @@
         } else
             out.println("Twoja ocena : " + ocenaDAO.getOcene(zalogowany.getIdUzytkownika(), film.getIdFilmu()).getOcena());
     }
+    %>
+<br><br>
+<form method="post" action="wypozycz" style="display:inline">
+    <input type="hidden" name="idFilmu" value="<%=film.getIdFilmu()%>"/>
+    <input type="submit" value="Wypożycz!"
+           style="width:90px;height:30px;background-color:lightgrey;border-color:lightgrey;"></input>
+</form>
+<%
     if (zalogowany != null) {
 %>
 <form method="post">

@@ -11,6 +11,7 @@
         <class>models.Sklep</class>
         <class>models.SklepFilm</class>
         <class>models.Wypozyczenie</class>
+        <class>models.Zamowienie</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/wypozyczalnia"/>
             <property name="hibernate.connection.characterEncoding" value="UTF-8"/>

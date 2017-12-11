@@ -1,4 +1,4 @@
-package serwlety;
+package servlets;
 
 import dao.UzytkownicyDAO;
 import models.Uzytkownik;
@@ -92,7 +92,7 @@ public class RejestracjaServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/widok/rejestracja.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/rejestracja.jsp").forward(request, response);
     }
 
 
