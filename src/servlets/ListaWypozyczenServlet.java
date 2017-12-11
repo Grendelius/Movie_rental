@@ -22,14 +22,12 @@ import java.util.List;
 public class ListaWypozyczenServlet extends HttpServlet {
 
     /**
-     *
      * Metoda sprawdza czy użytkownik jest zalogowany jeżeli nie to przenosi go do strony logowania.
      * Następnie w zależności od tego czy jest klientem czy pracownikiem wyświetla adekwatną tablicę wypożyczeń
      * i tablicę zamówień na stronie listaWypozyczen.jsp.
      * Metoda obsługuje możliwość zmiany statusu wypożyczenia przez pracownika
      * i anulowania wypożyczenia prze klienta.
      * Metoda umożliwia anulowanie zamówienia przez klienta
-     *
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
@@ -43,25 +41,25 @@ public class ListaWypozyczenServlet extends HttpServlet {
 
             if (zalogowany.getRola().equals("klient")) {
 
-                //Anulowanie przez klienta wypożyczenia
-                if (nowyStatus != null && nowyStatus.equals("Anuluj wypożyczenie")) {
-                    Wypozyczenie wypozyczenie = wypozyczenieDAO.getWypozyczenie(Integer.parseInt(idWypozyczenia));
-                    SklepFilmDAO sklepFilmDAO = new SklepFilmDAO();
+                if (nowyStatus != null) {
+                    //Anulowanie przez klienta wypożyczenia
+                    if (nowyStatus.equals("Anuluj wypożyczenie")) {
+                        Wypozyczenie wypozyczenie = wypozyczenieDAO.getWypozyczenie(Integer.parseInt(idWypozyczenia));
+                        SklepFilmDAO sklepFilmDAO = new SklepFilmDAO();
 
-                    try{
-                        addWypozyczenie(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
-                    }catch (NoResultException | IndexOutOfBoundsException e){
-                        sklepFilmDAO.zwiekszIloscFilmow(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
+                        try {
+                            addWypozyczenie(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
+                        } catch (NoResultException | IndexOutOfBoundsException e) {
+                            sklepFilmDAO.zwiekszIloscFilmow(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
+                        } finally {
+                            wypozyczenieDAO.deleteWypozyczenie(wypozyczenie);
+                        }
                     }
-                    finally {
-                        wypozyczenieDAO.deleteWypozyczenie(wypozyczenie);
+                    //Anulowanie przez klienta zamówienia
+                    else if (nowyStatus.equals("Anuluj zamówienie")) {
+                        Zamowienie zamowienie = zamowienieDAO.getZamowienie(Integer.parseInt(idZamowienia));
+                        zamowienieDAO.deleteZamowienie(zamowienie);
                     }
-                }
-
-                //Anulowanie przez klienta zamówienia
-                if (nowyStatus != null && nowyStatus.equals("Anuluj zamówienie")) {
-                    Zamowienie zamowienie = zamowienieDAO.getZamowienie(Integer.parseInt(idZamowienia));
-                    zamowienieDAO.deleteZamowienie(zamowienie);
                 }
 
                 //Pobranie listy wypożyczeń danego klienta
@@ -73,25 +71,44 @@ public class ListaWypozyczenServlet extends HttpServlet {
                 request.setAttribute("zamowienie", zamowienie);
 
             } else if (zalogowany.getRola().equals("pracownik")) {
-                if (nowyStatus != null) {
+                if (nowyStatus != null && !nowyStatus.equals("Anuluj zamówienie")) {
                     Wypozyczenie wypozyczenie = wypozyczenieDAO.getWypozyczenie(Integer.parseInt(idWypozyczenia));
+                    SklepFilmDAO sklepFilmDAO = new SklepFilmDAO();
 
                     //Zmiana statusu
                     wypozyczenie.setStatus(nowyStatus);
+
+                    //Zakończenie przez pracownika wypożyczenia
                     if (nowyStatus.equals("Zakończony")) {
-                        SklepFilmDAO sklepFilmDAO = new SklepFilmDAO();
 
                         //Zwrot filmu do sklepu i dopisane daty zwrotu wypożyczenia
-                        try{
+                        try {
                             addWypozyczenie(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
-                        }catch (NoResultException | IndexOutOfBoundsException e){
+                        } catch (NoResultException | IndexOutOfBoundsException e) {
                             sklepFilmDAO.zwiekszIloscFilmow(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
-                        }
-                        finally {
+                        } finally {
                             wypozyczenie.setDataZwrotu(new Timestamp(new Date().getTime()));
                         }
+                        wypozyczenieDAO.updateWypozyczenie(wypozyczenie);
                     }
-                    wypozyczenieDAO.updateWypozyczenie(wypozyczenie);
+                    //Anulowanie przez pracownika wypożyczenia
+                    else if (nowyStatus.equals("Anuluj wypożyczenie")) {
+                        try {
+                            addWypozyczenie(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
+                        } catch (NoResultException | IndexOutOfBoundsException e) {
+                            sklepFilmDAO.zwiekszIloscFilmow(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
+                        } finally {
+                            wypozyczenieDAO.deleteWypozyczenie(wypozyczenie);
+                        }
+                    }
+                    else
+                        wypozyczenieDAO.updateWypozyczenie(wypozyczenie);
+                }
+
+                //Anulowanie przez pracownika zamówienia
+                if (nowyStatus != null && nowyStatus.equals("Anuluj zamówienie")) {
+                    Zamowienie zamowienie = zamowienieDAO.getZamowienie(Integer.parseInt(idZamowienia));
+                    zamowienieDAO.deleteZamowienie(zamowienie);
                 }
 
                 //Pobranie listy wszystkich wypożyczeń
@@ -116,10 +133,10 @@ public class ListaWypozyczenServlet extends HttpServlet {
      * Metoda sprawdza czy jest zamówienie na dany film jeśli tak to tworzy nowe wypożyczenie na podstawie zamówienia
      * a następnie usuwa zamówienie z bazy
      */
-    private void addWypozyczenie(int idFilmu, int idSklepu){
+    private void addWypozyczenie(int idFilmu, int idSklepu) {
         WypozyczenieDAO wypozyczenieDAO = new WypozyczenieDAO();
         ZamowienieDAO zamowienieDAO = new ZamowienieDAO();
-        Zamowienie zamowienie = zamowienieDAO.getZamowienie(idFilmu,idSklepu);
+        Zamowienie zamowienie = zamowienieDAO.getZamowienie(idFilmu, idSklepu);
         Wypozyczenie wypozyczenieNowe = new Wypozyczenie();
         wypozyczenieNowe.setDataWypozyczenia(zamowienie.getDataZamowienia());
         wypozyczenieNowe.setIdFilmu(zamowienie.getIdFilmu());

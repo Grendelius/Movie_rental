@@ -50,6 +50,7 @@
                     <option>Do odbioru w sklepie</option>
                     <option>Wypożyczony</option>
                     <option>Zakończony</option>
+                    <option>Anuluj wypożyczenie</option>
                 </select>
                 <center>
                     <input type="submit" value="Zatwierź">
@@ -98,18 +99,12 @@
         <td><%=(sklepDAO.getSklep(z.getIdSklepu()).getUlica())%></td>
         <%if (zalogowany.getRola().equals("pracownik")){%><td><%=z.getIdUzytkownika()%></td><%}%>
         <td><%=z.getDataZamowienia()%></td>
-        <%
-            if (zalogowany.getRola().equals("klient")){
-        %>
         <td>
             <form method="post" action="listaWypozyczen">
                 <input type="hidden" name="idZamowienia" value="<%=z.getIdZamowienia()%>"/>
                 <input type="submit" name="nowyStatus" value="Anuluj zamówienie">
             </form>
         </td>
-        <%
-            }
-        %>
     </tr>
     <%
         }
