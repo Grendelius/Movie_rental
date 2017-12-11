@@ -15,7 +15,7 @@ public class FilmDAO {
     }
 
     // Metoda zwraca listę filmów posortowanych od najnowszych do najstarszych
-    public List<Film> getNajnowszeFilmy(){
+    public List<Film> getNajnowszeFilmyList(){
         List<Film> film = this.em.createQuery("select f from Film f order by dataDodania desc")
                 .getResultList();
         return film;
@@ -36,14 +36,13 @@ public class FilmDAO {
         return id;
     }
 
-    // Metoda dodaje Film do tabeli
+    // Metoda dodaje Film do bazy
     public boolean addFilm(Film f) {
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
             em.persist(f);
             et.commit();
-            System.out.println(f.getIdFilmu());
             return true;
         } catch (Exception e) {
             et.rollback();

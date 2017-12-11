@@ -13,6 +13,9 @@ public class StarterSerwlet extends HttpServlet {
         doGet(request, response);
     }
 
+    /**
+     * Metoda startuje aplikacje przenosząc użytkownika na stronę główną
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendRedirect(request.getContextPath() + "/stronaGlowna");
     }

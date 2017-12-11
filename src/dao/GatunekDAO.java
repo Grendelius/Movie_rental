@@ -15,28 +15,29 @@ public class GatunekDAO {
         em = DBConfig.createEntityManager();
     }
 
-    public List<Gatunek> getWszystkieGatunki() {
+    // Metoda zwraca listę wszystkich gatunków
+    public List<Gatunek> getAllGatunkiList() {
         List<Gatunek> g = this.em.createQuery("select g from Gatunek g")
                 .getResultList();
         return g;
     }
 
-    public List<String> getGatunki() {
+    // Metoda zwraca listę gatunków bez powtórzeń
+    public List<String> getDistinctGatunkiList() {
         List<String> gatunek = this.em.createQuery("select distinct nazwa from Gatunek ")
                 .getResultList();
         return gatunek;
     }
 
-    public List<Gatunek> getWybraneGatunki(int idFilmu) {
+    // Metoda zwraca listę wszystkich gatunków wybranego filmu
+    public List<Gatunek> getGatunkiFilmuList(int idFilmu) {
         List<Gatunek> g = this.em.createQuery("select g from Gatunek g where g.idFilmu = :idFilmu")
                 .setParameter("idFilmu", idFilmu)
-                .getResultList();;
+                .getResultList();
         return g;
     }
 
-     {
-    }
-
+    // Metoda dodaje Gatunek do bazy
     public boolean addGatunek(Gatunek g) {
         EntityTransaction et = em.getTransaction();
         try {
@@ -50,4 +51,6 @@ public class GatunekDAO {
             return false;
         }
     }
+
+
 }

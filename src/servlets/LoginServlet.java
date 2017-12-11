@@ -15,6 +15,11 @@ import java.io.IOException;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
+    /**
+     * Metoda przenosi użytkownika do strony logowania login.jsp.
+     * Po wprowadzeniu danych logowania sprawdza ich poprawność, zalogowuje użytkownika i przenosi go do strony
+     * StronaGlownaServlet. W razie błędnego wprowadzenia danych metoda ponownie przenosi użytkownika do strony logowania login.jsp.
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String login = request.getParameter("login");
@@ -22,8 +27,10 @@ public class LoginServlet extends HttpServlet {
         if (login != null && haslo != null && !"".equals(haslo)) {
             try {
                 UzytkownicyDAO dao = new UzytkownicyDAO();
-                Uzytkownik u = dao.getPoLoginie(login);
+                Uzytkownik u = dao.getUzytkownikPoLoginie(login);
                 if (u.getHaslo().equals(dao.getMD5(haslo))) {
+
+                    //Tworzenie sesji użytkownika
                     HttpSession session = request.getSession();
                     session.setAttribute("uzytkownik", u);
                     response.sendRedirect(request.getContextPath() + "/stronaGlowna");

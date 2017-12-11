@@ -22,11 +22,11 @@ import java.util.List;
 @WebServlet("/wypozycz")
 public class WypozyczenieServlet extends HttpServlet {
     /**
-     * Metoda sprawdza czy użytkownik jest zalogowany jeżeli nie to przenosi go do strony logowania.
+     * Metoda sprawdza czy użytkownik jest zalogowany jeżeli nie to przenosi go do strony LoginServlet.
      * Następnie wyświetla informacje na temat sklepów w których jest wybrany film.
-     * Jeżeli klient wybrał już sklep to metoda tworzy nowe wypożyczenie lub nowe zamówienie i przenosi go do strony logowania.
+     * Jeżeli klient wybrał już sklep to metoda tworzy nowe wypożyczenie lub nowe zamówienie i przenosi go do strony StronaGlownaServlet
      * Jeżeli klient wybrał film, który już wypożycza lub zamawia to program blokuje wypożyczenie i przenosi
-     * go do strony logowania
+     * go do strony LoginServlet
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
@@ -77,7 +77,7 @@ public class WypozyczenieServlet extends HttpServlet {
                 doGet(request, response);
             } else
                 response.sendRedirect(request.getContextPath() + "/stronaGlowna");
-        } else if (zalogowany.getRola().equals("pracownik"))
+        } else if (zalogowany != null && zalogowany.getRola().equals("pracownik"))
             response.sendRedirect(request.getContextPath() + "/stronaGlowna");
         else
             response.sendRedirect(request.getContextPath() + "/login");

@@ -14,6 +14,11 @@ import java.util.regex.Pattern;
 @WebServlet("/rejestruj")
 public class RejestracjaServlet extends HttpServlet {
 
+    /**
+     * Metoda przenosi użytkownika do strony rejestracji rejestracja.jsp.
+     * Po wprowadzeniu danych sprawdza ich poprawność, i przenosi go do strony StronaGlownaServlet.
+     * W razie błędnego wprowadzenia danych metoda ponownie przenosi użytkownika do strony rejestracji rejestracja.jsp.
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String login = request.getParameter("login");
@@ -25,9 +30,9 @@ public class RejestracjaServlet extends HttpServlet {
         String miejsceZamieszkania = request.getParameter("miejsceZamieszkania");
         String email = request.getParameter("email");
 
-        String patternLogin = "[a-zA-Z0-9]{6,}";
-        String patternHaslo = "^(?=.*[0-9]).{8,}$";
-        String patternNumerTelefonu = "[0-9]{7,}";
+        String patternLogin = "[a-zA-Z0-9]{6,15}";
+        String patternHaslo = "^(?=.*[0-9]).{8,15}$";
+        String patternNumerTelefonu = "[0-9]{9}";
         String patternEmail = "^[\\w!#$%&’*+/=\\-?^_`{|}~]+(\\.[\\w!#$%&’*+/=\\-?^_`{|}~]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
         String patternPusty = ".+";
 
@@ -74,15 +79,15 @@ public class RejestracjaServlet extends HttpServlet {
                             doGet(request, response);
                         }
                     } else {
-                        request.setAttribute("blad", "Błędny numer telefonu! Długość minimum 7 cyfr");
+                        request.setAttribute("blad", "Błędny numer telefonu! Długość 9 cyfr");
                         doGet(request, response);
                     }
                 } else {
-                    request.setAttribute("blad", "Błędny login! Długość minimum 6 znaków (brak znaków szczególnych)");
+                    request.setAttribute("blad", "Błędny login! Długość od 6 do 15 znaków (brak znaków szczególnych)");
                     doGet(request, response);
                 }
             } else {
-                request.setAttribute("blad", "Błędne hasło! Długość minimum 8 znaków (przynajmniej jedna cyfra)!");
+                request.setAttribute("blad", "Błędne hasło! Długość od 8 do 15 znaków (przynajmniej jedna cyfra)!");
                 doGet(request, response);
             }
         } else {

@@ -81,7 +81,7 @@
         for (Recenzja rec : recenzja) {
             out.println("<tr>");
             UzytkownicyDAO uzytkownicyDAO = new UzytkownicyDAO();
-            Uzytkownik u = uzytkownicyDAO.getPoId(rec.getIdUzytkownika());
+            Uzytkownik u = uzytkownicyDAO.getUzytkownikPoId(rec.getIdUzytkownika());
             out.println("<td>" + u.getLogin() + "</td>");
             out.println("<td>" + rec.getTresc() + "</td>");
             out.println("<td>" + rec.getData() + "</td>");

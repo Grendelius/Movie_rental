@@ -25,7 +25,7 @@ public class ListaWypozyczenServlet extends HttpServlet {
      *
      * Metoda sprawdza czy użytkownik jest zalogowany jeżeli nie to przenosi go do strony logowania.
      * Następnie w zależności od tego czy jest klientem czy pracownikiem wyświetla adekwatną tablicę wypożyczeń
-     * i tablicę zamówień.
+     * i tablicę zamówień na stronie listaWypozyczen.jsp.
      * Metoda obsługuje możliwość zmiany statusu wypożyczenia przez pracownika
      * i anulowania wypożyczenia prze klienta.
      * Metoda umożliwia anulowanie zamówienia przez klienta

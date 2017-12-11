@@ -41,7 +41,7 @@ public class FilmInfoServlet extends HttpServlet {
         GatunekDAO gatunekDAO = new GatunekDAO();
         Film film = filmDAO.getWybranyFilm(idFilmu);
         request.setAttribute("film", film);
-        List<Gatunek> gatunek = gatunekDAO.getWybraneGatunki(idFilmu);
+        List<Gatunek> gatunek = gatunekDAO.getGatunkiFilmuList(idFilmu);
         request.setAttribute("gatunek", gatunek);
         List<Recenzja> recenzjaList = recenzjaDAO.getRecenzje(idFilmu);
         request.setAttribute("recenzja", recenzjaList);

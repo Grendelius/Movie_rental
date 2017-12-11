@@ -55,7 +55,7 @@ public class ZamowienieDAO {
         return z;
     }
 
-    // Metoda dodaje Zamówienie do tabeli
+    // Metoda dodaje Zamówienie do bazy
     public boolean addZamowienie(Zamowienie z) {
         EntityTransaction et = em.getTransaction();
         try {
@@ -70,7 +70,7 @@ public class ZamowienieDAO {
         }
     }
 
-    // Metoda usuwa z tabeli wybrane Wypożyczenie
+    // Metoda usuwa z bazy wybrane Wypożyczenie
     public boolean deleteZamowienie(Zamowienie z) {
         EntityTransaction et = em.getTransaction();
         try {

@@ -14,6 +14,9 @@ public class WylogujServlet extends HttpServlet {
         doGet(request, response);
     }
 
+    /**
+     * Metoda kończy sesję użytkownika, wylogowuje go i przenosi go do StronaGlownaServlet
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().setAttribute("uzytkownik", null);
         request.logout();

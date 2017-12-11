@@ -20,14 +20,18 @@ public class StronaGlownaServlet extends HttpServlet {
         doGet(request,response);
     }
 
+    /**
+     * Metoda pobiera z bazy wszystkie filmy, gatunki, gatunki bez powtórzeń (gatunekdistinct)
+     * a następnie przesyła je do stony stronaGlowna.jsp
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmDAO filmDAO = new FilmDAO();
         GatunekDAO gatunekDAO = new GatunekDAO();
-        List<Film> film = filmDAO.getNajnowszeFilmy();
+        List<Film> film = filmDAO.getNajnowszeFilmyList();
         request.setAttribute("film", film);
-        List<Gatunek> gatunek = gatunekDAO.getWszystkieGatunki();
+        List<Gatunek> gatunek = gatunekDAO.getAllGatunkiList();
         request.setAttribute("gatunek", gatunek);
-        List<String> gatunekdistinct = gatunekDAO.getGatunki();
+        List<String> gatunekdistinct = gatunekDAO.getDistinctGatunkiList();
         request.setAttribute("gatunekdistinct", gatunekdistinct);
         request.getRequestDispatcher("/WEB-INF/views/stronaGlowna.jsp").forward(request, response);
     }

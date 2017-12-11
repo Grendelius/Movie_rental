@@ -46,7 +46,7 @@ public class WypozyczenieDAO {
         return w;
     }
 
-    // Metoda dodaje Wypożyczenie do tabeli
+    // Metoda dodaje Wypożyczenie do bazy
     public boolean addWypozyczenie(Wypozyczenie w) {
         EntityTransaction et = em.getTransaction();
         try {
@@ -61,7 +61,7 @@ public class WypozyczenieDAO {
         }
     }
 
-    // Metoda zmienia w tabeli wybrane Wypożyczenie
+    // Metoda zmienia w bazie wybrane Wypożyczenie
     public boolean updateWypozyczenie(Wypozyczenie w) {
         EntityTransaction et = em.getTransaction();
         try {
@@ -76,7 +76,7 @@ public class WypozyczenieDAO {
         }
     }
 
-    // Metoda usuwa z tabeli wybrane Wypożyczenie
+    // Metoda usuwa z bazy wybrane Wypożyczenie
     public boolean deleteWypozyczenie(Wypozyczenie w) {
         EntityTransaction et = em.getTransaction();
         try {

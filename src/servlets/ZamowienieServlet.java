@@ -15,6 +15,11 @@ import java.util.Date;
 
 @WebServlet("/zamow")
 public class ZamowienieServlet extends HttpServlet {
+
+    /**
+     * Metoda pobiera informacje na temat użytkownika, filmu i sklepu, a następnie tworzy nowe zamówienie
+     * po czym przeci użytkownika do strony StronaGlownaServlet
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
         int idFilmu = Integer.parseInt(request.getParameter("idFilmu"));
@@ -36,4 +41,6 @@ public class ZamowienieServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendRedirect(request.getContextPath() + "/stronaGlowna");
     }
+
+
 }

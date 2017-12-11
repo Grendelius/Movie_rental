@@ -11,6 +11,10 @@ import java.io.IOException;
 @WebServlet("/gatunek")
 public class GatunekFilmowyServlet extends HttpServlet {
 
+    /**
+     * Metoda pobiera ze strony left-menu.jsp wybrany gatunek, przesyła go do servletu stronaGlownaServlet
+     * a następnie jest wykorzystany na stronie center.jsp
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String g = request.getParameter("wybranyGatunek");
         request.setAttribute("g", g);
