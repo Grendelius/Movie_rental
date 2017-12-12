@@ -17,27 +17,20 @@ public class GatunekDAO {
 
     // Metoda zwraca listę wszystkich gatunków
     public List<Gatunek> getAllGatunkiList() {
-        List<Gatunek> g = this.em.createQuery("select g from Gatunek g")
+        List<Gatunek> g = this.em.createQuery("select g from Gatunek g order by nazwa")
                 .getResultList();
         return g;
     }
 
-    // Metoda zwraca listę gatunków bez powtórzeń
-    public List<String> getDistinctGatunkiList() {
-        List<String> gatunek = this.em.createQuery("select distinct nazwa from Gatunek ")
-                .getResultList();
-        return gatunek;
-    }
-
-    // Metoda zwraca listę wszystkich gatunków wybranego filmu
-    public List<Gatunek> getGatunkiFilmuList(int idFilmu) {
-        List<Gatunek> g = this.em.createQuery("select g from Gatunek g where g.idFilmu = :idFilmu")
-                .setParameter("idFilmu", idFilmu)
-                .getResultList();
+    // Metoda zwraca wybrany gatunek
+    public Gatunek getWybranyGatunek(int idGatunku) {
+        Gatunek g = (Gatunek) em.createQuery("select g from Gatunek g where g.idGatunku =:idGatunku")
+                .setParameter("idGatunku", idGatunku)
+                .getSingleResult();
         return g;
     }
 
-    // Metoda dodaje Gatunek do bazy
+    // Metoda dodaje Gatunek do tabeli
     public boolean addGatunek(Gatunek g) {
         EntityTransaction et = em.getTransaction();
         try {

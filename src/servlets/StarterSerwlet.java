@@ -9,6 +9,7 @@ import java.io.IOException;
 
 @WebServlet("")
 public class StarterSerwlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }

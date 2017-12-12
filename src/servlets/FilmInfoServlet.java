@@ -2,14 +2,10 @@ package servlets;
 
 import dao.FilmDAO;
 import dao.GatunekDAO;
+import dao.GatunekFilmDAO;
 import dao.RecenzjaDAO;
-import models.Film;
-import models.Gatunek;
-import models.Recenzja;
-import models.Uzytkownik;
+import models.*;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,28 +17,24 @@ import java.util.List;
 @WebServlet("/filmInfo")
 public class FilmInfoServlet extends HttpServlet {
 
+    /**
+     * Metoda odczytuje idFilmu przekazanego ze strony StronaGlowna.jsp, przekazuje do wyświetlenia
+     * informacje o filmie, jego gatunkach i recenzjach użytkowników
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String tresc = request.getParameter("tresc");
-        int idFilmu = Integer.parseInt(request.getParameter("id"));         // ID wybramnego filmu na stronie index.jsp
-        RecenzjaDAO recenzjaDAO = new RecenzjaDAO();
-
-        if (tresc != null && tresc.length() > 0 && idFilmu != 0) {
-            Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
-            Recenzja recenzja = new Recenzja();
-            recenzja.setData(new Timestamp(new Date().getTime()));
-            recenzja.setIdFilmu(idFilmu);
-            recenzja.setIdUzytkownika(zalogowany.getIdUzytkownika());
-            recenzja.setTresc(tresc);
-            recenzjaDAO.addRecenzje(recenzja);
-        }
+        int idFilmu = Integer.parseInt(request.getParameter("id"));
 
         FilmDAO filmDAO = new FilmDAO();
         GatunekDAO gatunekDAO = new GatunekDAO();
+        GatunekFilmDAO gatunekFilmDAO = new GatunekFilmDAO();
+        RecenzjaDAO recenzjaDAO = new RecenzjaDAO();
+
         Film film = filmDAO.getWybranyFilm(idFilmu);
         request.setAttribute("film", film);
-        List<Gatunek> gatunek = gatunekDAO.getGatunkiFilmuList(idFilmu);
+        List<Gatunek> gatunek = gatunekDAO.getAllGatunkiList();
         request.setAttribute("gatunek", gatunek);
+        List<GatunekFilm> gatunekFilm = gatunekFilmDAO.getGatunekFilmPoFilmieList(idFilmu);
+        request.setAttribute("gatunekFilm", gatunekFilm);
         List<Recenzja> recenzjaList = recenzjaDAO.getRecenzje(idFilmu);
         request.setAttribute("recenzja", recenzjaList);
 

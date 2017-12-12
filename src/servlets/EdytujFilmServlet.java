@@ -7,22 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/edytujFilm")
+public class EdytujFilmServlet extends HttpServlet {
 
-@WebServlet("/gatunek")
-public class GatunekFilmowyServlet extends HttpServlet {
-
-    /**
-     * Metoda pobiera ze strony left-menu.jsp wybrany gatunek, przesyła go do servletu stronaGlownaServlet
-     * a następnie jest wykorzystany na stronie center.jsp
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String g = request.getParameter("wybranyGatunek");
-        request.setAttribute("g", g);
         doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/stronaGlowna").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/edytujFilm.jsp").forward(request, response);
     }
 
 

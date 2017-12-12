@@ -3,13 +3,22 @@ package models;
 import javax.persistence.*;
 
 @Entity
-@IdClass(GatunekPK.class)
 @Table(name = "gatunek")
 public class Gatunek {
+    private int idGatunku;
     private String nazwa;
-    private int idFilmu;
 
     @Id
+    @Column(name = "idGatunku")
+    public int getIdGatunku() {
+        return idGatunku;
+    }
+
+    public void setIdGatunku(int idGatunku) {
+        this.idGatunku = idGatunku;
+    }
+
+    @Basic
     @Column(name = "nazwa")
     public String getNazwa() {
         return nazwa;
@@ -19,16 +28,6 @@ public class Gatunek {
         this.nazwa = nazwa;
     }
 
-    @Id
-    @Column(name = "idFilmu")
-    public int getIdFilmu() {
-        return idFilmu;
-    }
-
-    public void setIdFilmu(int idFilmu) {
-        this.idFilmu = idFilmu;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,7 +35,7 @@ public class Gatunek {
 
         Gatunek gatunek = (Gatunek) o;
 
-        if (idFilmu != gatunek.idFilmu) return false;
+        if (idGatunku != gatunek.idGatunku) return false;
         if (nazwa != null ? !nazwa.equals(gatunek.nazwa) : gatunek.nazwa != null) return false;
 
         return true;
@@ -44,8 +43,8 @@ public class Gatunek {
 
     @Override
     public int hashCode() {
-        int result = nazwa != null ? nazwa.hashCode() : 0;
-        result = 31 * result + idFilmu;
+        int result = idGatunku;
+        result = 31 * result + (nazwa != null ? nazwa.hashCode() : 0);
         return result;
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 11 Gru 2017, 20:12
+-- Czas generowania: 12 Gru 2017, 15:25
 -- Wersja serwera: 10.1.28-MariaDB
 -- Wersja PHP: 7.1.11
 
@@ -45,7 +45,7 @@ CREATE TABLE `film` (
 INSERT INTO `film` (`idFilmu`, `tytul`, `rokProdukcji`, `opis`, `sredniaOcena`, `dataDodania`, `okladka`) VALUES
 (1, 'Skazani na Shawshank', 1994, 'Adaptacja opowiadania Stephena Kinga. Niesłusznie skazany na dożywocie bankier, stara się przetrwać w brutalnym, więziennym świecie.', 0, '2017-12-06', NULL),
 (2, 'Ojciec Chrzestny', 1972, 'Opowieść o nowojorskiej rodzinie mafijnej. Starzejący się Don Corleone pragnie przekazać władzę swojemu synowi.', 0, '2017-12-01', NULL),
-(3, 'Nietykalni', 2011, 'Sparaliżowany milioner zatrudnia do opieki młodego chłopaka z przedmieścia, który właśnie wyszedł z więzienia.', 2, '2017-12-07', 'https://upload.wikimedia.org/wikipedia/en/9/93/The_Intouchables.jpg'),
+(3, 'Nietykalni', 2011, 'Sparaliżowany milioner zatrudnia do opieki młodego chłopaka z przedmieścia, który właśnie wyszedł z więzienia.', 10, '2017-12-07', 'https://upload.wikimedia.org/wikipedia/en/9/93/The_Intouchables.jpg'),
 (4, 'Zielona mila', 1999, 'Emerytowany strażnik więzienny opowiada przyjaciółce o niezwykłym mężczyźnie, którego skazano na śmierć za zabójstwo dwóch 9-letnich dziewczynek.', 0, '2017-12-03', NULL),
 (5, 'Forrest Gump', 1994, 'Historia życia Forresta, chłopca o niskim ilorazie inteligencji z niedowładem kończyn, który staje się miliarderem i bohaterem wojny w Wietnamie.', 0, '2017-12-05', NULL);
 
@@ -56,24 +56,45 @@ INSERT INTO `film` (`idFilmu`, `tytul`, `rokProdukcji`, `opis`, `sredniaOcena`, 
 --
 
 CREATE TABLE `gatunek` (
-  `nazwa` varchar(255) COLLATE utf8_bin NOT NULL,
-  `idFilmu` int(10) NOT NULL
+  `idGatunku` int(10) NOT NULL,
+  `nazwa` varchar(255) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Zrzut danych tabeli `gatunek`
 --
 
-INSERT INTO `gatunek` (`nazwa`, `idFilmu`) VALUES
-('Biograficzny', 3),
-('Dramat', 1),
-('Komedia', 3),
-('Dramat', 3),
-('Dramat', 4),
-('Dramat', 2),
-('Gangsterski', 2),
-('Dramat', 5),
-('Komedia', 5);
+INSERT INTO `gatunek` (`idGatunku`, `nazwa`) VALUES
+(1, 'Komedia'),
+(2, 'Dramat'),
+(3, 'Biograficzny'),
+(4, 'Gangsterski');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `gatunek_film`
+--
+
+CREATE TABLE `gatunek_film` (
+  `idFilmu` int(10) NOT NULL,
+  `idGatunku` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Zrzut danych tabeli `gatunek_film`
+--
+
+INSERT INTO `gatunek_film` (`idFilmu`, `idGatunku`) VALUES
+(1, 2),
+(3, 1),
+(3, 2),
+(3, 3),
+(4, 2),
+(2, 2),
+(2, 4),
+(5, 1),
+(5, 2);
 
 -- --------------------------------------------------------
 
@@ -215,7 +236,8 @@ INSERT INTO `wypozyczenie` (`idWypozyczenia`, `dataWypozyczenia`, `dataZwrotu`, 
 (47, '2017-12-11 17:13:50', '2017-12-11 17:49:10', 4, 3, 3, NULL, NULL, 'Zakończony'),
 (61, '2017-12-11 18:46:49', '2017-12-11 18:47:27', 4, 3, 3, NULL, NULL, 'Zakończony'),
 (63, '2017-12-11 18:53:17', '2017-12-11 18:54:43', 4, 3, 3, NULL, NULL, 'Zakończony'),
-(67, '2017-12-11 18:57:04', '2017-12-11 18:57:23', 6, 3, 3, NULL, NULL, 'Zakończony');
+(67, '2017-12-11 18:57:04', '2017-12-11 18:57:23', 6, 3, 3, NULL, NULL, 'Zakończony'),
+(68, '2017-12-12 12:17:06', '2017-12-12 12:19:02', 4, 3, 3, NULL, NULL, 'Zakończony');
 
 -- --------------------------------------------------------
 
@@ -280,7 +302,14 @@ ALTER TABLE `film`
 -- Indexes for table `gatunek`
 --
 ALTER TABLE `gatunek`
-  ADD KEY `IdFilmu` (`idFilmu`);
+  ADD PRIMARY KEY (`idGatunku`);
+
+--
+-- Indexes for table `gatunek_film`
+--
+ALTER TABLE `gatunek_film`
+  ADD KEY `idFilmu` (`idFilmu`),
+  ADD KEY `idGatunku` (`idGatunku`);
 
 --
 -- Indexes for table `ocena`
@@ -378,10 +407,16 @@ ALTER TABLE `film`
   MODIFY `idFilmu` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT dla tabeli `gatunek`
+--
+ALTER TABLE `gatunek`
+  MODIFY `idGatunku` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT dla tabeli `ocena`
 --
 ALTER TABLE `ocena`
-  MODIFY `idOceny` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idOceny` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT dla tabeli `platnosc`
@@ -405,29 +440,23 @@ ALTER TABLE `sklep`
 -- AUTO_INCREMENT dla tabeli `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
-  MODIFY `idUzytkownika` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idUzytkownika` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT dla tabeli `wypozyczenie`
 --
 ALTER TABLE `wypozyczenie`
-  MODIFY `idWypozyczenia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `idWypozyczenia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienie`
 --
 ALTER TABLE `zamowienie`
-  MODIFY `idZamowienia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idZamowienia` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- Ograniczenia dla zrzutów tabel
 --
-
---
--- Ograniczenia dla tabeli `gatunek`
---
-ALTER TABLE `gatunek`
-  ADD CONSTRAINT `gatunek_ibfk_1` FOREIGN KEY (`idFilmu`) REFERENCES `film` (`idFilmu`);
 
 --
 -- Ograniczenia dla tabeli `ocena`

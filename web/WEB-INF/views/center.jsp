@@ -1,6 +1,10 @@
 <%@ page import="models.Film" %>
 <%@ page import="java.util.List" %>
 <%@ page import="models.Gatunek" %>
+<%@ page import="dao.GatunekFilmDAO" %>
+<%@ page import="models.GatunekFilm" %>
+<%@ page import="dao.FilmDAO" %>
+<%@ page import="dao.GatunekDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -12,20 +16,22 @@
 <%
     String wybranyGatunek = request.getParameter("wybranyGatunek");
     List<Film> film = (List<Film>) request.getAttribute("film");
-    List<Gatunek> gatunek = (List<Gatunek>) request.getAttribute("gatunek");
+    GatunekFilmDAO gatunekFilmDAO = new GatunekFilmDAO();
     if (wybranyGatunek != null) {
+        List<GatunekFilm> gatunekFilm = gatunekFilmDAO.getGatunekFilmPoGatunkuList(Integer.parseInt(wybranyGatunek));
+        GatunekDAO gatunekDAO = new GatunekDAO();
+        Gatunek gatunek = gatunekDAO.getWybranyGatunek(Integer.parseInt(wybranyGatunek));
 %>
 <div id="center" style="background-color:red;width:490px;float:left; margin-left:5px;margin-right:5px">
     <div style="margin-bottom:10px;margin-top:5px">
         <b>
-            <center><font size="4" face="serif">Nowości/<%=wybranyGatunek%>:</font></center>
+            <center><font size="4" face="serif">Nowości/<%=gatunek.getNazwa()%>:</font></center>
         </b>
     </div>
     <%
-        for (Gatunek g : gatunek) {
-            if (g.getNazwa().equals(wybranyGatunek)) {
-                for (Film f : film) {
-                    if (f.getIdFilmu() == g.getIdFilmu()) {
+        for (GatunekFilm gf : gatunekFilm) {
+            for (Film f : film) {
+                if (f.getIdFilmu() == gf.getIdFilmu()) {
     %>
     <form method="post" action="/filmInfo">
         <div style="background-color:darkred;margin-top:5px">
@@ -62,7 +68,6 @@
         </td>
     </div>
     <%
-                    }
                 }
             }
         }

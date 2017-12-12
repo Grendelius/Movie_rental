@@ -39,14 +39,14 @@ public class WypozyczenieServlet extends HttpServlet {
             Wypozyczenie wypozyczenie = new Wypozyczenie();
             WypozyczenieDAO wypozyczenieDAO = new WypozyczenieDAO();
 
-            //Wypełnienie pól nowego wypożyczenia
+            // Wypełnienie pól nowego wypożyczenia
             wypozyczenie.setDataWypozyczenia(new Timestamp(new Date().getTime()));
             wypozyczenie.setIdFilmu(idFilmu);
             wypozyczenie.setIdUzytkownika(zalogowany.getIdUzytkownika());
             wypozyczenie.setIdSklepu(idSklepu);
             wypozyczenie.setStatus("W trakcie realizacji");
 
-            //Utworzenie nowego wypożyczenia i zminiejszenie sztuk danego filmu w sklepie
+            // Utworzenie nowego wypożyczenia i zminiejszenie sztuk danego filmu w sklepie
             wypozyczenieDAO.addWypozyczenie(wypozyczenie);
             sklepFilmDAO.zmniejszIloscFilmow(idFilmu, idSklepu);
 

@@ -6,13 +6,13 @@
 </head>
 <body>
     <div id="left-menu" style="background-color:red;width:200px;float:left;">
-        <form method="post" action="/gatunek">
+        <form method="post" action="/stronaGlowna">
             <div>
                 <center><font size="4" face="serif">Kategorie filmów:</font></center>
             </div>
-            <c:forEach var="gatunekdistinct" items="${gatunekdistinct}">
+            <c:forEach var="gatunek" items="${gatunek}">
                 <div style="margin-left:10px">
-                    <button name="wybranyGatunek" type="submit" value="${gatunekdistinct}" style="background-color: transparent; border-color: transparent">${gatunekdistinct}
+                    <button name="wybranyGatunek" type="submit" value="${gatunek.getIdGatunku()}" style="background-color: transparent; border-color: transparent">${gatunek.getNazwa()}
                     </button>
                 </div>
             </c:forEach>
