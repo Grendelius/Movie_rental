@@ -67,21 +67,6 @@ public class FilmDAO {
         }
     }
 
-    // Metoda edytuje wybrany Film
-    public boolean updateFilm(Film f) {
-        EntityTransaction et = em.getTransaction();
-        try {
-            et.begin();
-            em.merge(f);
-            et.commit();
-            return true;
-        } catch (Exception e) {
-            et.rollback();
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     // Metoda zmienia średnią ocenę na podstawie wszystkich ocen danego filmu
     public boolean updateSredniaOcena(int idFilmu) {
         OcenaDAO ocenaDAO = new OcenaDAO();

@@ -1,7 +1,5 @@
 package models;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -15,8 +13,6 @@ public class Recenzja {
     private int idFilmu;
 
     @Id
-    @GenericGenerator(name="kaugen" , strategy="increment")
-    @GeneratedValue(generator="kaugen")
     @Column(name = "idRecenzji")
     public int getIdReceznji() {
         return idRecenzji;

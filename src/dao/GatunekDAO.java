@@ -30,14 +30,6 @@ public class GatunekDAO {
         return g;
     }
 
-    // Metoda zwraca wybrany gatunek o danej nazwie
-    public Gatunek getWybranyGatunek(String nazwa) {
-        Gatunek g = (Gatunek) em.createQuery("select g from Gatunek g where g.nazwa =:nazwa")
-                .setParameter("nazwa", nazwa)
-                .getSingleResult();
-        return g;
-    }
-
     // Metoda dodaje Gatunek do tabeli
     public boolean addGatunek(Gatunek g) {
         EntityTransaction et = em.getTransaction();

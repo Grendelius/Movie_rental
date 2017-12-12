@@ -22,6 +22,8 @@ public class LoginServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
+
         String login = request.getParameter("login");
         String haslo = request.getParameter("haslo");
         if (login != null && haslo != null && !"".equals(haslo)) {
@@ -33,6 +35,7 @@ public class LoginServlet extends HttpServlet {
                     //Tworzenie sesji użytkownika
                     HttpSession session = request.getSession();
                     session.setAttribute("uzytkownik", u);
+                    request.setAttribute("czyLogin",null);
                     response.sendRedirect(request.getContextPath() + "/stronaGlowna");
                 } else {
                     request.setAttribute("blad", "Podałeś błędne hasło!");
@@ -46,10 +49,14 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("blad", "Błąd danych logowania!");
             doGet(request, response);
         }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
+        if(request.getAttribute("czyLogin")==null) {
+            request.setAttribute("czyLogin", "true");
+        }
+        request.getRequestDispatcher("/stronaGlowna").forward(request, response);
     }
 
 

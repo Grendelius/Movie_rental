@@ -4,7 +4,6 @@ import models.GatunekFilm;
 import utils.DBConfig;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class GatunekFilmDAO {
@@ -30,28 +29,5 @@ public class GatunekFilmDAO {
         return g;
     }
 
-    // Metoda zwraca wybrany gatunekFilm
-    public GatunekFilm getWybranyGatunek(int idFilmu, int idGatunku) {
-        GatunekFilm g = (GatunekFilm) em.createQuery("select g from GatunekFilm g where g.idFilmu =:idFilmu and g.idGatunku =:idGatunku")
-                .setParameter("idFilmu", idFilmu)
-                .setParameter("idGatunku", idGatunku)
-                .getSingleResult();
-        return g;
-    }
-
-    // Metoda edytuje wybrany GatunekFilm
-    public boolean updateGatunekFilm(GatunekFilm g) {
-        EntityTransaction et = em.getTransaction();
-        try {
-            et.begin();
-            em.merge(g);
-            et.commit();
-            return true;
-        } catch (Exception e) {
-            et.rollback();
-            e.printStackTrace();
-            return false;
-        }
-    }
 
 }

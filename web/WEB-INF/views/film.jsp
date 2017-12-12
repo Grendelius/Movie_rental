@@ -100,6 +100,7 @@
 <br><br>
 <form method="post" action="edytujFilm" style="display:inline">
     <input type="hidden" name="idFilmu" value="<%=film.getIdFilmu()%>"/>
+    <%--<input type="hidden" name="gatunek" value="<%=gatunek%>"/>--%>
     <input type="submit" value="Edytuj Film"
            style="width:90px;height:30px;background-color:lightgrey;border-color:lightgrey;"></input>
 </form>

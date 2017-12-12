@@ -1,7 +1,5 @@
 package models;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -18,8 +16,6 @@ public class Wypozyczenie implements Serializable {
     private String status;
 
     @Id
-    @GenericGenerator(name="kaugen" , strategy="increment")
-    @GeneratedValue(generator="kaugen")
     @Column(name = "idWypozyczenia")
     public int getIdWypozyczenia() {
         return idWypozyczenia;

@@ -1,7 +1,5 @@
 package models;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
@@ -11,8 +9,6 @@ public class Gatunek {
     private String nazwa;
 
     @Id
-    @GenericGenerator(name="kaugen" , strategy="increment")
-    @GeneratedValue(generator="kaugen")
     @Column(name = "idGatunku")
     public int getIdGatunku() {
         return idGatunku;

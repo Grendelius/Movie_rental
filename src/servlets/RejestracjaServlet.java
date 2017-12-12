@@ -97,7 +97,10 @@ public class RejestracjaServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/views/rejestracja.jsp").forward(request, response);
+        if(request.getAttribute("czyRejestruj")==null) {
+            request.setAttribute("czyRejestruj", "true");
+        }
+        request.getRequestDispatcher("/stronaGlowna").forward(request, response);
     }
 
 

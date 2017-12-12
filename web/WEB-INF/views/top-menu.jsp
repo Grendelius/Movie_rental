@@ -33,7 +33,7 @@
                 out.println("Pracownik: " + uzytkownik.getLogin());
         } else {
         %>
-        <form action="login" style="display:inline">
+        <form method="post" action="login" style="display:inline">
             <input type="submit" value="Logowanie"
                    style="width:120px;height:40px;background-color:lightgrey;border-color:lightgrey;"></input>
         </form>
