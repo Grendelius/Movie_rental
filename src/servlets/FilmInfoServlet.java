@@ -22,7 +22,7 @@ public class FilmInfoServlet extends HttpServlet {
      * informacje o filmie, jego gatunkach i recenzjach użytkowników
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idFilmu = Integer.parseInt(request.getParameter("id"));
+        int idFilmu = Integer.parseInt(request.getParameter("idFilmu"));
 
         FilmDAO filmDAO = new FilmDAO();
         GatunekDAO gatunekDAO = new GatunekDAO();

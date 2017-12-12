@@ -1,9 +1,8 @@
 package models;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 @Entity
 public class Sklep {
@@ -12,6 +11,8 @@ public class Sklep {
     private String ulica;
 
     @Id
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Column(name = "idSklepu")
     public int getIdSklepu() {
         return idSklepu;

@@ -35,7 +35,7 @@
     %>
     <form method="post" action="/filmInfo">
         <div style="background-color:darkred;margin-top:5px">
-            <button name="id" type="submit" value="<%=f.getIdFilmu() %>"
+            <button name="idFilmu" type="submit" value="<%=f.getIdFilmu() %>"
                     style="background-color: transparent; border-color: transparent; font-size : 20px"><%=f.getTytul() %>
             </button>
         </div>
@@ -86,7 +86,7 @@
     %>
     <form method="post" action="/filmInfo">
         <div style="background-color:darkred;margin-top:5px">
-            <button name="id" type="submit" value="<%=f.getIdFilmu() %>"
+            <button name="idFilmu" type="submit" value="<%=f.getIdFilmu() %>"
                     style="background-color: transparent; border-color: transparent; font-size : 20px"><%=f.getTytul() %>
             </button>
         </div>
