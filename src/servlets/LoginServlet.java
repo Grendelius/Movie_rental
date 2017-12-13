@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
             } catch (NoResultException e) {
                 request.setAttribute("blad", "Nie ma takiego uzytkownika!");
                 doGet(request, response);
+                System.out.println("sdfsdfsd");
             }
         } else {
             request.setAttribute("blad", "Błąd danych logowania!");
