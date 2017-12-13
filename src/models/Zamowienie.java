@@ -1,5 +1,7 @@
 package models;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -15,6 +17,8 @@ public class Zamowienie implements Serializable{
     private int idSklepu;
 
     @Id
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Column(name = "idZamowienia")
     public int getIdZamowienia() {
         return idZamowienia;
