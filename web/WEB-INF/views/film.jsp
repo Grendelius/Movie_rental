@@ -79,7 +79,7 @@
                 %>
                 <form method="post" action="/ocena">
                     Oceń film:
-                    <input type="hidden" name="id" value="<%=film.getIdFilmu()%>"/>
+                    <input type="hidden" name="idFilmu" value="<%=film.getIdFilmu()%>"/>
                     <select name="ocena" size="1">
                         <%
                             for (int i = 0; i <= 10; i++) {
@@ -139,7 +139,7 @@
         %>
         <div style="margin-left:10px">
             <form method="post" action="/recenzja">
-                <input type="hidden" name="id" value="<%=film.getIdFilmu()%>"/>
+                <input type="hidden" name="idFilmu" value="<%=film.getIdFilmu()%>"/>
                 <div style="margin-bottom:5px">
                     Dodaj recenzje:
                 </div>
