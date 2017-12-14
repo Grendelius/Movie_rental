@@ -3,7 +3,6 @@ package servlets;
 import dao.FilmDAO;
 import dao.GatunekDAO;
 import dao.GatunekFilmDAO;
-import dao.RecenzjaDAO;
 import models.Film;
 import models.Gatunek;
 import models.GatunekFilm;
@@ -80,7 +79,7 @@ public class EdytujFilmServlet extends HttpServlet {
                                 // Szukanie gatunku w bazie
                                 gatunek = gatunekDAO.getWybranyGatunekPoNazwie(newgatunek[i]);
                             } catch (NoResultException e) {
-
+                                // Tworzenie nowego gatunku
                                 gatunek = new Gatunek();
                                 gatunek.setNazwa(newgatunek[i]);
                                 gatunekDAO.addGatunek(gatunek);

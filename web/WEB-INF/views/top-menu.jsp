@@ -15,11 +15,24 @@
             <input type="submit" value="Wypożyczenia"
                    style="width:120px;height:40px;background-color:red;border-color:red;"></input>
         </form>
-        <button type="button" style="width:120px;height:40px;background-color:red;border-color:red;">cos</button>
+        <%
+            Uzytkownik uzytkownik = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
+            if (uzytkownik != null && uzytkownik.getRola().equals("pracownik")) {
+        %>
+        <form method="post" action="dodajFilm" style="display:inline">
+            <input type="submit" value="Dodaj Film"
+                   style="width:120px;height:40px;background-color:red;border-color:red;"></input>
+        </form>
+        <%
+        } else {
+        %>
+        <button type="button" style="width:120px;height:40px;background-color:red;border-color:red;">Dodaj Film</button>
+        <%
+            }
+        %>
         <button type="button" style="width:120px;height:40px;background-color:red;border-color:red;">cos</button>
         <button type="button" style="width:120px;height:40px;background-color:red;border-color:red;">cos</button>
         <%
-            Uzytkownik uzytkownik = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
             if (uzytkownik != null) {
         %>
         <form action="wyloguj" style="display:inline;">

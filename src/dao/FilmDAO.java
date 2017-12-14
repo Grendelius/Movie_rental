@@ -29,12 +29,11 @@ public class FilmDAO {
         return f;
     }
 
-//    // Do poprawy!!!!!!
-//    public int getIdDoPoprawy() {
-//        int id = (int) this.em.createQuery("select MAX(idFilmu) from Film")
-//                .getSingleResult();
-//        return id;
-//    }
+    public int getId() {
+        int id = (int) this.em.createQuery("select MAX(idFilmu) from Film")
+                .getSingleResult();
+        return id;
+    }
 
     public List<Film> getFilmyGatunkowe(int idGatunku){
         List<Film> f =  this.em.createQuery("select f from Film f where f.idFilmu = (select idFilmu from GatunekFilm where idGatunku =:idGatunku)")
@@ -42,15 +41,6 @@ public class FilmDAO {
                 .getResultList();
         return f;
     }
-
-//    // Metoda zwraca listę GatunekFilm dla wybranego gatunku
-//    public List<GatunekFilm> getGatunekFilmList(int idGatunku) {
-//        List<GatunekFilm> g = this.em.createQuery("select g from GatunekFilm g where g.idGatunku = :idGatunku")
-//                .setParameter("idGatunku", idGatunku)
-//                .getResultList();
-//        return g;
-//    }
-
 
     // Metoda dodaje Film do bazy
     public boolean addFilm(Film f) {
@@ -90,6 +80,7 @@ public class FilmDAO {
         for (Integer o : oceny)
             srednia += o;
         srednia /= oceny.size();
+        srednia = Math.round(srednia*100.0)/100.0;
         Film film = getWybranyFilm(idFilmu);
         film.setSredniaOcena(srednia);
         EntityTransaction et = em.getTransaction();

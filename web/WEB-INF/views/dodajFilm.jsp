@@ -19,6 +19,8 @@ ${blad}
     <input type="text" name="gatunek" maxlength="30"/>
     <p>Gatunek 3:</p>
     <input type="text" name="gatunek" maxlength="30"/>
+    <p>Opis:</p>
+    <textarea name="opis" cols="40" rows="8"></textarea>
     <p>Rok produkcji:</p>
     <input type="text" name="rokProdukcji" maxlength="30"/>
     <br><br><input type="submit" value="Zatwierź"/>
