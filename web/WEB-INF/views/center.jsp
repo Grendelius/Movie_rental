@@ -3,7 +3,6 @@
 <%@ page import="models.Gatunek" %>
 <%@ page import="dao.GatunekFilmDAO" %>
 <%@ page import="models.GatunekFilm" %>
-<%@ page import="dao.FilmDAO" %>
 <%@ page import="dao.GatunekDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -20,7 +19,7 @@
     if (wybranyGatunek != null) {
         List<GatunekFilm> gatunekFilm = gatunekFilmDAO.getGatunekFilmPoGatunkuList(Integer.parseInt(wybranyGatunek));
         GatunekDAO gatunekDAO = new GatunekDAO();
-        Gatunek gatunek = gatunekDAO.getWybranyGatunek(Integer.parseInt(wybranyGatunek));
+        Gatunek gatunek = gatunekDAO.getWybranyGatunekPoId(Integer.parseInt(wybranyGatunek));
 %>
 <div id="center" style="background-color:red;width:490px;float:left; margin-left:5px;margin-right:5px">
     <div style="margin-bottom:10px;margin-top:5px">
@@ -35,7 +34,7 @@
     %>
     <form method="post" action="/filmInfo">
         <div style="background-color:darkred;margin-top:5px">
-            <button name="id" type="submit" value="<%=f.getIdFilmu() %>"
+            <button name="idFilmu" type="submit" value="<%=f.getIdFilmu() %>"
                     style="background-color: transparent; border-color: transparent; font-size : 20px"><%=f.getTytul() %>
             </button>
         </div>
@@ -86,7 +85,7 @@
     %>
     <form method="post" action="/filmInfo">
         <div style="background-color:darkred;margin-top:5px">
-            <button name="id" type="submit" value="<%=f.getIdFilmu() %>"
+            <button name="idFilmu" type="submit" value="<%=f.getIdFilmu() %>"
                     style="background-color: transparent; border-color: transparent; font-size : 20px"><%=f.getTytul() %>
             </button>
         </div>

@@ -23,7 +23,7 @@ public class GatunekDAO {
     }
 
     // Metoda zwraca wybrany gatunek
-    public Gatunek getWybranyGatunek(int idGatunku) {
+    public Gatunek getWybranyGatunekPoId(int idGatunku) {
         Gatunek g = (Gatunek) em.createQuery("select g from Gatunek g where g.idGatunku =:idGatunku")
                 .setParameter("idGatunku", idGatunku)
                 .getSingleResult();
@@ -31,14 +31,14 @@ public class GatunekDAO {
     }
 
     // Metoda zwraca wybrany gatunek o danej nazwie
-    public Gatunek getWybranyGatunek(String nazwa) {
+    public Gatunek getWybranyGatunekPoNazwie(String nazwa) {
         Gatunek g = (Gatunek) em.createQuery("select g from Gatunek g where g.nazwa =:nazwa")
                 .setParameter("nazwa", nazwa)
                 .getSingleResult();
         return g;
     }
 
-    // Metoda dodaje Gatunek do tabeli
+    // Metoda dodaje Gatunek do bazy
     public boolean addGatunek(Gatunek g) {
         EntityTransaction et = em.getTransaction();
         try {
@@ -53,5 +53,19 @@ public class GatunekDAO {
         }
     }
 
+    // Metoda usuwa Gatunek z bazy
+    public boolean deleteGatunek(Gatunek g) {
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            em.remove(g);
+            et.commit();
+            return true;
+        } catch (Exception e) {
+            et.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }

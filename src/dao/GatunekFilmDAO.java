@@ -22,6 +22,13 @@ public class GatunekFilmDAO {
         return g;
     }
 
+    public GatunekFilm getGatunekFilmPoGatunku(int idGatunku) {
+        List<GatunekFilm> g = this.em.createQuery("select g from GatunekFilm g where g.idGatunku = :idGatunku")
+                .setParameter("idGatunku", idGatunku)
+                .getResultList();
+        return g.get(0);
+    }
+
     // Metoda zwraca listę GatunekFilm dla wybranego filmu
     public List<GatunekFilm> getGatunekFilmPoFilmieList(int idFilmu) {
         List<GatunekFilm> g = this.em.createQuery("select g from GatunekFilm g where g.idFilmu = :idFilmu")
@@ -39,12 +46,27 @@ public class GatunekFilmDAO {
         return g;
     }
 
-    // Metoda edytuje wybrany GatunekFilm
-    public boolean updateGatunekFilm(GatunekFilm g) {
+    // Metoda dodaje nowy GatunekFilm
+    public boolean addGatunekFilm(GatunekFilm g) {
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            em.merge(g);
+            em.persist(g);
+            et.commit();
+            return true;
+        } catch (Exception e) {
+            et.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Metoda usuwa wybrany GatunekFilm
+    public boolean deleteGatunekFilm(GatunekFilm g) {
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            em.remove(g);
             et.commit();
             return true;
         } catch (Exception e) {

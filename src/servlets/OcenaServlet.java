@@ -20,7 +20,7 @@ public class OcenaServlet extends HttpServlet {
      * i przenosi użytkownika do strony FilmInfoServlet
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idFilmu = Integer.parseInt(request.getParameter("id"));
+        int idFilmu = Integer.parseInt(request.getParameter("idFilmu"));
         int ocena = Integer.parseInt(request.getParameter("ocena"));
         Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
         OcenaDAO ocenaDAO = new OcenaDAO();

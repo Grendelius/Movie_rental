@@ -13,8 +13,6 @@ public class Ocena {
     private int idFilmu;
 
     @Id
-    @GenericGenerator(name="kaugen" , strategy="increment")
-    @GeneratedValue(generator="kaugen")
     @Column(name = "idOceny")
     public int getIdOceny() {
         return idOceny;
