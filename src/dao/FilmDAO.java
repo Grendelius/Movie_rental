@@ -37,7 +37,7 @@ public class FilmDAO {
 //    }
 
     public List<Film> getFilmyGatunkowe(int idGatunku){
-        List<Film> f = this.em.createQuery("select f from Film f where f.idFilmu = (select idFilmu from GatunekFilm where idGatunku =:idGatunku)")
+        List<Film> f =  this.em.createQuery("select f from Film f where f.idFilmu = (select idFilmu from GatunekFilm where idGatunku =:idGatunku)")
                 .setParameter("idGatunku", idGatunku)
                 .getResultList();
         return f;

@@ -15,8 +15,6 @@ public class Recenzja {
     private int idFilmu;
 
     @Id
-    @GenericGenerator(name="kaugen" , strategy="increment")
-    @GeneratedValue(generator="kaugen")
     @Column(name = "idRecenzji")
     public int getIdReceznji() {
         return idRecenzji;

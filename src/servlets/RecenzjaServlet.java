@@ -20,6 +20,7 @@ public class RecenzjaServlet extends HttpServlet {
      * Metoda pobiera Recenzję wystawioną przez użytkownika, dodaje ją do bazy i przenosi użytkownika do strony FilmInfoServlet
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String tresc = request.getParameter("tresc");
         int idFilmu = Integer.parseInt(request.getParameter("id"));
         RecenzjaDAO recenzjaDAO = new RecenzjaDAO();

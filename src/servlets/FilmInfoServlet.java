@@ -22,6 +22,7 @@ public class FilmInfoServlet extends HttpServlet {
      * informacje o filmie, jego gatunkach i recenzjach użytkowników
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         int idFilmu = Integer.parseInt(request.getParameter("id"));
 
         FilmDAO filmDAO = new FilmDAO();
@@ -30,7 +31,7 @@ public class FilmInfoServlet extends HttpServlet {
         RecenzjaDAO recenzjaDAO = new RecenzjaDAO();
 
         Film film = filmDAO.getWybranyFilm(idFilmu);
-        request.setAttribute("film", film);
+        request.setAttribute("getFilm", film);
         List<Gatunek> gatunek = gatunekDAO.getAllGatunkiList();
         request.setAttribute("gatunek", gatunek);
         List<GatunekFilm> gatunekFilm = gatunekFilmDAO.getGatunekFilmPoFilmieList(idFilmu);
@@ -42,7 +43,10 @@ public class FilmInfoServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/film.jsp").forward(request, response);
+        if(request.getAttribute("czyFilm")==null) {
+            request.setAttribute("czyFilm", "true");
+        }
+        request.getRequestDispatcher("/stronaGlowna").forward(request, response);
     }
 
 

@@ -22,8 +22,6 @@ public class LoginServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-
         String login = request.getParameter("login");
         String haslo = request.getParameter("haslo");
         if (login != null && haslo != null && !"".equals(haslo)) {
@@ -44,7 +42,6 @@ public class LoginServlet extends HttpServlet {
             } catch (NoResultException e) {
                 request.setAttribute("blad", "Nie ma takiego uzytkownika!");
                 doGet(request, response);
-                System.out.println("sdfsdfsd");
             }
         } else {
             request.setAttribute("blad", "Błąd danych logowania!");

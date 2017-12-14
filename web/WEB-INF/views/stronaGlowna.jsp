@@ -8,7 +8,7 @@
     <%
         String czyLogin = (String) request.getAttribute("czyLogin");
         String czyRejestruj = (String) request.getAttribute("czyRejestruj");
-
+        String czyFilm  = (String) request.getAttribute("czyFilm");
     %>
 </head>
 <body bgcolor="black">
@@ -26,6 +26,11 @@
         else if(czyRejestruj=="true"){
         %>
         <jsp:include page="rejestracja.jsp"></jsp:include>
+        <%
+        }
+        else if(czyFilm=="true"){
+        %>
+        <jsp:include page="film.jsp"></jsp:include>
         <%
         }
         else {

@@ -83,11 +83,11 @@ public class RejestracjaServlet extends HttpServlet {
                         doGet(request, response);
                     }
                 } else {
-                    request.setAttribute("blad", "Błędny login! Długość od 6 do 15 znaków (brak znaków szczególnych)");
+                    request.setAttribute("blad", "Błędny login! Długość od 6 do 15 znaków (brak znaków szczególnych).");
                     doGet(request, response);
                 }
             } else {
-                request.setAttribute("blad", "Błędne hasło! Długość od 8 do 15 znaków (przynajmniej jedna cyfra)!");
+                request.setAttribute("blad", "Błędne hasło! Długość od 8 do 15 znaków (przynajmniej jedna cyfra).");
                 doGet(request, response);
             }
         } else {
