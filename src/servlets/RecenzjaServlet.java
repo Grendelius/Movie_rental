@@ -35,13 +35,6 @@ public class RecenzjaServlet extends HttpServlet {
             recenzja.setIdUzytkownika(zalogowany.getIdUzytkownika());
             recenzja.setTresc(tresc);
 
-            System.out.println(recenzja.getTresc());
-            System.out.println(recenzja.getData());
-            System.out.println(recenzja.getIdFilmu());
-            System.out.println(recenzja.getIdReceznji());
-            System.out.println(recenzja.getIdUzytkownika());
-
-
             // Utworzenie nowej Recenzji
             recenzjaDAO.addRecenzje(recenzja);
         }
