@@ -21,7 +21,7 @@ public class RecenzjaServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tresc = request.getParameter("tresc");
-        int idFilmu = Integer.parseInt(request.getParameter("id"));
+        int idFilmu = Integer.parseInt(request.getParameter("idFilmu"));
         RecenzjaDAO recenzjaDAO = new RecenzjaDAO();
 
         if (tresc != null && tresc.length() > 0) {
@@ -33,6 +33,13 @@ public class RecenzjaServlet extends HttpServlet {
             recenzja.setIdFilmu(idFilmu);
             recenzja.setIdUzytkownika(zalogowany.getIdUzytkownika());
             recenzja.setTresc(tresc);
+
+            System.out.println(recenzja.getTresc());
+            System.out.println(recenzja.getData());
+            System.out.println(recenzja.getIdFilmu());
+            System.out.println(recenzja.getIdReceznji());
+            System.out.println(recenzja.getIdUzytkownika());
+
 
             // Utworzenie nowej Recenzji
             recenzjaDAO.addRecenzje(recenzja);

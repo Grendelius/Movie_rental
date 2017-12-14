@@ -34,7 +34,7 @@
 
 <form method="post" action="/ocena">
     Oceń film:
-    <input type="hidden" name="id" value="${film.idFilmu}"/>
+    <input type="hidden" name="idFilmu" value="<%=film.getIdFilmu()%>"/>
     <select name="ocena" size="1">
         <%
             for (int i = 0; i <= 10; i++) {
@@ -63,7 +63,7 @@
     if (zalogowany != null) {
 %>
 <form method="post" action="/recenzja">
-    <input type="hidden" name="id" value="${film.idFilmu}"/>
+    <input type="hidden" name="idFilmu" value="<%=film.getIdFilmu()%>"/>
     <p>Dodaj recenzje:</p>
     <textarea name="tresc" cols="40" rows="8"></textarea><br/>
     <input type="submit" value="OK"/>
