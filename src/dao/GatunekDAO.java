@@ -38,6 +38,12 @@ public class GatunekDAO {
         return g;
     }
 
+    public int getId() {
+        int id = (int) this.em.createQuery("select MAX(idGatunku) from Gatunek")
+                .getSingleResult();
+        return id;
+    }
+
     // Metoda dodaje Gatunek do bazy
     public boolean addGatunek(Gatunek g) {
         EntityTransaction et = em.getTransaction();
@@ -67,5 +73,6 @@ public class GatunekDAO {
             return false;
         }
     }
+
 
 }
