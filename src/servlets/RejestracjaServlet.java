@@ -67,7 +67,6 @@ public class RejestracjaServlet extends HttpServlet {
                                     u.setRola("klient");
                                     if (dao.addUzytkownika(u)) {
                                         request.setAttribute("czyLogin", "true");
-                                        request.setAttribute("info", "Rejestracja przebiegła pomyślnie!");
                                         response.sendRedirect(request.getContextPath() + "/login");
                                     } else
                                         request.setAttribute("blad", "Nie udało się zakończyć rejestracji!");

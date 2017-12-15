@@ -57,5 +57,19 @@ public class OcenaDAO {
 
     }
 
+    public boolean deleteOcene(Ocena o) {
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            em.remove(o);
+            et.commit();
+            return true;
+        } catch (Exception e) {
+            et.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 }

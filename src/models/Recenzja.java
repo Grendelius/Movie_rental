@@ -16,11 +16,11 @@ public class Recenzja {
 
     @Id
     @Column(name = "idRecenzji")
-    public int getIdReceznji() {
+    public int getIdRecenzji() {
         return idRecenzji;
     }
 
-    public void setIdReceznji(int idReceznji) {
+    public void setIdRecenzji(int idRecenzji) {
         this.idRecenzji = idRecenzji;
     }
 

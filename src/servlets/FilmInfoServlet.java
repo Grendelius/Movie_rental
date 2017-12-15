@@ -24,6 +24,7 @@ public class FilmInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         int idFilmu = Integer.parseInt(request.getParameter("idFilmu"));
+        String zmienOcene = request.getParameter("zmienOcene");
 
         FilmDAO filmDAO = new FilmDAO();
         GatunekDAO gatunekDAO = new GatunekDAO();
@@ -36,8 +37,9 @@ public class FilmInfoServlet extends HttpServlet {
         request.setAttribute("gatunek", gatunek);
         List<GatunekFilm> gatunekFilm = gatunekFilmDAO.getGatunekFilmPoFilmieList(idFilmu);
         request.setAttribute("gatunekFilm", gatunekFilm);
-        List<Recenzja> recenzjaList = recenzjaDAO.getRecenzje(idFilmu);
+        List<Recenzja> recenzjaList = recenzjaDAO.getRecenzjeList(idFilmu);
         request.setAttribute("recenzja", recenzjaList);
+        request.setAttribute("zmienOcene", zmienOcene);
 
         doGet(request, response);
     }
