@@ -65,9 +65,11 @@ public class RejestracjaServlet extends HttpServlet {
                                     u.setMiejsceZamieszkania(miejsceZamieszkania);
                                     u.setEmail(email);
                                     u.setRola("klient");
-                                    if (dao.addUzytkownika(u))
-                                        response.sendRedirect(request.getContextPath() + "/stronaGlowna");
-                                    else
+                                    if (dao.addUzytkownika(u)) {
+                                        request.setAttribute("czyLogin", "true");
+                                        request.setAttribute("info", "Rejestracja przebiegła pomyślnie!");
+                                        response.sendRedirect(request.getContextPath() + "/login");
+                                    } else
                                         request.setAttribute("blad", "Nie udało się zakończyć rejestracji!");
                                 }
                             } else {
