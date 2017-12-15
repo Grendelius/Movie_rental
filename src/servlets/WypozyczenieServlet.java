@@ -50,6 +50,7 @@ public class WypozyczenieServlet extends HttpServlet {
             wypozyczenieDAO.addWypozyczenie(wypozyczenie);
             sklepFilmDAO.zmniejszIloscFilmow(idFilmu, idSklepu);
 
+            request.setAttribute("info", "Twoje zlecenie zostało przekazane do realizacji!");
             response.sendRedirect(request.getContextPath() + "/stronaGlowna");
         } else if (zalogowany != null && zalogowany.getRola().equals("klient")) {
             int errCounter = 0;

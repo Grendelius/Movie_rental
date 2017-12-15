@@ -144,6 +144,12 @@
                     Dodaj recenzje:
                 </div>
                 <textarea name="tresc" cols="56" rows="2" style="margin-bottom:5px"></textarea><br/>
+                <%
+                    String blad = (String) request.getAttribute("blad");
+                    if(blad!=null) {
+                        out.println(blad + "<br>");
+                    }
+                %>
                 <input type="submit" value="OK"/>
             </form>
         </div>

@@ -26,16 +26,19 @@ public class EdytujFilmServlet extends HttpServlet {
      * Metoda umożliwia edycje filmu, a także dodawanie, edycje i usuwanie gatunków do filmu.
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         // Pobieramy informacje na temet filmu i jego gatunków
         int idFilmu = Integer.parseInt(request.getParameter("idFilmu"));
         String tytul = request.getParameter("tytul");
         String opis = request.getParameter("opis");
         String rokProdukcji = request.getParameter("rokProdukcji");
+
         // Nazwy gatunków wpisanych przez pracownika
         String[] newgatunek = request.getParameterValues("gatunek");
 
         // Tworzenie Regex-ów
         String patternPusty = ".+";
+        String patternOpis = ".{1,255}";
         String patternRokProdukcji = "19[0-9]{2}|20[0-9]{2}";
 
         FilmDAO filmDAO = new FilmDAO();
@@ -50,7 +53,7 @@ public class EdytujFilmServlet extends HttpServlet {
         if (tytul != null) {
 
             // Sprawdzenie czy dane zostały poprawnie wstawione
-            if (Pattern.matches(patternPusty, tytul) && Pattern.matches(patternPusty, opis)
+            if (Pattern.matches(patternPusty, tytul) && Pattern.matches(patternOpis, opis)
                     && Pattern.matches(patternRokProdukcji, rokProdukcji) && Pattern.matches(patternPusty, newgatunek[0])) {
 
                 // Pobranie listy gatunków danego filmu
@@ -70,11 +73,11 @@ public class EdytujFilmServlet extends HttpServlet {
 
                 // Iteracja po gatunkach wybranego filmu
                 for (int i = 0; i < gatunekFilm.size(); i++) {
-
                     // Sprawdzanie czy zmieniono dany gatunek
                     if (!gatunekDAO.getWybranyGatunekPoId(gatunekFilm.get(i).getIdGatunku()).getNazwa().equals(newgatunek[i])) {
                         // Sprawdzanie czy nowy gatunek nie jest pusty (usunięcie gatunku)
                         if (Pattern.matches(patternPusty, newgatunek[i])) {
+                            newgatunek[i] = newgatunek[i].substring(0, 1).toUpperCase() + newgatunek[i].substring(1);
                             try {
                                 // Szukanie gatunku w bazie
                                 gatunek = gatunekDAO.getWybranyGatunekPoNazwie(newgatunek[i]);
@@ -115,6 +118,7 @@ public class EdytujFilmServlet extends HttpServlet {
 
                 //Sprawdzanie czy jest dodatkowy gatunek
                 if (gatunekFilm.size() < newgatunek.length && Pattern.matches(patternPusty, newgatunek[newgatunek.length - 1])) {
+                    newgatunek[newgatunek.length - 1] = newgatunek[newgatunek.length - 1].substring(0, 1).toUpperCase() + newgatunek[newgatunek.length - 1].substring(1);
                     try {
                         // Szukanie gatunku w bazie
                         gatunek = gatunekDAO.getWybranyGatunekPoNazwie(newgatunek[newgatunek.length - 1]);

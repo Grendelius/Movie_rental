@@ -97,7 +97,7 @@ public class RejestracjaServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getAttribute("czyRejestruj")==null) {
+        if (request.getAttribute("czyRejestruj") == null) {
             request.setAttribute("czyRejestruj", "true");
         }
         request.getRequestDispatcher("/stronaGlowna").forward(request, response);

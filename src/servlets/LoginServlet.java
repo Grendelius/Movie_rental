@@ -24,34 +24,36 @@ public class LoginServlet extends HttpServlet {
 
         String login = request.getParameter("login");
         String haslo = request.getParameter("haslo");
-        if (login != null && haslo != null && !"".equals(haslo)) {
-            try {
-                UzytkownicyDAO dao = new UzytkownicyDAO();
-                Uzytkownik u = dao.getUzytkownikPoLoginie(login);
-                if (u.getHaslo().equals(dao.getMD5(haslo))) {
+        if (login != null) {
+            if (haslo != null && !"".equals(haslo)) {
+                try {
+                    UzytkownicyDAO dao = new UzytkownicyDAO();
+                    Uzytkownik u = dao.getUzytkownikPoLoginie(login);
+                    if (u.getHaslo().equals(dao.getMD5(haslo))) {
 
-                    //Tworzenie sesji użytkownika
-                    HttpSession session = request.getSession();
-                    session.setAttribute("uzytkownik", u);
-                    request.setAttribute("czyLogin",null);
-                    response.sendRedirect(request.getContextPath() + "/stronaGlowna");
-                } else {
-                    request.setAttribute("blad", "Podałeś błędne hasło!");
+                        //Tworzenie sesji użytkownika
+                        HttpSession session = request.getSession();
+                        session.setAttribute("uzytkownik", u);
+                        request.setAttribute("czyLogin", null);
+                        response.sendRedirect(request.getContextPath() + "/stronaGlowna");
+                    } else {
+                        request.setAttribute("blad", "Podałeś błędne hasło!");
+                        doGet(request, response);
+                    }
+                } catch (NoResultException e) {
+                    request.setAttribute("blad", "Nie ma takiego uzytkownika!");
                     doGet(request, response);
                 }
-            } catch (NoResultException e) {
-                request.setAttribute("blad", "Nie ma takiego uzytkownika!");
+            } else {
+                request.setAttribute("blad", "Błąd danych logowania!");
                 doGet(request, response);
             }
-        } else {
-            request.setAttribute("blad", "Błąd danych logowania!");
+        }else
             doGet(request, response);
-        }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getAttribute("czyLogin")==null) {
+        if (request.getAttribute("czyLogin") == null) {
             request.setAttribute("czyLogin", "true");
         }
         request.getRequestDispatcher("/stronaGlowna").forward(request, response);
@@ -59,6 +61,3 @@ public class LoginServlet extends HttpServlet {
 
 
 }
-
-
-

@@ -3,9 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Wypozyczalnia</title>
-    <%
-        String blad = (String) request.getAttribute("blad");
-    %>
 
 </head>
 <body>
@@ -17,6 +14,7 @@
     </div>
     <div style="margin-top:5px;margin-left:10px;">
         <%
+            String blad = (String) request.getAttribute("blad");
             if(blad!=null) {
                 out.println(blad);
             }
