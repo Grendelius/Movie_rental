@@ -14,16 +14,31 @@ public class WypozyczenieDAO {
         em = DBConfig.createEntityManager();
     }
 
-    // Metoda zwraca listę wszystkich Wypożyczeń posortowaną po statusie
-    public List<Wypozyczenie> getAllWypozyczeniaList() {
-        List<Wypozyczenie> w = this.em.createQuery("select w from Wypozyczenie w order by status")
+    // Metoda zwraca listę wszystkich aktualnych Wypożyczeń posortowaną po statusie
+    public List<Wypozyczenie> getAllAktualneWypozyczeniaList() {
+        List<Wypozyczenie> w = this.em.createQuery("select w from Wypozyczenie w where w.status != 'Zakończony' order by status")
                 .getResultList();
         return w;
     }
 
-    // Metoda zwraca listę Wypożyczeń wybranego klienta posortowaną po statusie
-    public List<Wypozyczenie> getWypozyczeniaKlientaList(int idUzytkownika) {
-        List<Wypozyczenie> w = this.em.createQuery("select w from Wypozyczenie w where w.idUzytkownika = :idUzytkownika order by status")
+    // Metoda zwraca listę wszystkich zakończonych Wypożyczeń posortowaną po dacie
+    public List<Wypozyczenie> getAllHistorieWypozyczeniaList() {
+        List<Wypozyczenie> w = this.em.createQuery("select w from Wypozyczenie w where w.status = 'Zakończony' order by dataWypozyczenia")
+                .getResultList();
+        return w;
+    }
+
+    // Metoda zwraca listę aktualnych Wypożyczeń wybranego klienta posortowaną po statusie
+    public List<Wypozyczenie> getAktualneWypozyczeniaKlientaList(int idUzytkownika) {
+        List<Wypozyczenie> w = this.em.createQuery("select w from Wypozyczenie w where w.idUzytkownika = :idUzytkownika and w.status != 'Zakończony' order by status")
+                .setParameter("idUzytkownika", idUzytkownika)
+                .getResultList();
+        return w;
+    }
+
+    // Metoda zwraca listę zakończonych Wypożyczeń wybranego klienta posortowaną po dacie
+    public List<Wypozyczenie> getHistorieWypozyczeniaKlientaList(int idUzytkownika) {
+        List<Wypozyczenie> w = this.em.createQuery("select w from Wypozyczenie w where w.idUzytkownika = :idUzytkownika and w.status = 'Zakończony' order by dataWypozyczenia")
                 .setParameter("idUzytkownika", idUzytkownika)
                 .getResultList();
         return w;

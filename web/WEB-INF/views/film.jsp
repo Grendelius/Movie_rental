@@ -7,6 +7,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Wypożyczalnia</title>
+</head>
+<body>
 
     <%
         String zmienOcene = (String) request.getAttribute("zmienOcene");
@@ -25,8 +27,6 @@
 
     %>
 
-</head>
-<body>
 <div id="center" style="background-color:red;width:490px;float:left; margin-left:5px;margin-right:5px">
     <div style="background-color:darkred;margin-top:37px;height:30px">
         <div style="margin-left:10px;font-size:22px;">
