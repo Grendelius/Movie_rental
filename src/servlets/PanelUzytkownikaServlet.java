@@ -1,5 +1,6 @@
 package servlets;
 
+import dao.UzytkownicyDAO;
 import models.Uzytkownik;
 
 import javax.servlet.ServletException;
@@ -14,15 +15,36 @@ public class PanelUzytkownikaServlet extends HttpServlet {
 
     /**
      * Metoda sprawdza czy użytkownik jest zalogowany jęsli nie to przenosi go do
-     * servletu LoginServlet, w innym przypadku przenosi użytkownika do strony panelUzytkownika.jsp.
+     * servletu LoginServlet. W innym przypadku sprawdza jaka opcja została wybrana i wykonuje ją.
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Uzytkownik uzytkownik = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
-        if (uzytkownik == null)
-            request.getRequestDispatcher("/login").forward(request, response);
-        else
-            doGet(request, response);
 
+        Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
+        String akcja = request.getParameter("akcja");
+
+        if (zalogowany != null)
+            if (akcja != null) {
+                String idUzytkownika = request.getParameter("idUzytkownika");
+                UzytkownicyDAO uzytkownicyDAO = new UzytkownicyDAO();
+                Uzytkownik uzytkownik = uzytkownicyDAO.getUzytkownikPoId(Integer.parseInt(idUzytkownika));
+                if (akcja.equals("Zablokuj konto")) {
+                    uzytkownik.setZablokowany(true);
+                    uzytkownicyDAO.updateUzytkownika(uzytkownik);
+                } else if (akcja.equals("Odblokuj konto")) {
+                    uzytkownik.setZablokowany(false);
+                    uzytkownicyDAO.updateUzytkownika(uzytkownik);
+                } else if (akcja.equals("Usuń konto")) {
+                    uzytkownicyDAO.deleteUzytkownika(uzytkownik);
+                } else {
+                    // Zmiana roli
+                    uzytkownik.setRola(akcja);
+                    uzytkownicyDAO.updateUzytkownika(uzytkownik);
+                }
+                doGet(request, response);
+            } else
+                doGet(request, response);
+        else
+            request.getRequestDispatcher("/login").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

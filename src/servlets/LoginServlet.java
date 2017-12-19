@@ -30,12 +30,16 @@ public class LoginServlet extends HttpServlet {
                     UzytkownicyDAO dao = new UzytkownicyDAO();
                     Uzytkownik u = dao.getUzytkownikPoLoginie(login);
                     if (u.getHaslo().equals(dao.getMD5(haslo))) {
-
-                        //Tworzenie sesji użytkownika
-                        HttpSession session = request.getSession();
-                        session.setAttribute("uzytkownik", u);
-                        request.setAttribute("czyLogin", null);
-                        response.sendRedirect(request.getContextPath() + "/stronaGlowna");
+                        if (!u.isZablokowany()) {
+                            //Tworzenie sesji użytkownika
+                            HttpSession session = request.getSession();
+                            session.setAttribute("uzytkownik", u);
+                            request.setAttribute("czyLogin", null);
+                            response.sendRedirect(request.getContextPath() + "/stronaGlowna");
+                        } else {
+                            request.setAttribute("blad", "Twoje konto zostało zablokowane! Skontaktuj się z Administratorem");
+                            doGet(request, response);
+                        }
                     } else {
                         request.setAttribute("blad", "Podałeś błędne hasło!");
                         doGet(request, response);

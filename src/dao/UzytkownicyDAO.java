@@ -8,12 +8,20 @@ import javax.persistence.EntityTransaction;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class UzytkownicyDAO {
     private EntityManager em;
 
     public UzytkownicyDAO() {
         em = DBConfig.createEntityManager();
+    }
+
+    // Metoda zwraca listę filmów posortowanych od najnowszych do najstarszych
+    public List<Uzytkownik> getUzytkownicyList(){
+        List<Uzytkownik> u = this.em.createQuery("select u from Uzytkownik u")
+                .getResultList();
+        return u;
     }
 
     // Metoda zwraca Użytkownika o danym liginie
@@ -90,6 +98,21 @@ public class UzytkownicyDAO {
         try {
             et.begin();
             em.merge(u);
+            et.commit();
+            return true;
+        } catch (Exception e) {
+            et.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Metoda usuwa Użytkownika z bazy
+    public boolean deleteUzytkownika(Uzytkownik u) {
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            em.remove(u);
             et.commit();
             return true;
         } catch (Exception e) {

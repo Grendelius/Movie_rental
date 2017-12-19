@@ -65,6 +65,7 @@ public class RejestracjaServlet extends HttpServlet {
                                     u.setMiejsceZamieszkania(miejsceZamieszkania);
                                     u.setEmail(email);
                                     u.setRola("klient");
+                                    u.setZablokowany(false);
                                     if (dao.addUzytkownika(u)) {
                                         request.setAttribute("czyLogin", "true");
                                         response.sendRedirect(request.getContextPath() + "/login");

@@ -16,6 +16,7 @@ public class Uzytkownik {
     private String miejsceZamieszkania;
     private String email;
     private String rola;
+    private boolean zablokowany;
 
     @Id
     @GenericGenerator(name="kaugen" , strategy="increment")
@@ -109,6 +110,16 @@ public class Uzytkownik {
         this.rola = rola;
     }
 
+    @Basic
+    @Column(name = "zablokowany")
+    public boolean isZablokowany() {
+        return zablokowany;
+    }
+
+    public void setZablokowany(boolean zablokowany) {
+        this.zablokowany = zablokowany;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -118,6 +129,7 @@ public class Uzytkownik {
 
         if (idUzytkownika != that.idUzytkownika) return false;
         if (numerTelefonu != that.numerTelefonu) return false;
+        if (zablokowany != that.zablokowany) return false;
         if (login != null ? !login.equals(that.login) : that.login != null) return false;
         if (haslo != null ? !haslo.equals(that.haslo) : that.haslo != null) return false;
         if (imie != null ? !imie.equals(that.imie) : that.imie != null) return false;
@@ -125,9 +137,7 @@ public class Uzytkownik {
         if (miejsceZamieszkania != null ? !miejsceZamieszkania.equals(that.miejsceZamieszkania) : that.miejsceZamieszkania != null)
             return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (rola != null ? !rola.equals(that.rola) : that.rola != null) return false;
-
-        return true;
+        return rola != null ? rola.equals(that.rola) : that.rola == null;
     }
 
     @Override
@@ -141,6 +151,7 @@ public class Uzytkownik {
         result = 31 * result + (miejsceZamieszkania != null ? miejsceZamieszkania.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (rola != null ? rola.hashCode() : 0);
+        result = 31 * result + (zablokowany ? 1 : 0);
         return result;
     }
 }

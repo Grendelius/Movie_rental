@@ -29,8 +29,11 @@
         <%
             if (uzytkownik.getRola().equals("klient")) {
                 out.println("Klient: " + uzytkownik.getLogin());
-            } else if (uzytkownik.getRola().equals("pracownik"))
+            } else if (uzytkownik.getRola().equals("pracownik")) {
                 out.println("Pracownik: " + uzytkownik.getLogin());
+            } else if (uzytkownik.getRola().equals("administrator")) {
+                out.println("Administrator: " + uzytkownik.getLogin());
+            }
         } else {
         %>
         <form method="post" action="login" style="display:inline">
