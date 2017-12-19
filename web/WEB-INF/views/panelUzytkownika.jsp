@@ -14,7 +14,7 @@
     <input type="submit" value="Dodaj Film"
            style="width:160px;height:40px;background-color:red;border-color:red;"></input>
 </form>
-<form method="post" action="edycjaProfilu" style="display:inline">
+<form method="post" action="edytujProfil" style="display:inline">
     <input type="submit" value="Edycja profilu"
            style="width:160px;height:40px;background-color:red;border-color:red;"></input>
 </form>
@@ -32,9 +32,9 @@
 </form>
 
 <%
-    } else if (uzytkownik.getRola().equals("klient")) {
+} else if (uzytkownik.getRola().equals("klient")) {
 %>
-<form method="post" action="edycjaProfilu" style="display:inline">
+<form method="post" action="edytujProfil" style="display:inline">
     <input type="submit" value="Edycja profilu"
            style="width:160px;height:40px;background-color:red;border-color:red;"></input>
 </form>

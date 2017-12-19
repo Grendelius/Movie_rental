@@ -84,6 +84,21 @@ public class UzytkownicyDAO {
         }
     }
 
+    // Metoda edytuje Użytkownika w bazy
+    public boolean updateUzytkownika(Uzytkownik u) {
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            em.merge(u);
+            et.commit();
+            return true;
+        } catch (Exception e) {
+            et.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     // Metoda zamienia hasło na postać MD5
     public String getMD5(String dane) {
         MessageDigest md5;

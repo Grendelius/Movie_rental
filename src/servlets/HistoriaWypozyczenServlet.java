@@ -13,10 +13,15 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/historiaWypozyczen")
-public class historiaWypozyczenServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
+public class HistoriaWypozyczenServlet extends HttpServlet {
 
+    /**
+     * Metoda pobiera historię wypożyczeń użytkownika lub jeśli to pracownik to całą historię wypożyczeń
+     * i przekazuje ją do wyświetlenia  do strony historiaWypozyczen.jsp
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
         WypozyczenieDAO wypozyczenieDAO = new WypozyczenieDAO();
 
         if (zalogowany.getRola().equals("klient")) {
