@@ -32,6 +32,7 @@ public class DodajFilmServlet extends HttpServlet {
         String tytul = request.getParameter("tytul");
         String rokProdukcji = request.getParameter("rokProdukcji");
         String opis = request.getParameter("opis");
+        String okladka = request.getParameter("okladka");
         String[] gat = request.getParameterValues("gatunek");
 
         // Tworzenie Regex-ów
@@ -44,13 +45,15 @@ public class DodajFilmServlet extends HttpServlet {
 
             // Sprawdzenie czy dane zostały poprawnie wstawione
             if (Pattern.matches(patternPusty, tytul) && Pattern.matches(patternPusty, rokProdukcji)
-                    && Pattern.matches(patternRokProdukcji, rokProdukcji) && Pattern.matches(patternOpis, opis)) {
+                    && Pattern.matches(patternRokProdukcji, rokProdukcji) && Pattern.matches(patternOpis, opis)
+                    && Pattern.matches(patternPusty, okladka)) {
 
                 // Dodanie danych o filmie
                 Film film = new Film();
                 film.setTytul(tytul);
                 film.setRokProdukcji(Integer.parseInt(rokProdukcji));
                 film.setOpis(opis);
+                film.setOkladka(okladka);
                 film.setDataDodania(new Timestamp(new Date().getTime()));
                 FilmDAO filmDAO = new FilmDAO();
 
@@ -66,9 +69,9 @@ public class DodajFilmServlet extends HttpServlet {
 
                 // Iteracja po podanych gatunkach
                 for (String g: newGatunek) {
-                    g = g.substring(0, 1).toUpperCase() + g.substring(1);
                     // Sprawdzenie czy gatunek nie jest pusty
                     if (Pattern.matches(patternPusty, g)) {
+                        g = g.substring(0, 1).toUpperCase() + g.substring(1);
                         try {
                             // Szukanie gatunku w bazie
                             gatunek = gatunekDAO.getWybranyGatunekPoNazwie(g);

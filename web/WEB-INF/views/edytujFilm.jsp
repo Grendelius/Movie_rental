@@ -41,6 +41,8 @@ ${blad}
     <textarea name="opis" cols="40" rows="8"><%=film.getOpis()%></textarea>
     <p>Rok produkcji:</p>
     <input type="text" name="rokProdukcji" maxlength="30" value="<%=film.getRokProdukcji()%>"/>
+    <p>Okładka:</p>
+    <textarea name="okladka" cols="40" rows="8" ><%=film.getOkladka()%></textarea>
     <input type="hidden" name="idFilmu" value="<%=film.getIdFilmu()%>"/>
     <br><br><input type="submit" value="Zatwierdź"/>
 </form>

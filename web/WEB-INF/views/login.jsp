@@ -17,9 +17,11 @@
     <div style="margin-top:5px;margin-left:10px;">
         <%
             String blad = (String) request.getAttribute("blad");
-            if(blad!=null) {
+            String info = (String) request.getAttribute("info");
+            if (blad != null) {
                 out.println(blad);
-            }
+            } else if (info != null)
+                out.println(info);
         %>
         <form method="post">
             <p>Login:</p>

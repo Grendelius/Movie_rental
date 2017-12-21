@@ -31,6 +31,7 @@ public class EdytujFilmServlet extends HttpServlet {
         int idFilmu = Integer.parseInt(request.getParameter("idFilmu"));
         String tytul = request.getParameter("tytul");
         String opis = request.getParameter("opis");
+        String okladka = request.getParameter("okladka");
         String rokProdukcji = request.getParameter("rokProdukcji");
 
         // Nazwy gatunków wpisanych przez pracownika
@@ -54,7 +55,8 @@ public class EdytujFilmServlet extends HttpServlet {
 
             // Sprawdzenie czy dane zostały poprawnie wstawione
             if (Pattern.matches(patternPusty, tytul) && Pattern.matches(patternOpis, opis)
-                    && Pattern.matches(patternRokProdukcji, rokProdukcji) && Pattern.matches(patternPusty, newgatunek[0])) {
+                    && Pattern.matches(patternRokProdukcji, rokProdukcji) && Pattern.matches(patternPusty, newgatunek[0])
+                    && Pattern.matches(patternPusty, okladka)) {
 
                 // Pobranie listy gatunków danego filmu
                 gatunekFilm = gatunekFilmDAO.getGatunekFilmPoFilmieList(idFilmu);
@@ -63,6 +65,7 @@ public class EdytujFilmServlet extends HttpServlet {
                 film.setTytul(tytul);
                 film.setOpis(opis);
                 film.setRokProdukcji(Integer.parseInt(rokProdukcji));
+                film.setOkladka(okladka);
 
                 // Update danych o filmie
                 filmDAO.updateFilm(film);
