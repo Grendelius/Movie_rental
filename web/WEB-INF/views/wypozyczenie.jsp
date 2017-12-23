@@ -17,8 +17,8 @@
         sklep = sklepDAO.getSklep(s.getIdSklepu());
         out.println("<br>" + sklep.getNazwaSklepu());
         out.println(sklep.getUlica());
-        if (s.getIloscFilmow() > 0) {
-            out.println("<br>Ilość dostępnych sztuk: " + s.getIloscFilmow());
+        if (s.getIloscDostepnychFilmow() > 0) {
+            out.println("<br>Ilość dostępnych sztuk: " + s.getIloscDostepnychFilmow());
 %>
 <form method="post" action="wypozycz" style="display:inline">
     <input type="hidden" name="idSklepu" value="<%=s.getIdSklepu()%>"/>

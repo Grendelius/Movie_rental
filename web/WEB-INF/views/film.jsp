@@ -48,9 +48,9 @@
         <img style="width:130px;height:170px;" src="<%=film.getOkladka()%>">
 
         <div style="margin-left:10px;margin-right:430px;position:absolute;display:inline;">
-            <td>Reżyser:</td>
+            <td>Reżyser: <%=film.getRezyser()%></td>
             </br>
-            <td>Czas trwania:</td>
+            <td>Czas trwania: <%=film.getCzasTrwania()%></td>
             </br>
             <td>Rok produkcji: <%=film.getRokProdukcji()%>
             </td>

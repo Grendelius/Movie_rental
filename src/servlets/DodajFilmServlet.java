@@ -33,12 +33,15 @@ public class DodajFilmServlet extends HttpServlet {
         String rokProdukcji = request.getParameter("rokProdukcji");
         String opis = request.getParameter("opis");
         String okladka = request.getParameter("okladka");
+        String rezyser = request.getParameter("rezyser");
+        String czasTrwania = request.getParameter("czasTrwania");
         String[] gat = request.getParameterValues("gatunek");
 
         // Tworzenie Regex-ów
         String patternPusty = ".+";
         String patternOpis = ".{1,255}";
         String patternRokProdukcji = "19[0-9]{2}|20[0-9]{2}";
+        String patternCzasTrwania = "[1-9]{1}[0-9]{0,2}";
 
         // Pominięcie dodawania jeśli wchodzimy w dodawanie pierwszy raz
         if (tytul != null) {
@@ -46,7 +49,8 @@ public class DodajFilmServlet extends HttpServlet {
             // Sprawdzenie czy dane zostały poprawnie wstawione
             if (Pattern.matches(patternPusty, tytul) && Pattern.matches(patternPusty, rokProdukcji)
                     && Pattern.matches(patternRokProdukcji, rokProdukcji) && Pattern.matches(patternOpis, opis)
-                    && Pattern.matches(patternPusty, okladka)) {
+                    && Pattern.matches(patternPusty, okladka) && Pattern.matches(patternPusty, rezyser)
+                    && Pattern.matches(patternCzasTrwania, czasTrwania)) {
 
                 // Dodanie danych o filmie
                 Film film = new Film();
@@ -55,6 +59,8 @@ public class DodajFilmServlet extends HttpServlet {
                 film.setOpis(opis);
                 film.setOkladka(okladka);
                 film.setDataDodania(new Timestamp(new Date().getTime()));
+                film.setRezyser(rezyser);
+                film.setCzasTrwania(Integer.parseInt(czasTrwania));
                 FilmDAO filmDAO = new FilmDAO();
 
                 // Dodanie nowego filmu

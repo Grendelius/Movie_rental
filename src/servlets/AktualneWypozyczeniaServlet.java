@@ -47,7 +47,7 @@ public class AktualneWypozyczeniaServlet extends HttpServlet {
                         // Szukanie pasującego zamówienia
                         addWypozyczenie(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
                     } catch (NoResultException | IndexOutOfBoundsException e) {
-                        sklepFilmDAO.zwiekszIloscFilmow(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
+                        sklepFilmDAO.zwiekszIloscDostepnychFilmow(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
                     } finally {
                         wypozyczenieDAO.deleteWypozyczenie(wypozyczenie);
                     }
@@ -74,7 +74,7 @@ public class AktualneWypozyczeniaServlet extends HttpServlet {
                         // Szukanie pasującego zamówienia
                         addWypozyczenie(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
                     } catch (NoResultException | IndexOutOfBoundsException e) {
-                        sklepFilmDAO.zwiekszIloscFilmow(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
+                        sklepFilmDAO.zwiekszIloscDostepnychFilmow(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
                     } finally {
                         wypozyczenie.setDataZwrotu(new Timestamp(new Date().getTime()));
                     }
@@ -85,7 +85,7 @@ public class AktualneWypozyczeniaServlet extends HttpServlet {
                     try {
                         addWypozyczenie(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
                     } catch (NoResultException | IndexOutOfBoundsException e) {
-                        sklepFilmDAO.zwiekszIloscFilmow(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
+                        sklepFilmDAO.zwiekszIloscDostepnychFilmow(wypozyczenie.getIdFilmu(), wypozyczenie.getIdSklepu());
                     } finally {
                         wypozyczenieDAO.deleteWypozyczenie(wypozyczenie);
                     }

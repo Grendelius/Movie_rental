@@ -48,10 +48,9 @@ public class WypozyczenieServlet extends HttpServlet {
 
             // Utworzenie nowego wypożyczenia i zminiejszenie sztuk danego filmu w sklepie
             wypozyczenieDAO.addWypozyczenie(wypozyczenie);
-            sklepFilmDAO.zmniejszIloscFilmow(idFilmu, idSklepu);
-
-            request.setAttribute("info", "Twoje zlecenie zostało przekazane do realizacji!");
-            response.sendRedirect(request.getContextPath() + "/stronaGlowna");
+            sklepFilmDAO.zmniejszIloscDostepnychFilmow(idFilmu, idSklepu);
+            request.setAttribute("info", "<br>Twoje zlecenie zostało przekazane do realizacji!");
+            request.getRequestDispatcher("/stronaGlowna").forward(request, response);
         } else if (zalogowany != null && zalogowany.getRola().equals("klient")) {
             int errCounter = 0;
 

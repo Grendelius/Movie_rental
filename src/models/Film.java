@@ -15,10 +15,12 @@ public class Film {
     private Date dataDodania;
     private String okladka;
     private String opis;
+    private String rezyser;
+    private int czasTrwania;
 
     @Id
-    @GenericGenerator(name="kaugen" , strategy="increment")
-    @GeneratedValue(generator="kaugen")
+    @GenericGenerator(name = "kaugen", strategy = "increment")
+    @GeneratedValue(generator = "kaugen")
     @Column(name = "idFilmu")
     public int getIdFilmu() {
         return idFilmu;
@@ -88,6 +90,26 @@ public class Film {
         this.opis = opis;
     }
 
+    @Basic
+    @Column(name = "rezyser")
+    public String getRezyser() {
+        return rezyser;
+    }
+
+    public void setRezyser(String rezyser) {
+        this.rezyser = rezyser;
+    }
+
+    @Basic
+    @Column(name = "czasTrwania")
+    public int getCzasTrwania() {
+        return czasTrwania;
+    }
+
+    public void setCzasTrwania(int czasTrwania) {
+        this.czasTrwania = czasTrwania;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -98,8 +120,12 @@ public class Film {
         if (idFilmu != film.idFilmu) return false;
         if (rokProdukcji != film.rokProdukcji) return false;
         if (Double.compare(film.sredniaOcena, sredniaOcena) != 0) return false;
+        if (czasTrwania != film.czasTrwania) return false;
         if (tytul != null ? !tytul.equals(film.tytul) : film.tytul != null) return false;
-        return dataDodania != null ? dataDodania.equals(film.dataDodania) : film.dataDodania == null;
+        if (dataDodania != null ? !dataDodania.equals(film.dataDodania) : film.dataDodania != null) return false;
+        if (okladka != null ? !okladka.equals(film.okladka) : film.okladka != null) return false;
+        if (opis != null ? !opis.equals(film.opis) : film.opis != null) return false;
+        return rezyser != null ? rezyser.equals(film.rezyser) : film.rezyser == null;
     }
 
     @Override
@@ -112,6 +138,11 @@ public class Film {
         temp = Double.doubleToLongBits(sredniaOcena);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (dataDodania != null ? dataDodania.hashCode() : 0);
+        result = 31 * result + (okladka != null ? okladka.hashCode() : 0);
+        result = 31 * result + (opis != null ? opis.hashCode() : 0);
+        result = 31 * result + (rezyser != null ? rezyser.hashCode() : 0);
+        result = 31 * result + czasTrwania;
         return result;
     }
 }
+

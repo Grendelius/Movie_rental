@@ -42,9 +42,9 @@
     <div style="margin-top:5px;margin-left:10px;">
         <a href=""><img style="width:130px;height:170px;" src="<%=f.getOkladka()%>"></a>
         <div style="margin-left:10px;position:absolute;display:inline">
-            <td>Reżyser:</td>
+            <td>Reżyser: <%=f.getRezyser()%></td>
             </br>
-            <td>Czas trwania:</td>
+            <td>Czas trwania: <%=f.getCzasTrwania()%></td>
             </br>
             <td>Rok produkcji: <%=f.getRokProdukcji()%>
             </td>
@@ -79,6 +79,11 @@
         <b>
             <center><font size="4" face="serif">Nowości:</font></center>
         </b>
+        <%
+            String info = (String) request.getAttribute("info");
+            if (info != null)
+                out.println(info);
+        %>
     </div>
     <%
         for (Film f : film) {
@@ -94,9 +99,9 @@
         <a href=""><img style="width:130px;height:170px;" src="<%=f.getOkladka()%>"></a>
 
         <div style="margin-left:10px;position:absolute;display:inline">
-            <td>Reżyser:</td>
+            <td>Reżyser: <%=f.getRezyser()%></td>
             </br>
-            <td>Czas trwania:</td>
+            <td>Czas trwania: <%=f.getCzasTrwania()%></td>
             </br>
             <td>Rok produkcji: <%=f.getRokProdukcji()%>
             </td>

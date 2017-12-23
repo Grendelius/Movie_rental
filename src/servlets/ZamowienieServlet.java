@@ -36,12 +36,12 @@ public class ZamowienieServlet extends HttpServlet {
         //Utworzenie nowego zamówienia
         zamowienieDAO.addZamowienie(zamowienie);
 
-        request.setAttribute("info", "Twoje zamówienie zostało przekazane do kolejki oczekujących!");
+        request.setAttribute("info", "<br>Twoje zamówienie zostało przekazane do kolejki oczekujących!");
         doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath() + "/stronaGlowna");
+        request.getRequestDispatcher("/stronaGlowna").forward(request, response);
     }
 
 

@@ -4,6 +4,7 @@ import models.Sklep;
 import utils.DBConfig;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class SklepDAO {
     private EntityManager em;
@@ -20,5 +21,11 @@ public class SklepDAO {
         return s;
     }
 
+    // Metoda zwraca wszystkie sklepy
+    public List<Sklep> getSklepList() {
+        List<Sklep> s = (List<Sklep>) em.createQuery("select s from Sklep s")
+                .getResultList();
+        return s;
+    }
 
 }

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 @WebServlet("/edytujFilm")
-public class EdytujFilmServlet extends HttpServlet {
+public class EdycjaFilmuServlet extends HttpServlet {
 
     /**
      * Metoda pobiera informacje o filmie i przekazuje je do wyświetlenia na stronie formularza edytujFilm.jsp.
@@ -33,6 +33,8 @@ public class EdytujFilmServlet extends HttpServlet {
         String opis = request.getParameter("opis");
         String okladka = request.getParameter("okladka");
         String rokProdukcji = request.getParameter("rokProdukcji");
+        String rezyser = request.getParameter("rezyser");
+        String czasTrwania = request.getParameter("czasTrwania");
 
         // Nazwy gatunków wpisanych przez pracownika
         String[] newgatunek = request.getParameterValues("gatunek");
@@ -41,6 +43,7 @@ public class EdytujFilmServlet extends HttpServlet {
         String patternPusty = ".+";
         String patternOpis = ".{1,255}";
         String patternRokProdukcji = "19[0-9]{2}|20[0-9]{2}";
+        String patternCzasTrwania = "[1-9]{1}[0-9]{0,2}";
 
         FilmDAO filmDAO = new FilmDAO();
         GatunekDAO gatunekDAO = new GatunekDAO();
@@ -56,7 +59,8 @@ public class EdytujFilmServlet extends HttpServlet {
             // Sprawdzenie czy dane zostały poprawnie wstawione
             if (Pattern.matches(patternPusty, tytul) && Pattern.matches(patternOpis, opis)
                     && Pattern.matches(patternRokProdukcji, rokProdukcji) && Pattern.matches(patternPusty, newgatunek[0])
-                    && Pattern.matches(patternPusty, okladka)) {
+                    && Pattern.matches(patternPusty, okladka) && Pattern.matches(patternPusty, rezyser)
+                    && Pattern.matches(patternCzasTrwania, czasTrwania)) {
 
                 // Pobranie listy gatunków danego filmu
                 gatunekFilm = gatunekFilmDAO.getGatunekFilmPoFilmieList(idFilmu);
@@ -66,6 +70,8 @@ public class EdytujFilmServlet extends HttpServlet {
                 film.setOpis(opis);
                 film.setRokProdukcji(Integer.parseInt(rokProdukcji));
                 film.setOkladka(okladka);
+                film.setRezyser(rezyser);
+                film.setCzasTrwania(Integer.parseInt(czasTrwania));
 
                 // Update danych o filmie
                 filmDAO.updateFilm(film);

@@ -45,4 +45,13 @@
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <servlet>
+        <servlet-name>EdycjaSklepu</servlet-name>
+        <jsp-file>/WEB-INF/views/wyborSklepu.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EdycjaSklepu</servlet-name>
+        <url-pattern>/wybierzSklep</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -25,6 +25,10 @@ ${blad}
     <input type="text" name="rokProdukcji" maxlength="30"/>
     <p>Okładka:</p>
     <textarea name="okladka" cols="40" rows="8"></textarea>
+    <p>Reżyser:</p>
+    <input type="text" name="rezyser" maxlength="30"/>
+    <p>Czas trwania:</p>
+    <input type="text" name="czasTrwania" maxlength="30">
     <br><br><input type="submit" value="Zapisz zmiany"/>
 </form>
 

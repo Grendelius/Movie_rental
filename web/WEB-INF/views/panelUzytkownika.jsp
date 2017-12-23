@@ -16,6 +16,10 @@
     <input type="submit" value="Dodaj Film"
            style="width:160px;height:40px;background-color:red;border-color:red;"></input>
 </form>
+<form method="post" action="wybierzSklep" style="display:inline">
+    <input type="submit" value="Edytuj Sklep"
+           style="width:160px;height:40px;background-color:red;border-color:red;"></input>
+</form>
 <form method="post" action="edytujProfil" style="display:inline">
     <input type="submit" value="Edycja profilu"
            style="width:160px;height:40px;background-color:red;border-color:red;"></input>

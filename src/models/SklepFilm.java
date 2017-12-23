@@ -9,6 +9,7 @@ public class SklepFilm implements Serializable {
     private int idSklepu;
     private int idFilmu;
     private int iloscFilmow;
+    private int iloscDostepnychFilmow;
 
     @Basic
     @Column(name = "iloscFilmow")
@@ -40,23 +41,13 @@ public class SklepFilm implements Serializable {
         this.idFilmu = idFilmu;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SklepFilm sklepFilm = (SklepFilm) o;
-
-        if (idSklepu != sklepFilm.idSklepu) return false;
-        if (idFilmu != sklepFilm.idFilmu) return false;
-        return iloscFilmow == sklepFilm.iloscFilmow;
+    @Basic
+    @Column(name = "iloscDostepnychFilmow")
+    public int getIloscDostepnychFilmow() {
+        return iloscDostepnychFilmow;
     }
 
-    @Override
-    public int hashCode() {
-        int result = idSklepu;
-        result = 31 * result + idFilmu;
-        result = 31 * result + iloscFilmow;
-        return result;
+    public void setIloscDostepnychFilmow(int iloscDostepnychFilmow) {
+        this.iloscDostepnychFilmow = iloscDostepnychFilmow;
     }
 }
