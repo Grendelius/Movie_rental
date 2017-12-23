@@ -96,5 +96,18 @@ public class FilmDAO {
         }
     }
 
-
+    // Metoda edytuje wybrany Film
+    public boolean deleteFilm(Film f) {
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            em.remove(f);
+            et.commit();
+            return true;
+        } catch (Exception e) {
+            et.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

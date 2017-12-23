@@ -21,6 +21,14 @@ public class ZamowienieDAO {
         return z;
     }
 
+    // Metoda zwraca jedno aktualne Zamówienie danego filmu
+    public Zamowienie getZamowienieFilmu(int idFilmu) {
+        List<Zamowienie> z = this.em.createQuery("select z from Zamowienie z where z.idFilmu =:idFilmu")
+                .setParameter("idFilmu", idFilmu)
+                .getResultList();
+        return z.get(0);
+    }
+
     // Metoda zwraca listę Zamówień wybranego klienta posortowaną po dacie zamówienia
     public List<Zamowienie> getZamowieniaKlientaList(int idUzytkownika) {
         List<Zamowienie> z = this.em.createQuery("select z from Zamowienie z where z.idUzytkownika = :idUzytkownika order by dataZamowienia")

@@ -81,8 +81,11 @@
         </b>
         <%
             String info = (String) request.getAttribute("info");
+            String blad = (String) request.getAttribute("blad");
             if (info != null)
                 out.println(info);
+            else if (blad != null)
+                out.println(blad);
         %>
     </div>
     <%

@@ -34,6 +34,14 @@ public class OcenaDAO {
         return oceny;
     }
 
+    public List<Ocena> getOcenyFilmuList(int idFilmu) {
+        List<Ocena> o = em.createQuery("select o from Ocena o where o.idFilmu = :idFilmu")
+                .setParameter("idFilmu", idFilmu)
+                .getResultList();
+        return o;
+    }
+
+
     public Ocena getOcene(int idUzytkownika, int idFilmu) {
         Ocena o = (Ocena) em.createQuery("select o from Ocena o where o.idUzytkownika = :idUzytkownika and o.idFilmu = :idFilmu")
                 .setParameter("idFilmu", idFilmu)

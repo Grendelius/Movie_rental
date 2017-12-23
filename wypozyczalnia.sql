@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 12 Gru 2017, 15:25
+-- Czas generowania: 23 Gru 2017, 20:58
 -- Wersja serwera: 10.1.28-MariaDB
 -- Wersja PHP: 7.1.11
 
@@ -35,19 +35,28 @@ CREATE TABLE `film` (
   `opis` varchar(255) COLLATE utf8_bin NOT NULL,
   `sredniaOcena` double NOT NULL,
   `dataDodania` date NOT NULL,
-  `okladka` varchar(255) COLLATE utf8_bin DEFAULT NULL
+  `okladka` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `rezyser` varchar(255) COLLATE utf8_bin NOT NULL,
+  `czasTrwania` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Zrzut danych tabeli `film`
 --
 
-INSERT INTO `film` (`idFilmu`, `tytul`, `rokProdukcji`, `opis`, `sredniaOcena`, `dataDodania`, `okladka`) VALUES
-(1, 'Skazani na Shawshank', 1994, 'Adaptacja opowiadania Stephena Kinga. Niesłusznie skazany na dożywocie bankier, stara się przetrwać w brutalnym, więziennym świecie.', 0, '2017-12-06', NULL),
-(2, 'Ojciec Chrzestny', 1972, 'Opowieść o nowojorskiej rodzinie mafijnej. Starzejący się Don Corleone pragnie przekazać władzę swojemu synowi.', 0, '2017-12-01', NULL),
-(3, 'Nietykalni', 2011, 'Sparaliżowany milioner zatrudnia do opieki młodego chłopaka z przedmieścia, który właśnie wyszedł z więzienia.', 10, '2017-12-07', 'https://upload.wikimedia.org/wikipedia/en/9/93/The_Intouchables.jpg'),
-(4, 'Zielona mila', 1999, 'Emerytowany strażnik więzienny opowiada przyjaciółce o niezwykłym mężczyźnie, którego skazano na śmierć za zabójstwo dwóch 9-letnich dziewczynek.', 0, '2017-12-03', NULL),
-(5, 'Forrest Gump', 1994, 'Historia życia Forresta, chłopca o niskim ilorazie inteligencji z niedowładem kończyn, który staje się miliarderem i bohaterem wojny w Wietnamie.', 0, '2017-12-05', NULL);
+INSERT INTO `film` (`idFilmu`, `tytul`, `rokProdukcji`, `opis`, `sredniaOcena`, `dataDodania`, `okladka`, `rezyser`, `czasTrwania`) VALUES
+(1, 'Skazani na Shawshank', 1994, 'Adaptacja opowiadania Stephena Kinga. Niesłusznie skazany na dożywocie bankier, stara się przetrwać w brutalnym, więziennym świecie.', 8.5, '2017-12-14', 'http://1.fwcdn.pl/po/10/48/1048/6925401.3.jpg', '', 0),
+(2, 'Nietykalni', 2011, 'Sparaliżowany milioner zatrudnia do opieki młodego chłopaka z przedmieścia, który właśnie wyszedł z więzienia.', 10, '2017-12-14', 'http://1.fwcdn.pl/po/33/90/583390/7441162.3.jpg', '', 0),
+(3, 'Zielona mila', 1999, 'Emerytowany strażnik więzienny opowiada przyjaciółce o niezwykłym mężczyźnie, którego skazano na śmierć za zabójstwo dwóch 9-letnich dziewczynek.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/08/62/862/7517878.3.jpg', '', 0),
+(4, 'Ojciec chrzestny', 1972, 'Opowieść o nowojorskiej rodzinie mafijnej. Starzejący się Don Corleone pragnie przekazać władzę swojemu synowi.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/10/89/1089/7196615.3.jpg', '', 0),
+(5, 'Forrest Gump', 1994, 'Historia życia Forresta, chłopca o niskim ilorazie inteligencji z niedowładem kończyn, który staje się miliarderem i bohaterem wojny w Wietnamie.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/09/98/998/7314731.3.jpg', '', 0),
+(6, 'Dwunastu gniewnych ludzi', 1957, 'Dwunastu przysięgłych ma wydać wyrok w procesie o morderstwo. Jeden z nich ma wątpliwości dotyczące winy oskarżonego.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/07/01/30701/7492190.3.jpg', '', 0),
+(7, 'Lot nad kukułczym gniazdem', 1975, 'Historia złodzieja, szulera i chuligana, który, by uniknąć więzienia, udaje niepoczytalność. Trafia do szpitala dla umysłowo chorych, gdzie twardą ręką rządzi siostra Ratched.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/10/19/1019/7386645.3.jpg', '', 0),
+(8, 'Ojciec chrzestny II', 1974, 'Rok 1917. Młody Vito Corleone stawia pierwsze kroki w mafijnym świecie Nowego Jorku. Ponad 40 lat później jego syn Michael walczy o interesy i dobro rodziny.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/10/90/1090/7196616.3.jpg', '', 0),
+(9, 'Władca Pierścieni: Powrót król', 2003, 'Zwieńczenie filmowej trylogii wg powieści Tolkiena. Aragorn jednoczy siły Śródziemia, szykując się do bitwy, która ma odwrócić uwagę Saurona od podążających w kierunku Góry Przeznaczenia hobbitów.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/18/41/11841/7494142.3.jpg', '', 0),
+(10, 'Pulp Fiction', 1994, 'Przemoc i odkupienie w opowieści o dwóch płatnych mordercach pracujących na zlecenie mafii, żonie gangstera, bokserze i parze okradającej ludzi w restauracji.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/10/39/1039/7517880.6.jpg', '', 0),
+(11, 'Incepcja', 2010, 'Czasy, gdy technologia pozwala na wchodzenie w świat snów. Złodziej Cobb ma za zadanie wszczepić myśl do śpiącego umysłu.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/08/91/500891/7354571.3.jpg', '', 0),
+(12, 'Django', 2012, 'Łowca nagród Schultz i czarnoskóry niewolnik Django wyruszają w podróż, aby odbić żonę tego drugiego z rąk bezlitosnego Calvina Candie\'ego.', 0, '2017-12-20', 'http://1.fwcdn.pl/po/05/41/620541/7517014.3.jpg', 'Dupa', 13);
 
 -- --------------------------------------------------------
 
@@ -65,10 +74,18 @@ CREATE TABLE `gatunek` (
 --
 
 INSERT INTO `gatunek` (`idGatunku`, `nazwa`) VALUES
-(1, 'Komedia'),
-(2, 'Dramat'),
-(3, 'Biograficzny'),
-(4, 'Gangsterski');
+(1, 'Dramat'),
+(2, 'Komedia'),
+(4, 'Gangsterski'),
+(5, 'Dramat sądowy'),
+(6, 'Psychologiczny'),
+(7, 'Fantazy'),
+(8, 'Przygodowy'),
+(9, 'Sci-Fi'),
+(10, 'Thriller'),
+(11, 'Surrealistyczny'),
+(14, 'Biograficzny'),
+(15, 'Western');
 
 -- --------------------------------------------------------
 
@@ -86,15 +103,27 @@ CREATE TABLE `gatunek_film` (
 --
 
 INSERT INTO `gatunek_film` (`idFilmu`, `idGatunku`) VALUES
-(1, 2),
+(1, 1),
 (3, 1),
-(3, 2),
-(3, 3),
-(4, 2),
-(2, 2),
-(2, 4),
+(4, 1),
 (5, 1),
-(5, 2);
+(6, 5),
+(7, 1),
+(8, 1),
+(9, 7),
+(10, 4),
+(9, 8),
+(8, 4),
+(7, 6),
+(5, 2),
+(4, 4),
+(11, 9),
+(11, 10),
+(11, 11),
+(2, 14),
+(2, 1),
+(2, 2),
+(12, 15);
 
 -- --------------------------------------------------------
 
@@ -108,6 +137,15 @@ CREATE TABLE `ocena` (
   `idFilmu` int(10) NOT NULL,
   `idUzytkownika` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Zrzut danych tabeli `ocena`
+--
+
+INSERT INTO `ocena` (`idOceny`, `wartosc`, `idFilmu`, `idUzytkownika`) VALUES
+(12, 10, 2, 4),
+(13, 9, 1, 4),
+(14, 8, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -136,6 +174,13 @@ CREATE TABLE `recenzja` (
   `idUzytkownika` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Zrzut danych tabeli `recenzja`
+--
+
+INSERT INTO `recenzja` (`idRecenzji`, `tresc`, `data`, `idFilmu`, `idUzytkownika`) VALUES
+(12, 'to jest dobry film', '2017-12-15 21:40:25', 1, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -153,7 +198,7 @@ CREATE TABLE `sklep` (
 --
 
 INSERT INTO `sklep` (`idSklepu`, `nazwaSklepu`, `ulica`) VALUES
-(1, 'Sklep nr1', '3 Maja '),
+(1, 'Sklep nr1', '3 Maja 6/8'),
 (2, 'Sklep nr2', 'Warszawska 24'),
 (3, 'Sklep nr3', 'Okulickiego 34');
 
@@ -166,16 +211,51 @@ INSERT INTO `sklep` (`idSklepu`, `nazwaSklepu`, `ulica`) VALUES
 CREATE TABLE `sklep_film` (
   `idSklepu` int(10) NOT NULL,
   `idFilmu` int(10) NOT NULL,
-  `iloscFilmow` int(10) NOT NULL
+  `iloscFilmow` int(10) NOT NULL,
+  `iloscDostepnychFilmow` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Zrzut danych tabeli `sklep_film`
 --
 
-INSERT INTO `sklep_film` (`idSklepu`, `idFilmu`, `iloscFilmow`) VALUES
-(1, 1, 4),
-(3, 3, 1);
+INSERT INTO `sklep_film` (`idSklepu`, `idFilmu`, `iloscFilmow`, `iloscDostepnychFilmow`) VALUES
+(1, 1, 1, 1),
+(1, 2, 2, 2),
+(1, 3, 5, 5),
+(1, 6, 4, 4),
+(1, 7, 3, 3),
+(1, 8, 5, 5),
+(1, 9, 5, 5),
+(1, 10, 3, 3),
+(1, 11, 6, 6),
+(2, 12, 1, 1),
+(2, 1, 1, 1),
+(2, 2, 11, 11),
+(2, 3, 2, 2),
+(2, 4, 4, 4),
+(2, 5, 1, 1),
+(2, 6, 8, 8),
+(2, 7, 7, 7),
+(2, 8, 6, 6),
+(2, 9, 5, 5),
+(2, 10, 4, 4),
+(2, 11, 3, 3),
+(3, 2, 3, 3),
+(3, 3, 4, 4),
+(3, 4, 6, 6),
+(3, 5, 7, 7),
+(3, 6, 8, 8),
+(3, 8, 108, 108),
+(3, 9, 4, 4),
+(3, 10, 5, 5),
+(3, 11, 6, 6),
+(1, 12, 3, 3),
+(3, 12, 1, 1),
+(1, 5, 2, 2),
+(1, 4, 3, 3),
+(3, 7, 34, 34),
+(3, 1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -192,18 +272,20 @@ CREATE TABLE `uzytkownik` (
   `numerTelefonu` varchar(255) COLLATE utf8_bin NOT NULL,
   `miejsceZamieszkania` varchar(255) COLLATE utf8_bin NOT NULL,
   `email` varchar(255) COLLATE utf8_bin NOT NULL,
-  `rola` varchar(255) COLLATE utf8_bin NOT NULL
+  `rola` varchar(255) COLLATE utf8_bin NOT NULL,
+  `zablokowany` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Zrzut danych tabeli `uzytkownik`
 --
 
-INSERT INTO `uzytkownik` (`idUzytkownika`, `login`, `haslo`, `imie`, `nazwisko`, `numerTelefonu`, `miejsceZamieszkania`, `email`, `rola`) VALUES
-(3, 'admin1', '0192023a7bbd73250516f069df18b500', 'admin', 'admin', '111222333', 'admin', 'admin@gmail.com', 'pracownik'),
-(4, 'user12345', '80ec08504af83331911f5882349af59d', 'user', 'user', '111222111', 'user', 'user@gmail.com', 'klient'),
-(5, 'user23456', 'b6a02b73d239c9b22e74c406b6b53fbc', 'user23456', 'user23456', '111111111', 'user23456', 'user23456@gmail.com', 'klient'),
-(6, 'user54321', '62d45781b210f9961097d1cfe90fbac5', 'user54321', 'user54321', '22222222', 'user54321', 'user54321@gmail.com', 'klient');
+INSERT INTO `uzytkownik` (`idUzytkownika`, `login`, `haslo`, `imie`, `nazwisko`, `numerTelefonu`, `miejsceZamieszkania`, `email`, `rola`, `zablokowany`) VALUES
+(1, 'pracownik', 'a03d603193c93860b74fb3839bc62716', 'pracownik', 'pracownik', '777555333', 'pracownik', 'pracownik@gmail.com', 'pracownik', 0),
+(3, 'admin1', '0192023a7bbd73250516f069df18b500', 'admin1', 'admin1', '111222333', 'admin1', 'admin@gmail.com', 'administrator', 0),
+(4, 'user12345', '80ec08504af83331911f5882349af59d', 'user12345', 'user12345', '987654321', 'user12345', 'user12345@gmail.com', 'klient', 0),
+(5, 'user23456', 'b6a02b73d239c9b22e74c406b6b53fbc', 'user23456', 'user23456', '111111111', 'user23456', 'user23456@gmail.com', 'klient', 0),
+(6, 'user54321', '62d45781b210f9961097d1cfe90fbac5', 'user54321', 'user54321', '22222222', 'user54321', 'user54321@gmail.com', 'klient', 0);
 
 -- --------------------------------------------------------
 
@@ -228,16 +310,13 @@ CREATE TABLE `wypozyczenie` (
 --
 
 INSERT INTO `wypozyczenie` (`idWypozyczenia`, `dataWypozyczenia`, `dataZwrotu`, `idUzytkownika`, `idFilmu`, `idSklepu`, `znizka`, `idPlatnosci`, `status`) VALUES
-(14, '2017-12-10 20:22:54', '2017-12-10 20:52:54', 5, 1, 2, NULL, NULL, 'Zakończony'),
-(41, '2017-12-11 12:20:58', '2017-12-11 12:21:34', 6, 3, 3, NULL, NULL, 'Zakończony'),
-(42, '2017-12-11 12:21:18', '2017-12-11 12:21:44', 5, 3, 3, NULL, NULL, 'Zakończony'),
-(44, '2017-12-11 12:31:19', '2017-12-11 12:31:46', 4, 3, 3, NULL, NULL, 'Zakończony'),
-(45, '2017-12-11 12:31:33', '2017-12-11 12:31:51', 5, 3, 3, NULL, NULL, 'Zakończony'),
-(47, '2017-12-11 17:13:50', '2017-12-11 17:49:10', 4, 3, 3, NULL, NULL, 'Zakończony'),
-(61, '2017-12-11 18:46:49', '2017-12-11 18:47:27', 4, 3, 3, NULL, NULL, 'Zakończony'),
-(63, '2017-12-11 18:53:17', '2017-12-11 18:54:43', 4, 3, 3, NULL, NULL, 'Zakończony'),
-(67, '2017-12-11 18:57:04', '2017-12-11 18:57:23', 6, 3, 3, NULL, NULL, 'Zakończony'),
-(68, '2017-12-12 12:17:06', '2017-12-12 12:19:02', 4, 3, 3, NULL, NULL, 'Zakończony');
+(2, '2017-12-14 23:47:46', '2017-12-19 11:19:42', 5, 1, 1, NULL, NULL, 'Zakończony'),
+(3, '2017-12-14 23:49:27', '2017-12-19 10:58:00', 6, 1, 1, NULL, NULL, 'Zakończony'),
+(4, '2017-12-19 11:22:24', '2017-12-19 11:22:37', 4, 1, 1, NULL, NULL, 'Zakończony'),
+(5, '2017-12-22 17:00:45', '2017-12-22 17:03:50', 4, 1, 2, NULL, NULL, 'Zakończony'),
+(6, '2017-12-22 17:03:13', '2017-12-22 17:03:54', 5, 1, 2, NULL, NULL, 'Zakończony'),
+(7, '2017-12-23 16:10:14', '2017-12-23 19:40:36', 4, 1, 1, NULL, NULL, 'Zakończony'),
+(8, '2017-12-23 18:18:59', '2017-12-23 19:40:38', 4, 12, 3, NULL, NULL, 'Zakończony');
 
 -- --------------------------------------------------------
 
@@ -404,19 +483,19 @@ ALTER TABLE `znizka`
 -- AUTO_INCREMENT dla tabeli `film`
 --
 ALTER TABLE `film`
-  MODIFY `idFilmu` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idFilmu` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT dla tabeli `gatunek`
 --
 ALTER TABLE `gatunek`
-  MODIFY `idGatunku` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idGatunku` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT dla tabeli `ocena`
 --
 ALTER TABLE `ocena`
-  MODIFY `idOceny` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `idOceny` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT dla tabeli `platnosc`
@@ -428,7 +507,7 @@ ALTER TABLE `platnosc`
 -- AUTO_INCREMENT dla tabeli `recenzja`
 --
 ALTER TABLE `recenzja`
-  MODIFY `idRecenzji` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `idRecenzji` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT dla tabeli `sklep`
@@ -446,13 +525,13 @@ ALTER TABLE `uzytkownik`
 -- AUTO_INCREMENT dla tabeli `wypozyczenie`
 --
 ALTER TABLE `wypozyczenie`
-  MODIFY `idWypozyczenia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `idWypozyczenia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienie`
 --
 ALTER TABLE `zamowienie`
-  MODIFY `idZamowienia` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `idZamowienia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ograniczenia dla zrzutów tabel

@@ -21,6 +21,14 @@ public class WypozyczenieDAO {
         return w;
     }
 
+    // Metoda zwraca jedno aktualne Wypożyczenie danego filmu
+    public Wypozyczenie getAktualneWypozyczeniaFilmu(int idFilmu) {
+        List<Wypozyczenie> w = this.em.createQuery("select w from Wypozyczenie w where w.status != 'Zakończony' and w.idFilmu =:idFilmu")
+                .setParameter("idFilmu", idFilmu)
+                .getResultList();
+        return w.get(0);
+    }
+
     // Metoda zwraca listę wszystkich zakończonych Wypożyczeń posortowaną po dacie
     public List<Wypozyczenie> getAllHistorieWypozyczeniaList() {
         List<Wypozyczenie> w = this.em.createQuery("select w from Wypozyczenie w where w.status = 'Zakończony' order by dataWypozyczenia")

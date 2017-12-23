@@ -36,7 +36,7 @@ public class ZamowienieServlet extends HttpServlet {
         //Utworzenie nowego zamówienia
         zamowienieDAO.addZamowienie(zamowienie);
 
-        request.setAttribute("info", "<br>Twoje zamówienie zostało przekazane do kolejki oczekujących!");
+        request.setAttribute("info", "<br> Twoje zamówienie zostało przekazane do kolejki oczekujących!");
         doGet(request,response);
     }
 
