@@ -33,7 +33,7 @@
             <%=film.getTytul()%>
             <% if (zalogowany != null && zalogowany.getRola().equals("pracownik")) {
             %>
-            <form method="post" action="czyUsunFilm"
+            <form method="post" action="usunFilm"
                   style="display:inline;position:relative;margin-top:2px;float:right;margin-right:5px">
                 <input type="hidden" name="idFilmu" value="<%=film.getIdFilmu()%>"/>
                 <input type="submit" value="Usuń Film"

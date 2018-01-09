@@ -16,7 +16,9 @@ import java.util.List;
 public class UsunFilmServlet extends HttpServlet {
 
     /**
-     * Metoda odczytuje idFilmu, a następnie usuwa wybrany film razem z wszystkimi powiązaniami z innymi tabelami w bazie.
+     * Metoda odczytuje idFilmu, sprawdza czy została podjęta ostateczna decyzja o usunięciu,
+     * jeśli nie to Użytkownik zostanie przeniesiony do strony z wyborem,
+     * następnie usuwa wybrany film razem z wszystkimi powiązaniami z innymi tabelami w bazie.
      * Jeżeli film jest aktualnie wypożyczony lub zamówiony to usunięcie filmu zostanie zablokowane, a na stronie
      * ukaże informacja o błędzie
      */
@@ -28,65 +30,70 @@ public class UsunFilmServlet extends HttpServlet {
 
         int errCounter = 0;
 
-        try {
-            WypozyczenieDAO wypozyczenieDAO = new WypozyczenieDAO();
-            Wypozyczenie wypozyczenie = wypozyczenieDAO.getAktualneWypozyczeniaFilmu(idFilmu);
-        } catch (NoResultException | IndexOutOfBoundsException e) {
-            errCounter++;
-        }
+        if (request.getParameter("czyUsun") != null) {
+            try {
+                WypozyczenieDAO wypozyczenieDAO = new WypozyczenieDAO();
+                Wypozyczenie wypozyczenie = wypozyczenieDAO.getAktualneWypozyczeniaFilmu(idFilmu);
+            } catch (NoResultException | IndexOutOfBoundsException e) {
+                errCounter++;
+            }
 
-        try {
-            ZamowienieDAO zamowienieDAO = new ZamowienieDAO();
-            Zamowienie zamowienie = zamowienieDAO.getZamowienieFilmu(idFilmu);
-        } catch (NoResultException | IndexOutOfBoundsException e) {
-            errCounter++;
-        }
+            try {
+                ZamowienieDAO zamowienieDAO = new ZamowienieDAO();
+                Zamowienie zamowienie = zamowienieDAO.getZamowienieFilmu(idFilmu);
+            } catch (NoResultException | IndexOutOfBoundsException e) {
+                errCounter++;
+            }
 
-        // Sprawdzanie czy film nie jest już wypożyczony lub zamówiony
-        if (errCounter == 2) {
-            Film film = filmDAO.getWybranyFilm(idFilmu);
-            GatunekFilmDAO gatunekFilmDAO = new GatunekFilmDAO();
-            List<GatunekFilm> gatunekFilm = gatunekFilmDAO.getGatunekFilmPoFilmieList(idFilmu);
+            // Sprawdzanie czy film nie jest już wypożyczony lub zamówiony
+            if (errCounter == 2) {
+                Film film = filmDAO.getWybranyFilm(idFilmu);
+                GatunekFilmDAO gatunekFilmDAO = new GatunekFilmDAO();
+                List<GatunekFilm> gatunekFilm = gatunekFilmDAO.getGatunekFilmPoFilmieList(idFilmu);
 
-            // Usuwanie połączeń z Gatunkiem
-            for (GatunekFilm gf : gatunekFilm) {
-                gatunekFilmDAO.deleteGatunekFilm(gf);
-                try {
-                    GatunekFilm gatunkuList = gatunekFilmDAO.getGatunekFilmPoGatunku(gf.getIdGatunku());
-                } catch (NoResultException | IndexOutOfBoundsException e) {
-                    //Usuwanie nieużywanego gatunku
-                    GatunekDAO gatunekDAO = new GatunekDAO();
-                    Gatunek gatunek = gatunekDAO.getWybranyGatunekPoId(gf.getIdGatunku());
-                    gatunekDAO.deleteGatunek(gatunek);
+                // Usuwanie połączeń z Gatunkiem
+                for (GatunekFilm gf : gatunekFilm) {
+                    gatunekFilmDAO.deleteGatunekFilm(gf);
+                    try {
+                        GatunekFilm gatunkuList = gatunekFilmDAO.getGatunekFilmPoGatunku(gf.getIdGatunku());
+                    } catch (NoResultException | IndexOutOfBoundsException e) {
+                        //Usuwanie nieużywanego gatunku
+                        GatunekDAO gatunekDAO = new GatunekDAO();
+                        Gatunek gatunek = gatunekDAO.getWybranyGatunekPoId(gf.getIdGatunku());
+                        gatunekDAO.deleteGatunek(gatunek);
+                    }
                 }
-            }
 
-            // Usuwanie ocen filmu
-            OcenaDAO ocenaDAO = new OcenaDAO();
-            List<Ocena> ocenaList = ocenaDAO.getOcenyFilmuList(idFilmu);
-            for (Ocena o : ocenaList) {
-                ocenaDAO.deleteOcene(o);
-            }
+                // Usuwanie ocen filmu
+                OcenaDAO ocenaDAO = new OcenaDAO();
+                List<Ocena> ocenaList = ocenaDAO.getOcenyFilmuList(idFilmu);
+                for (Ocena o : ocenaList) {
+                    ocenaDAO.deleteOcene(o);
+                }
 
-            // Usuwanie recenzji filmu
-            RecenzjaDAO recenzjaDAO = new RecenzjaDAO();
-            List<Recenzja> recenzjaList = recenzjaDAO.getRecenzjeList(idFilmu);
-            for (Recenzja r : recenzjaList) {
-                recenzjaDAO.deleteRecenzje(r);
-            }
+                // Usuwanie recenzji filmu
+                RecenzjaDAO recenzjaDAO = new RecenzjaDAO();
+                List<Recenzja> recenzjaList = recenzjaDAO.getRecenzjeList(idFilmu);
+                for (Recenzja r : recenzjaList) {
+                    recenzjaDAO.deleteRecenzje(r);
+                }
 
-            // Usuwanie połączeń SklepFilm
-            SklepFilmDAO sklepFilmDAO = new SklepFilmDAO();
-            List<SklepFilm> sklepFilmList = sklepFilmDAO.getWybraneSklepFilmList(idFilmu);
-            for (SklepFilm sf : sklepFilmList) {
-                sklepFilmDAO.deleteSklepFilm(sf);
-            }
+                // Usuwanie połączeń SklepFilm
+                SklepFilmDAO sklepFilmDAO = new SklepFilmDAO();
+                List<SklepFilm> sklepFilmList = sklepFilmDAO.getWybraneSklepFilmList(idFilmu);
+                for (SklepFilm sf : sklepFilmList) {
+                    sklepFilmDAO.deleteSklepFilm(sf);
+                }
 
-            // Usuwanie filmu
-            filmDAO.deleteFilm(film);
-            request.setAttribute("info", "<br> Film został usunięty!");
+                // Usuwanie filmu
+                filmDAO.deleteFilm(film);
+                request.setAttribute("info", "<br> Film został usunięty!");
+            } else {
+                request.setAttribute("blad", "<br> Nie możesz usunąć wypożyczonego lub zamówionego filmu!");
+            }
+            request.setAttribute("czyUsun", "false");
         } else {
-            request.setAttribute("blad", "<br> Nie możesz usunąć wypożyczonego lub zamówionego filmu!");
+            request.setAttribute("czyUsun", "true");
         }
         doGet(request, response);
     }
