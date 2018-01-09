@@ -142,12 +142,13 @@ public class EdycjaFilmuServlet extends HttpServlet {
                     newGatunekFilm.setIdFilmu(idFilmu);
                     gatunekFilmDAO.addGatunekFilm(newGatunekFilm);
                 }
-                request.setAttribute("wynik", "Film został edytowany!");
+                request.setAttribute("info", "Film został edytowany!");
+                request.setAttribute("czyEdytujFilm", "false");
             } else request.setAttribute("blad", "Podałeś błędne dane!");
         }
 
         // Przekazanie danych do wyświetlenia
-        request.setAttribute("filmm", film);
+        request.setAttribute("edytowanyFilm", film);
 
         List<Gatunek> gatunek = gatunekDAO.getAllGatunkiList();
         request.setAttribute("gatunek", gatunek);
@@ -163,7 +164,6 @@ public class EdycjaFilmuServlet extends HttpServlet {
             request.setAttribute("czyEdytujFilm", "true");
         }
         request.getRequestDispatcher("/stronaGlowna").forward(request, response);
-//        request.getRequestDispatcher("/WEB-INF/views/edytujFilm.jsp").forward(request, response);
     }
 
 

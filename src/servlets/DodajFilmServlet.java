@@ -94,7 +94,8 @@ public class DodajFilmServlet extends HttpServlet {
                         gatunekFilmDAO.addGatunekFilm(newGatunekFilm);
                     }
                 }
-                request.setAttribute("wynik", "Film został dodany!");
+                request.setAttribute("info", "Film został dodany!");
+                request.setAttribute("czyDodajFilm", "false");
             } else
                 request.setAttribute("blad", "Podałeś błędne dane!");
         }
@@ -102,6 +103,9 @@ public class DodajFilmServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/dodajFilm.jsp").forward(request, response);
+        if(request.getAttribute("czyDodajFilm")==null) {
+            request.setAttribute("czyDodajFilm", "true");
+        }
+        request.getRequestDispatcher("/stronaGlowna").forward(request, response);
     }
 }

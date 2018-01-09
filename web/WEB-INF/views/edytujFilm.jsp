@@ -16,10 +16,9 @@
         </b>
     </div>
     <div style="margin-top:5px;margin-left:10px;">
-        ${wynik}
         ${blad}
         <%
-            Film film = (Film) request.getAttribute("filmm");
+            Film film = (Film) request.getAttribute("edytowanyFilm");
             List<GatunekFilm> gatunekFilm = (List<GatunekFilm>) request.getAttribute("gatunekFilm");
             List<Gatunek> gatunek = (List<Gatunek>) request.getAttribute("gatunek");
         %>
