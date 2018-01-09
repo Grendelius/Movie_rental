@@ -142,7 +142,7 @@ public class EdycjaFilmuServlet extends HttpServlet {
                     newGatunekFilm.setIdFilmu(idFilmu);
                     gatunekFilmDAO.addGatunekFilm(newGatunekFilm);
                 }
-                request.setAttribute("info", "Film został edytowany!");
+                request.setAttribute("info", "<br> Film został edytowany!");
                 request.setAttribute("czyEdytujFilm", "false");
             } else request.setAttribute("blad", "Podałeś błędne dane!");
         }

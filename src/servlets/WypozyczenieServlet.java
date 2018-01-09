@@ -49,8 +49,9 @@ public class WypozyczenieServlet extends HttpServlet {
             // Utworzenie nowego wypożyczenia i zminiejszenie sztuk danego filmu w sklepie
             wypozyczenieDAO.addWypozyczenie(wypozyczenie);
             sklepFilmDAO.zmniejszIloscDostepnychFilmow(idFilmu, idSklepu);
-            request.setAttribute("info", "<br> Twoje zlecenie zostało przekazane do realizacji!");
-            request.getRequestDispatcher("/stronaGlowna").forward(request, response);
+            request.setAttribute("info", "<br>Twoje zlecenie zostało przekazane do realizacji!");
+            request.setAttribute("czyWypozyczenie", "false");
+            doGet(request,response);
         } else if (zalogowany != null && zalogowany.getRola().equals("klient")) {
             int errCounter = 0;
 
@@ -75,15 +76,23 @@ public class WypozyczenieServlet extends HttpServlet {
                 List<SklepFilm> sklepFilmList = sklepFilmDAO.getWybraneSklepFilmList(idFilmu);
                 request.setAttribute("sklepFilmList", sklepFilmList);
                 doGet(request, response);
-            } else
-                response.sendRedirect(request.getContextPath() + "/stronaGlowna");
-        } else if (zalogowany != null && zalogowany.getRola().equals("pracownik"))
-            response.sendRedirect(request.getContextPath() + "/stronaGlowna");
+            } else {
+                request.setAttribute("info","<br> Nie możesz wypożyczyć/zamówić więcej niż jedną sztukę wybranego filmu");
+                request.setAttribute("czyWypozyczenie", "false");
+            }
+        } else if (zalogowany != null && zalogowany.getRola().equals("pracownik")){
+            request.setAttribute("info","<br> Jako pracownik nie możesz wypożyczać/zamawiać filmów");
+            request.setAttribute("czyWypozyczenie", "false");
+        }
         else
             response.sendRedirect(request.getContextPath() + "/login");
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/wypozyczenie.jsp").forward(request, response);
+        if(request.getAttribute("czyWypozyczenie")==null) {
+            request.setAttribute("czyWypozyczenie", "true");
+        }
+        request.getRequestDispatcher("/stronaGlowna").forward(request, response);
     }
 }

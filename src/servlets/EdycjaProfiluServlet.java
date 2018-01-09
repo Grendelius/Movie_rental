@@ -52,7 +52,7 @@ public class EdycjaProfiluServlet extends HttpServlet {
                             uzytkownik.setMiejsceZamieszkania(miejsceZamieszkania);
                             uzytkownik.setEmail(email);
                             if (dao.updateUzytkownika(uzytkownik)) {
-                                request.setAttribute("info", "Zmiany zostały wprowadzone!");
+                                request.setAttribute("info", "<br> Zmiany zostały wprowadzone!");
                                 request.setAttribute("czyEdytujProfil", "true");
                                 request.getRequestDispatcher("/stronaGlowna").forward(request, response);
                             } else

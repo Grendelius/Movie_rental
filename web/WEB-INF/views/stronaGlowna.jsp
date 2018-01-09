@@ -13,6 +13,7 @@
         String czyEdytujHaslo = (String) request.getAttribute("czyEdytujHaslo");
         String czyEdytujFilm = (String) request.getAttribute("czyEdytujFilm");
         String czyDodajFilm = (String) request.getAttribute("czyDodajFilm");
+        String czyWypozyczenie = (String) request.getAttribute("czyWypozyczenie");
     %>
 </head>
 <body bgcolor="black">
@@ -49,6 +50,10 @@
         } else if (czyEdytujFilm == "true") {
         %>
         <jsp:include page="edytujFilm.jsp"></jsp:include>
+        <%
+        } else if (czyWypozyczenie == "true") {
+        %>
+        <jsp:include page="wypozyczenie.jsp"></jsp:include>
         <%
         } else {
         %>
