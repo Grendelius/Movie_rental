@@ -105,7 +105,7 @@
                 } else {
                     out.print("Twoja ocena: " + ocenaDAO.getOcene(zalogowany.getIdUzytkownika(), film.getIdFilmu()).getOcena());
                 %>
-                <form method="post" action="filmInfo">
+                <form method="post" action="filmInfo" style="display:inline">
                     <input type="hidden" name="idFilmu" value="<%=film.getIdFilmu()%>"/>
                     <input type="submit" name="zmienOcene" value="Zmień ocene">
                 </form>
