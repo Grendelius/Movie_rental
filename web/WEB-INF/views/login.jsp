@@ -23,7 +23,7 @@
             } else if (info != null)
                 out.println(info);
         %>
-        <form method="post">
+        <form method="post" action="login">
             <p>Login:</p>
             <input type="text" name="login" maxlength="30"/>
             <p>Hasło:</p>
