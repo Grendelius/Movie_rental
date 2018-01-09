@@ -32,34 +32,40 @@ public class EdycjaSklepuServlet extends HttpServlet {
         SklepFilmDAO sklepFilmDAO = new SklepFilmDAO();
         SklepFilm sklepFilm = new SklepFilm();
 
-        // Pominięcie edycji jeśli wchodzimy w edycje pierwszy raz
-        if (idFilmu != null) {
-            try {
-                // Sprawdzanie czy jest już wybrany film w wybranym sklepie
-                sklepFilm = sklepFilmDAO.getWybranySklepFilm(Integer.parseInt(idFilmu), Integer.parseInt(idSklepu));
+        if (request.getParameter("czyWyborSklepu") != null) {
+            // Pominięcie edycji jeśli wchodzimy w edycje pierwszy raz
+            if (idFilmu != null) {
+                try {
+                    // Sprawdzanie czy jest już wybrany film w wybranym sklepie
+                    sklepFilm = sklepFilmDAO.getWybranySklepFilm(Integer.parseInt(idFilmu), Integer.parseInt(idSklepu));
 
-                // Jeżeli został wciśnięty minus to zostaje odjęta jedna sztuka filmu
-                if (value.equals("-") && sklepFilm.getIloscDostepnychFilmow() != 0)
-                    sklepFilmDAO.zmniejszIloscFilmow(Integer.parseInt(idFilmu), Integer.parseInt(idSklepu));
+                    // Jeżeli został wciśnięty minus to zostaje odjęta jedna sztuka filmu
+                    if (value.equals("-") && sklepFilm.getIloscDostepnychFilmow() != 0)
+                        sklepFilmDAO.zmniejszIloscFilmow(Integer.parseInt(idFilmu), Integer.parseInt(idSklepu));
 
-                // Jeżeli został wciśnięty plus to zostaje dodana jedna sztuka filmu
-                else if (value.equals("+"))
-                    sklepFilmDAO.zwiekszIloscFilmow(Integer.parseInt(idFilmu), Integer.parseInt(idSklepu));
+                        // Jeżeli został wciśnięty plus to zostaje dodana jedna sztuka filmu
+                    else if (value.equals("+"))
+                        sklepFilmDAO.zwiekszIloscFilmow(Integer.parseInt(idFilmu), Integer.parseInt(idSklepu));
 
-                // Jeśli w sklepie jest 0 sztuk danego filmu to jest on usuwany ze sklepu
-                if (sklepFilm.getIloscFilmow() == 0)
-                    sklepFilmDAO.deleteSklepFilm(sklepFilm);
+                    // Jeśli w sklepie jest 0 sztuk danego filmu to jest on usuwany ze sklepu
+                    if (sklepFilm.getIloscFilmow() == 0)
+                        sklepFilmDAO.deleteSklepFilm(sklepFilm);
 
-            } catch (NoResultException e) {
-                // Dodanie nowego SklepFilm
-                if (Pattern.matches(patternIloscFilmow, iloscFilmow)) {
-                    sklepFilm.setIdSklepu(Integer.parseInt(idSklepu));
-                    sklepFilm.setIdFilmu(Integer.parseInt(idFilmu));
-                    sklepFilm.setIloscFilmow(Integer.parseInt(iloscFilmow));
-                    sklepFilm.setIloscDostepnychFilmow(Integer.parseInt(iloscFilmow));
-                    sklepFilmDAO.addSklepFilm(sklepFilm);
+                } catch (NoResultException e) {
+                    // Dodanie nowego SklepFilm
+                    if (Pattern.matches(patternIloscFilmow, iloscFilmow)) {
+                        sklepFilm.setIdSklepu(Integer.parseInt(idSklepu));
+                        sklepFilm.setIdFilmu(Integer.parseInt(idFilmu));
+                        sklepFilm.setIloscFilmow(Integer.parseInt(iloscFilmow));
+                        sklepFilm.setIloscDostepnychFilmow(Integer.parseInt(iloscFilmow));
+                        sklepFilmDAO.addSklepFilm(sklepFilm);
+                    }
                 }
             }
+            request.setAttribute("czyWyborSklepu", "false");
+        } else {
+            request.setAttribute("czyWyborSklepu", "true");
+            request.getRequestDispatcher("/stronaGlowna").forward(request, response);
         }
         doGet(request, response);
     }

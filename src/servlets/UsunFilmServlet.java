@@ -30,7 +30,7 @@ public class UsunFilmServlet extends HttpServlet {
 
         int errCounter = 0;
 
-        if (request.getParameter("czyUsun") != null) {
+        if (request.getParameter("czyUsunFilm") != null) {
             try {
                 WypozyczenieDAO wypozyczenieDAO = new WypozyczenieDAO();
                 Wypozyczenie wypozyczenie = wypozyczenieDAO.getAktualneWypozyczeniaFilmu(idFilmu);
@@ -91,9 +91,9 @@ public class UsunFilmServlet extends HttpServlet {
             } else {
                 request.setAttribute("blad", "<br> Nie możesz usunąć wypożyczonego lub zamówionego filmu!");
             }
-            request.setAttribute("czyUsun", "false");
+            request.setAttribute("czyUsunFilm", "false");
         } else {
-            request.setAttribute("czyUsun", "true");
+            request.setAttribute("czyUsunFilm", "true");
         }
         doGet(request, response);
     }

@@ -14,7 +14,8 @@
         String czyEdytujFilm = (String) request.getAttribute("czyEdytujFilm");
         String czyDodajFilm = (String) request.getAttribute("czyDodajFilm");
         String czyWypozyczenie = (String) request.getAttribute("czyWypozyczenie");
-        String czyUsun = (String) request.getAttribute("czyUsun");
+        String czyUsunFilm = (String) request.getAttribute("czyUsunFilm");
+        String czyWyborSklepu = (String) request.getAttribute("czyWyborSklepu");
     %>
 </head>
 <body bgcolor="black">
@@ -52,13 +53,17 @@
         %>
         <jsp:include page="edytujFilm.jsp"></jsp:include>
         <%
-        } else if (czyUsun == "true") {
+        } else if (czyUsunFilm == "true") {
         %>
         <jsp:include page="czyUsunFilm.jsp"></jsp:include>
         <%
         } else if (czyWypozyczenie == "true") {
         %>
         <jsp:include page="wypozyczenie.jsp"></jsp:include>
+        <%
+        } else if (czyWyborSklepu == "true") {
+        %>
+        <jsp:include page="wyborSklepu.jsp"></jsp:include>
         <%
         } else {
         %>

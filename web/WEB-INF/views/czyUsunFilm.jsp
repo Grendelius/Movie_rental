@@ -17,7 +17,7 @@
         %>
         <form method="post" action="usunFilm"
               style="display:inline;position:relative;margin-top:2px;float:right;margin-right:5px">
-            <input type="hidden" name="czyUsun" value="true"/>
+            <input type="hidden" name="czyUsunFilm" value="true"/>
             <input type="hidden" name="idFilmu" value="<%=idFilmu%>"/>
             <input type="submit" value="TAK"
                    style="width:80px;height:25px;background-color:lightgrey;border-color:lightgrey;"></input>

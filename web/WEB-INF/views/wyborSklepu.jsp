@@ -8,20 +8,28 @@
     <title>Wypożyczalnia</title>
 </head>
 <body>
-<h1>Wybór Sklepu:</h1>
-<%
-    SklepDAO sklepDAO = new SklepDAO();
-    List<Sklep> sklepList = sklepDAO.getSklepList();
-    for (Sklep s: sklepList) {
-%>
-<form method="post" action="edytujSklep" style="display:inline">
-    <input type="hidden" name="idSklepu" value="<%=s.getIdSklepu()%>"/>
-    <input type="submit" value="<%=s.getNazwaSklepu()%> <%=s.getUlica()%>"
-           style="width:160px;height:40px;background-color:red;border-color:red;"></input>
-</form>
-
-<%
-    }
-%>
+<div id="center" style="background-color:red;width:490px;float:left; margin-left:5px;margin-right:5px">
+    <div style="margin-bottom:10px;margin-top:5px">
+        <b>
+            <center><font size="4" face="serif">Wybór Sklepu:</font></center>
+        </b>
+    </div>
+    <div style="margin-top:5px;margin-left:10px;">
+        <%
+            SklepDAO sklepDAO = new SklepDAO();
+            List<Sklep> sklepList = sklepDAO.getSklepList();
+            for (Sklep s : sklepList) {
+        %>
+        <form method="post" action="edytujSklep">
+            <input type="hidden" name="czyWyborSklepu" value="true"/>
+            <input type="hidden" name="idSklepu" value="<%=s.getIdSklepu()%>"/>
+            <input type="submit" value="<%=s.getNazwaSklepu()%> <%=s.getUlica()%>"
+                   style="width:180px;height:40px;background-color:red;border-color:#720805;"></input>
+        </form>
+        <%
+            }
+        %>
+    </div>
+</div>
 </body>
 </html>
