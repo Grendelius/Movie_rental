@@ -147,7 +147,7 @@ public class EdycjaFilmuServlet extends HttpServlet {
         }
 
         // Przekazanie danych do wyświetlenia
-        request.setAttribute("film", film);
+        request.setAttribute("filmm", film);
 
         List<Gatunek> gatunek = gatunekDAO.getAllGatunkiList();
         request.setAttribute("gatunek", gatunek);
@@ -159,7 +159,11 @@ public class EdycjaFilmuServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/edytujFilm.jsp").forward(request, response);
+        if(request.getAttribute("czyEdytujFilm")==null) {
+            request.setAttribute("czyEdytujFilm", "true");
+        }
+        request.getRequestDispatcher("/stronaGlowna").forward(request, response);
+//        request.getRequestDispatcher("/WEB-INF/views/edytujFilm.jsp").forward(request, response);
     }
 
 
