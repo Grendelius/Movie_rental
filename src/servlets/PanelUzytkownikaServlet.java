@@ -43,8 +43,10 @@ public class PanelUzytkownikaServlet extends HttpServlet {
                 doGet(request, response);
             } else
                 doGet(request, response);
-        else
+        else {
+            request.setAttribute("blad", "<br> Dostęp do Panelu użytkownika mają tylko zalogowane osoby!");
             request.getRequestDispatcher("/login").forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

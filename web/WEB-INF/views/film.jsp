@@ -56,7 +56,7 @@
         <div style="margin-left:10px;margin-right:430px;position:absolute;display:inline;">
             <td>Reżyser: <%=film.getRezyser()%></td>
             </br>
-            <td>Czas trwania: <%=film.getCzasTrwania()%></td>
+            <td>Czas trwania: <%=film.getCzasTrwania()%> min.</td>
             </br>
             <td>Rok produkcji: <%=film.getRokProdukcji()%>
             </td>

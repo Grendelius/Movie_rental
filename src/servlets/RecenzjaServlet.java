@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @WebServlet("/recenzja")
@@ -34,8 +36,8 @@ public class RecenzjaServlet extends HttpServlet {
         RecenzjaDAO recenzjaDAO = new RecenzjaDAO();
         Recenzja recenzja = new Recenzja();
 
-        // Ograniczenie treści do 255 znaków
-        String patternTresc = ".{1,255}";
+        // Ograniczenie treści do 249 znaków
+        String patternTresc = ".{1,249}";
 
         if (tresc != null) {
             if (Pattern.matches(patternTresc, tresc)) {
@@ -45,12 +47,11 @@ public class RecenzjaServlet extends HttpServlet {
                 recenzja.setData(new Timestamp(new Date().getTime()));
                 recenzja.setIdFilmu(idFilmu);
                 recenzja.setIdUzytkownika(zalogowany.getIdUzytkownika());
-                recenzja.setTresc(tresc);
-
+                recenzja.setTresc(checkWordLength(tresc));
                 // Utworzenie nowej Recenzji
                 recenzjaDAO.addRecenzje(recenzja);
             } else
-                request.setAttribute("blad", "Błędna długość recenzji (od 1 do 255 znaków)!");
+                request.setAttribute("blad", "Błędna długość recenzji (od 1 do 249 znaków)!");
         } else if (usun != null) {
             // Usuwanie recenzji
             recenzjaDAO.deleteRecenzje(recenzjaDAO.getRecenzje(Integer.parseInt(idRecenzji)));
@@ -61,16 +62,39 @@ public class RecenzjaServlet extends HttpServlet {
         } else if (trescEdycji != null && Pattern.matches(patternTresc, trescEdycji)) {
             // Edycja recenzji
             recenzja = recenzjaDAO.getRecenzje(Integer.parseInt(idRecenzji));
-            recenzja.setTresc(trescEdycji);
+            recenzja.setTresc(checkWordLength(trescEdycji));
             recenzjaDAO.updateRecenzje(recenzja);
         } else
-            request.setAttribute("blad", "Błędna długość recenzji (od 1 do 255 znaków)!");
+            request.setAttribute("blad", "Błędna długość recenzji (od 1 do 249 znaków)!");
 
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/filmInfo").forward(request, response);
+    }
+
+    /**
+     * Metoda Sprawdza czy wyrazy w recenzji nie są dłuższe niż 38 znaków (ograniczenie szerokości strony),
+     * jeżeli tak to są one przedzielane białymi znakami co 38 znaków.
+     */
+    private String checkWordLength(String tresc) {
+        String[] word = tresc.split(" ");
+        List<String> words = Arrays.asList(word);
+        int counter, a;
+        for (int i = 0; i < words.size(); i++) {
+            words.set(i, words.get(i) + " ");
+            if (words.get(i).length() > 38) {
+                counter = words.get(i).length() / 38;
+                a = 38;
+                for (int j = 0; j < counter; j++) {
+
+                    words.set(i, words.get(i).substring(0, a) + " " + words.get(i).substring(a));
+                    a += 39;
+                }
+            }
+        }
+        return String.join("", words);
     }
 
 

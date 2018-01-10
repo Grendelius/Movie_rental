@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "recenzja")
@@ -89,4 +90,5 @@ public class Recenzja {
         result = 31 * result + idFilmu;
         return result;
     }
+
 }

@@ -104,7 +104,7 @@
         <div style="margin-left:10px;position:absolute;display:inline">
             <td>Reżyser: <%=f.getRezyser()%></td>
             </br>
-            <td>Czas trwania: <%=f.getCzasTrwania()%></td>
+            <td>Czas trwania: <%=f.getCzasTrwania()%> min.</td>
             </br>
             <td>Rok produkcji: <%=f.getRokProdukcji()%>
             </td>

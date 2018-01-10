@@ -49,9 +49,8 @@ public class WypozyczenieServlet extends HttpServlet {
             // Utworzenie nowego wypożyczenia i zminiejszenie sztuk danego filmu w sklepie
             wypozyczenieDAO.addWypozyczenie(wypozyczenie);
             sklepFilmDAO.zmniejszIloscDostepnychFilmow(idFilmu, idSklepu);
-            request.setAttribute("info", "<br>Twoje zlecenie zostało przekazane do realizacji!");
+            request.setAttribute("info", "<br> Twoje zlecenie zostało przekazane do realizacji!");
             request.setAttribute("czyWypozyczenie", "false");
-            doGet(request,response);
         } else if (zalogowany != null && zalogowany.getRola().equals("klient")) {
             int errCounter = 0;
 
@@ -77,15 +76,17 @@ public class WypozyczenieServlet extends HttpServlet {
                 request.setAttribute("sklepFilmList", sklepFilmList);
                 doGet(request, response);
             } else {
-                request.setAttribute("info","<br> Nie możesz wypożyczyć/zamówić więcej niż jedną sztukę wybranego filmu");
+                request.setAttribute("info","<br> Nie możesz wypożyczyć/zamówić więcej niż jedną sztukę wybranego filmu!");
                 request.setAttribute("czyWypozyczenie", "false");
             }
-        } else if (zalogowany != null && zalogowany.getRola().equals("pracownik")){
-            request.setAttribute("info","<br> Jako pracownik nie możesz wypożyczać/zamawiać filmów");
+        } else if (zalogowany != null && (zalogowany.getRola().equals("pracownik") || zalogowany.getRola().equals("administrator"))){
+            request.setAttribute("info","<br> Filmy mogą wypożyczać jedynie klienci!");
             request.setAttribute("czyWypozyczenie", "false");
         }
-        else
-            response.sendRedirect(request.getContextPath() + "/login");
+        else{
+            request.setAttribute("blad", "<br> Aby wypożyczyć film musisz być zalogowany!");
+            request.getRequestDispatcher("/login").forward(request, response);
+        }
         doGet(request, response);
     }
 
