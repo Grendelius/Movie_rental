@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 23 Gru 2017, 20:58
+-- Czas generowania: 10 Sty 2018, 15:53
 -- Wersja serwera: 10.1.28-MariaDB
 -- Wersja PHP: 7.1.11
 
@@ -45,18 +45,18 @@ CREATE TABLE `film` (
 --
 
 INSERT INTO `film` (`idFilmu`, `tytul`, `rokProdukcji`, `opis`, `sredniaOcena`, `dataDodania`, `okladka`, `rezyser`, `czasTrwania`) VALUES
-(1, 'Skazani na Shawshank', 1994, 'Adaptacja opowiadania Stephena Kinga. Niesłusznie skazany na dożywocie bankier, stara się przetrwać w brutalnym, więziennym świecie.', 8.5, '2017-12-14', 'http://1.fwcdn.pl/po/10/48/1048/6925401.3.jpg', '', 0),
-(2, 'Nietykalni', 2011, 'Sparaliżowany milioner zatrudnia do opieki młodego chłopaka z przedmieścia, który właśnie wyszedł z więzienia.', 10, '2017-12-14', 'http://1.fwcdn.pl/po/33/90/583390/7441162.3.jpg', '', 0),
-(3, 'Zielona mila', 1999, 'Emerytowany strażnik więzienny opowiada przyjaciółce o niezwykłym mężczyźnie, którego skazano na śmierć za zabójstwo dwóch 9-letnich dziewczynek.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/08/62/862/7517878.3.jpg', '', 0),
-(4, 'Ojciec chrzestny', 1972, 'Opowieść o nowojorskiej rodzinie mafijnej. Starzejący się Don Corleone pragnie przekazać władzę swojemu synowi.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/10/89/1089/7196615.3.jpg', '', 0),
-(5, 'Forrest Gump', 1994, 'Historia życia Forresta, chłopca o niskim ilorazie inteligencji z niedowładem kończyn, który staje się miliarderem i bohaterem wojny w Wietnamie.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/09/98/998/7314731.3.jpg', '', 0),
-(6, 'Dwunastu gniewnych ludzi', 1957, 'Dwunastu przysięgłych ma wydać wyrok w procesie o morderstwo. Jeden z nich ma wątpliwości dotyczące winy oskarżonego.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/07/01/30701/7492190.3.jpg', '', 0),
-(7, 'Lot nad kukułczym gniazdem', 1975, 'Historia złodzieja, szulera i chuligana, który, by uniknąć więzienia, udaje niepoczytalność. Trafia do szpitala dla umysłowo chorych, gdzie twardą ręką rządzi siostra Ratched.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/10/19/1019/7386645.3.jpg', '', 0),
-(8, 'Ojciec chrzestny II', 1974, 'Rok 1917. Młody Vito Corleone stawia pierwsze kroki w mafijnym świecie Nowego Jorku. Ponad 40 lat później jego syn Michael walczy o interesy i dobro rodziny.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/10/90/1090/7196616.3.jpg', '', 0),
-(9, 'Władca Pierścieni: Powrót król', 2003, 'Zwieńczenie filmowej trylogii wg powieści Tolkiena. Aragorn jednoczy siły Śródziemia, szykując się do bitwy, która ma odwrócić uwagę Saurona od podążających w kierunku Góry Przeznaczenia hobbitów.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/18/41/11841/7494142.3.jpg', '', 0),
-(10, 'Pulp Fiction', 1994, 'Przemoc i odkupienie w opowieści o dwóch płatnych mordercach pracujących na zlecenie mafii, żonie gangstera, bokserze i parze okradającej ludzi w restauracji.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/10/39/1039/7517880.6.jpg', '', 0),
-(11, 'Incepcja', 2010, 'Czasy, gdy technologia pozwala na wchodzenie w świat snów. Złodziej Cobb ma za zadanie wszczepić myśl do śpiącego umysłu.', 0, '2017-12-14', 'http://1.fwcdn.pl/po/08/91/500891/7354571.3.jpg', '', 0),
-(12, 'Django', 2012, 'Łowca nagród Schultz i czarnoskóry niewolnik Django wyruszają w podróż, aby odbić żonę tego drugiego z rąk bezlitosnego Calvina Candie\'ego.', 0, '2017-12-20', 'http://1.fwcdn.pl/po/05/41/620541/7517014.3.jpg', 'Dupa', 13);
+(1, 'Skazani na Shawshank', 1994, 'Adaptacja opowiadania Stephena Kinga. Niesłusznie skazany na dożywocie bankier, stara się przetrwać w brutalnym, więziennym świecie.', 9, '2017-12-14', 'http://1.fwcdn.pl/po/10/48/1048/6925401.3.jpg', 'Frank Darabont', 142),
+(2, 'Nietykalni', 2011, 'Sparaliżowany milioner zatrudnia do opieki młodego chłopaka z przedmieścia, który właśnie wyszedł z więzienia.', 9.6, '2017-12-14', 'http://1.fwcdn.pl/po/33/90/583390/7441162.3.jpg', 'Olivier Nakache,Eric Toledano', 112),
+(3, 'Zielona mila', 1999, 'Emerytowany strażnik więzienny opowiada przyjaciółce o niezwykłym mężczyźnie, którego skazano na śmierć za zabójstwo dwóch 9-letnich dziewczynek.', 7.6, '2017-12-14', 'http://1.fwcdn.pl/po/08/62/862/7517878.3.jpg', 'Frank Darabont', 188),
+(4, 'Ojciec chrzestny', 1972, 'Opowieść o nowojorskiej rodzinie mafijnej. Starzejący się Don Corleone pragnie przekazać władzę swojemu synowi.', 8.6, '2017-12-14', 'http://1.fwcdn.pl/po/10/89/1089/7196615.3.jpg', 'Francis Ford Coppola', 175),
+(5, 'Forrest Gump', 1994, 'Historia życia Forresta, chłopca o niskim ilorazie inteligencji z niedowładem kończyn, który staje się miliarderem i bohaterem wojny w Wietnamie.', 8.2, '2017-12-14', 'http://1.fwcdn.pl/po/09/98/998/7314731.3.jpg', 'Robert Zemeckis', 142),
+(6, 'Dwunastu gniewnych ludzi', 1957, 'Dwunastu przysięgłych ma wydać wyrok w procesie o morderstwo. Jeden z nich ma wątpliwości dotyczące winy oskarżonego.', 6.4, '2017-12-14', 'http://1.fwcdn.pl/po/07/01/30701/7492190.3.jpg', 'Sidney Lumet', 96),
+(7, 'Lot nad kukułczym gniazdem', 1975, 'Historia złodzieja, szulera i chuligana, który, by uniknąć więzienia, udaje niepoczytalność. Trafia do szpitala dla umysłowo chorych, gdzie twardą ręką rządzi siostra Ratched.', 5.2, '2017-12-14', 'http://1.fwcdn.pl/po/10/19/1019/7386645.3.jpg', 'Miloš Forman', 133),
+(8, 'Ojciec chrzestny II', 1974, 'Rok 1917. Młody Vito Corleone stawia pierwsze kroki w mafijnym świecie Nowego Jorku. Ponad 40 lat później jego syn Michael walczy o interesy i dobro rodziny.', 7.4, '2017-12-14', 'http://1.fwcdn.pl/po/10/90/1090/7196616.3.jpg', 'Francis Ford Coppola', 200),
+(9, 'Władca Pierścieni: Powrót króla', 2003, 'Zwieńczenie filmowej trylogii wg powieści Tolkiena. Aragorn jednoczy siły Śródziemia, szykując się do bitwy, która ma odwrócić uwagę Saurona od podążających w kierunku Góry Przeznaczenia hobbitów.', 8.2, '2017-12-14', 'http://1.fwcdn.pl/po/18/41/11841/7494142.3.jpg', 'Peter Jackson', 201),
+(10, 'Pulp Fiction', 1994, 'Przemoc i odkupienie w opowieści o dwóch płatnych mordercach pracujących na zlecenie mafii, żonie gangstera, bokserze i parze okradającej ludzi w restauracji.', 8.8, '2017-12-14', 'http://1.fwcdn.pl/po/10/39/1039/7517880.6.jpg', 'Quentin Tarantino', 154),
+(11, 'Incepcja', 2010, 'Czasy, gdy technologia pozwala na wchodzenie w świat snów. Złodziej Cobb ma za zadanie wszczepić myśl do śpiącego umysłu.', 9, '2017-12-14', 'http://1.fwcdn.pl/po/08/91/500891/7354571.3.jpg', 'Christopher Nolan', 148),
+(12, 'Django', 2012, 'Łowca nagród Schultz i czarnoskóry niewolnik Django wyruszają w podróż, aby odbić żonę tego drugiego z rąk bezlitosnego Calvina Candie\'ego.', 7.6, '2017-12-20', 'http://1.fwcdn.pl/po/05/41/620541/7517014.3.jpg', 'Quentin Tarantino', 165);
 
 -- --------------------------------------------------------
 
@@ -143,9 +143,66 @@ CREATE TABLE `ocena` (
 --
 
 INSERT INTO `ocena` (`idOceny`, `wartosc`, `idFilmu`, `idUzytkownika`) VALUES
-(12, 10, 2, 4),
-(13, 9, 1, 4),
-(14, 8, 1, 3);
+(28, 7, 12, 4),
+(29, 9, 1, 4),
+(30, 10, 2, 4),
+(31, 8, 3, 4),
+(32, 9, 4, 4),
+(33, 8, 5, 4),
+(34, 6, 6, 4),
+(35, 5, 7, 4),
+(36, 7, 8, 4),
+(37, 8, 9, 4),
+(38, 9, 10, 4),
+(39, 9, 11, 4),
+(40, 9, 12, 5),
+(41, 10, 1, 5),
+(42, 9, 2, 5),
+(43, 7, 3, 5),
+(44, 8, 4, 5),
+(45, 7, 5, 5),
+(46, 9, 6, 5),
+(47, 7, 7, 5),
+(48, 8, 8, 5),
+(49, 9, 9, 5),
+(50, 8, 10, 5),
+(51, 10, 11, 5),
+(52, 7, 12, 6),
+(53, 8, 1, 6),
+(54, 10, 2, 6),
+(55, 8, 3, 6),
+(56, 8, 4, 6),
+(57, 9, 5, 6),
+(58, 7, 6, 6),
+(59, 9, 7, 6),
+(60, 8, 8, 6),
+(61, 7, 9, 6),
+(62, 9, 10, 6),
+(63, 9, 11, 6),
+(64, 7, 12, 1),
+(65, 10, 1, 1),
+(66, 9, 2, 1),
+(67, 7, 3, 1),
+(68, 9, 4, 1),
+(69, 9, 5, 1),
+(70, 4, 6, 1),
+(71, 2, 7, 1),
+(72, 7, 8, 1),
+(73, 9, 9, 1),
+(74, 9, 10, 1),
+(75, 7, 11, 1),
+(76, 8, 12, 3),
+(77, 8, 1, 3),
+(78, 10, 2, 3),
+(79, 8, 3, 3),
+(80, 9, 4, 3),
+(81, 8, 5, 3),
+(82, 6, 6, 3),
+(83, 3, 7, 3),
+(84, 7, 8, 3),
+(85, 8, 9, 3),
+(86, 9, 10, 3),
+(87, 10, 11, 3);
 
 -- --------------------------------------------------------
 
@@ -173,13 +230,6 @@ CREATE TABLE `recenzja` (
   `idFilmu` int(10) NOT NULL,
   `idUzytkownika` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Zrzut danych tabeli `recenzja`
---
-
-INSERT INTO `recenzja` (`idRecenzji`, `tresc`, `data`, `idFilmu`, `idUzytkownika`) VALUES
-(12, 'to jest dobry film', '2017-12-15 21:40:25', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -230,7 +280,7 @@ INSERT INTO `sklep_film` (`idSklepu`, `idFilmu`, `iloscFilmow`, `iloscDostepnych
 (1, 10, 3, 3),
 (1, 11, 6, 6),
 (2, 12, 1, 1),
-(2, 1, 1, 1),
+(2, 1, 1, 0),
 (2, 2, 11, 11),
 (2, 3, 2, 2),
 (2, 4, 4, 4),
@@ -285,7 +335,7 @@ INSERT INTO `uzytkownik` (`idUzytkownika`, `login`, `haslo`, `imie`, `nazwisko`,
 (3, 'admin1', '0192023a7bbd73250516f069df18b500', 'admin1', 'admin1', '111222333', 'admin1', 'admin@gmail.com', 'administrator', 0),
 (4, 'user12345', '80ec08504af83331911f5882349af59d', 'user12345', 'user12345', '987654321', 'user12345', 'user12345@gmail.com', 'klient', 0),
 (5, 'user23456', 'b6a02b73d239c9b22e74c406b6b53fbc', 'user23456', 'user23456', '111111111', 'user23456', 'user23456@gmail.com', 'klient', 0),
-(6, 'user54321', '62d45781b210f9961097d1cfe90fbac5', 'user54321', 'user54321', '22222222', 'user54321', 'user54321@gmail.com', 'klient', 0);
+(6, 'user54321', '62d45781b210f9961097d1cfe90fbac5', 'user54321', 'user54321', '222222222', 'user54321', 'user54321@gmail.com', 'klient', 0);
 
 -- --------------------------------------------------------
 
@@ -316,7 +366,14 @@ INSERT INTO `wypozyczenie` (`idWypozyczenia`, `dataWypozyczenia`, `dataZwrotu`, 
 (5, '2017-12-22 17:00:45', '2017-12-22 17:03:50', 4, 1, 2, NULL, NULL, 'Zakończony'),
 (6, '2017-12-22 17:03:13', '2017-12-22 17:03:54', 5, 1, 2, NULL, NULL, 'Zakończony'),
 (7, '2017-12-23 16:10:14', '2017-12-23 19:40:36', 4, 1, 1, NULL, NULL, 'Zakończony'),
-(8, '2017-12-23 18:18:59', '2017-12-23 19:40:38', 4, 12, 3, NULL, NULL, 'Zakończony');
+(8, '2017-12-23 18:18:59', '2017-12-23 19:40:38', 4, 12, 3, NULL, NULL, 'Zakończony'),
+(9, '2018-01-09 17:41:55', '2018-01-10 10:43:23', 4, 12, 2, NULL, NULL, 'Zakończony'),
+(10, '2018-01-10 10:35:29', '2018-01-10 10:43:21', 4, 1, 1, NULL, NULL, 'Zakończony'),
+(12, '2018-01-10 10:40:10', '2018-01-10 10:43:19', 4, 3, 1, NULL, NULL, 'Zakończony'),
+(13, '2018-01-10 10:41:31', '2018-01-10 10:43:17', 4, 4, 3, NULL, NULL, 'Zakończony'),
+(14, '2018-01-09 17:43:41', '2018-01-10 10:43:27', 6, 12, 2, NULL, NULL, 'Zakończony'),
+(15, '2018-01-10 10:41:46', '2018-01-10 10:43:29', 5, 12, 2, NULL, NULL, 'Zakończony'),
+(17, '2018-01-10 10:45:06', NULL, 4, 1, 2, NULL, NULL, 'W trakcie realizacji');
 
 -- --------------------------------------------------------
 
@@ -483,19 +540,19 @@ ALTER TABLE `znizka`
 -- AUTO_INCREMENT dla tabeli `film`
 --
 ALTER TABLE `film`
-  MODIFY `idFilmu` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idFilmu` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT dla tabeli `gatunek`
 --
 ALTER TABLE `gatunek`
-  MODIFY `idGatunku` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idGatunku` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT dla tabeli `ocena`
 --
 ALTER TABLE `ocena`
-  MODIFY `idOceny` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idOceny` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT dla tabeli `platnosc`
@@ -507,7 +564,7 @@ ALTER TABLE `platnosc`
 -- AUTO_INCREMENT dla tabeli `recenzja`
 --
 ALTER TABLE `recenzja`
-  MODIFY `idRecenzji` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idRecenzji` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT dla tabeli `sklep`
@@ -519,19 +576,19 @@ ALTER TABLE `sklep`
 -- AUTO_INCREMENT dla tabeli `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
-  MODIFY `idUzytkownika` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idUzytkownika` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT dla tabeli `wypozyczenie`
 --
 ALTER TABLE `wypozyczenie`
-  MODIFY `idWypozyczenia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idWypozyczenia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienie`
 --
 ALTER TABLE `zamowienie`
-  MODIFY `idZamowienia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idZamowienia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ograniczenia dla zrzutów tabel
