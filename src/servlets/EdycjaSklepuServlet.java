@@ -3,6 +3,7 @@ package servlets;
 import dao.SklepFilmDAO;
 import models.SklepFilm;
 
+import java.util.List;
 import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -71,6 +72,11 @@ public class EdycjaSklepuServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/edycjaSklepu.jsp").forward(request, response);
+        if(request.getAttribute("czyEdytujSklep")==null) {
+            request.setAttribute("czyEdytujSklep", "true");
+        }
+
+
+        request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
     }
 }

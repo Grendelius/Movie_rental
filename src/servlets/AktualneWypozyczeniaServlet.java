@@ -104,7 +104,10 @@ public class AktualneWypozyczeniaServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/aktualneWypozyczenia.jsp").forward(request, response);
+        if (request.getAttribute("czyAktualneWypozyczenia") == null) {
+            request.setAttribute("czyAktualneWypozyczenia", "true");
+        }
+        request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
     }
 
     /**

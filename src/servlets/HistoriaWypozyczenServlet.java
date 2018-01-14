@@ -37,6 +37,10 @@ public class HistoriaWypozyczenServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/historiaWypozyczen.jsp").forward(request, response);
+        if (request.getAttribute("czyHistoriaWypozyczen") == null) {
+            request.setAttribute("czyHistoriaWypozyczen", "true");
+        }
+
+        request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
     }
 }

@@ -79,6 +79,7 @@
         <b>
             <center><font size="4" face="serif">Nowości:</font></center>
         </b>
+        <div style="margin-left:10px">
         <%
             String info = (String) request.getAttribute("info");
             String blad = (String) request.getAttribute("blad");
@@ -87,6 +88,7 @@
             else if (blad != null)
                 out.println(blad);
         %>
+        </div>
     </div>
     <%
         for (Film f : film) {

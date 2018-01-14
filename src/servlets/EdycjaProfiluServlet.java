@@ -54,7 +54,7 @@ public class EdycjaProfiluServlet extends HttpServlet {
                             if (dao.updateUzytkownika(uzytkownik)) {
                                 request.setAttribute("info", "<br> Zmiany zostały wprowadzone!");
                                 request.setAttribute("czyEdytujProfil", "true");
-                                request.getRequestDispatcher("/stronaGlowna").forward(request, response);
+                                request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
                             } else
                                 request.setAttribute("blad", "Nie udało się zakończyć edycji!");
                         } else {
@@ -81,6 +81,6 @@ public class EdycjaProfiluServlet extends HttpServlet {
         if (request.getAttribute("czyEdytujProfil") == null) {
             request.setAttribute("czyEdytujProfil", "true");
         }
-        request.getRequestDispatcher("/stronaGlowna").forward(request, response);
+        request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
     }
 }

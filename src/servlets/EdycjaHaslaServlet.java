@@ -40,7 +40,7 @@ public class EdycjaHaslaServlet extends HttpServlet {
                             uzytkownicyDAO.updateUzytkownika(uzytkownik);
                             request.setAttribute("info", "Hasło zostało zmienione!");
                             request.setAttribute("czyEdytujProfil", "true");
-                            request.getRequestDispatcher("/stronaGlowna").forward(request, response);
+                            request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
                         } else {
                             request.setAttribute("blad", "Nowe hasło musi się różnić od starego hasła!");
                             doGet(request, response);
@@ -65,6 +65,6 @@ public class EdycjaHaslaServlet extends HttpServlet {
         if (request.getAttribute("czyEdytujHaslo") == null) {
             request.setAttribute("czyEdytujHaslo", "true");
         }
-        request.getRequestDispatcher("/stronaGlowna").forward(request, response);
+        request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
     }
 }

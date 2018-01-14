@@ -53,6 +53,9 @@ public class ZamowieniaServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/zamowienia.jsp").forward(request, response);
+        if (request.getAttribute("czyZamowienia") == null) {
+            request.setAttribute("czyZamowienia", "true");
+        }
+        request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
     }
 }

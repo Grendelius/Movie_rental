@@ -8,53 +8,85 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Wypozyczalnia</title>
+    <%
+        Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
+        List<Wypozyczenie> wypozyczenie = (List<Wypozyczenie>) request.getAttribute("wypozyczenie");
+        FilmDAO filmDAO = new FilmDAO();
+        SklepDAO sklepDAO = new SklepDAO();
+    %>
 </head>
 <body>
-<%
-    Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
-    List<Wypozyczenie> wypozyczenie = (List<Wypozyczenie>) request.getAttribute("wypozyczenie");
-    FilmDAO filmDAO = new FilmDAO();
-    SklepDAO sklepDAO = new SklepDAO();
-%>
-<h1>Lista Wypożyczeń:</h1>
-<table border="1">
-    <tr>
-        <th>Nazwa Filmu</th>
-        <th>Nazwa Sklepu</th>
-        <th>Nazwa Ulicy</th>
+<div style="background-color:red;width:700px;height:465px;float:left; margin-left:5px;">
+    <div style="margin-top:10px">
+        <b>
+            <center><font size="5" face="serif">Lista Wypożyczeń:</font></center>
+        </b>
+    </div>
+    <div style="height:420px;overflow-y:auto;overflow-x:auto;margin-right:6px;margin-left:6px;white-space:nowrap;">
+        <div style="margin-top:10px;margin-bottom:10px">
+            <div style="display:inline-block;width:195px;">
+                Nazwa Filmu
+            </div>
+            <div style="display:inline-block;width:105px;">
+                Nazwa Sklepu
+            </div>
+            <div style="display:inline-block;width:113px;">
+                Nazwa Ulicy
+            </div>
+            <%if (zalogowany.getRola().equals("pracownik")) {%>
+            <div style="display:inline-block;width:20px;">
+                Id
+            </div>
+            <% } %>
+            <div style="display:inline-block;width:155px;">
+                Data wypożyczenia
+            </div>
+            <div style="display:inline-block;width:150px;">
+                Data zwrotu
+            </div>
+            <div style="display:inline-block;width:160px;">
+                Status Wypożyczenia
+            </div>
+            <div style="display:inline-block">
+                Zmień Status
+            </div>
+        </div>
+        <%
+            for (Wypozyczenie w : wypozyczenie) {
+        %>
+        <div style="display:inline-block;width:210px;">
+            <%=(filmDAO.getWybranyFilm(w.getIdFilmu()).getTytul())%>
+        </div>
+        <div style="display:inline-block;width:90px">
+            <%=(sklepDAO.getSklep(w.getIdSklepu()).getNazwaSklepu())%>
+        </div>
+        <div style="display:inline-block;width:115px">
+            <%=(sklepDAO.getSklep(w.getIdSklepu()).getUlica())%>
+        </div>
         <%if (zalogowany.getRola().equals("pracownik")) {%>
-        <th>Id Użytkownika</th>
+        <div style="display:inline-block;width:20px">
+            <%=w.getIdUzytkownika()%>
+        </div>
         <%}%>
-        <th>Data Wypożyczenia</th>
-        <th>Data Zwrotu</th>
-        <th>Status Wypożyczenia</th>
-        <th>Zmień Status</th>
-    </tr>
-    <%
-        for (Wypozyczenie w : wypozyczenie) {
-    %>
-    <tr>
-        <td><%=(filmDAO.getWybranyFilm(w.getIdFilmu()).getTytul())%>
-        </td>
-        <td><%=(sklepDAO.getSklep(w.getIdSklepu()).getNazwaSklepu())%>
-        </td>
-        <td><%=(sklepDAO.getSklep(w.getIdSklepu()).getUlica())%>
-        </td>
-        <%if (zalogowany.getRola().equals("pracownik")) {%>
-        <td><%=w.getIdUzytkownika()%>
-        </td>
-        <%}%>
-        <td><%=w.getDataWypozyczenia()%>
-        </td>
-        <td><%=w.getDataZwrotu()%>
-        </td>
-        <td><%=w.getStatus()%>
-        </td>
+        <div style="display:inline-block;width:155px">
+            <%=w.getDataWypozyczenia()%>
+        </div>
+        <div style="display:inline-block;width:155px">
+            <% if(w.getDataZwrotu()==null){%>
+                Nie oddano
+            <% } else {
+                w.getDataZwrotu();
+            }%>
+        </div>
+        <div style="display:inline-block;width:155px">
+            <%=w.getStatus()%>
+        </div>
         <%
             if (zalogowany.getRola().equals("pracownik")) {
         %>
-        <td>
+        <div style="display:inline-block;margin-right:10px">
             <form method="post" action="aktualneWypozyczenia">
+                <div style="display:inline-block">
                 <input type="hidden" name="idWypozyczenia" value="<%=w.getIdWypozyczenia()%>"/>
                 <select name="nowyStatus">
                     <option>Do odbioru w sklepie</option>
@@ -62,27 +94,32 @@
                     <option>Zakończony</option>
                     <option>Anuluj wypożyczenie</option>
                 </select>
-                <center>
-                    <input type="submit" value="Zatwierź">
-                </center>
+                </div>
+                <div style="display:inline-block">
+                    <input type="submit" value="Zatwierdź">
+                </div>
             </form>
-        </td>
+        </div>
         <%
         } else if (zalogowany.getRola().equals("klient") && w.getStatus().equals("W trakcie realizacji")) {
         %>
-        <td>
+        <div style="display:inline-block;margin-right:10px">
             <form method="post" action="aktualneWypozyczenia">
                 <input type="hidden" name="idWypozyczenia" value="<%=w.getIdWypozyczenia()%>"/>
                 <input type="submit" name="nowyStatus" value="Anuluj wypożyczenie">
             </form>
-        </td>
+        </div>
         <%
             }
         %>
-    </tr>
-    <%
-        }
-    %>
-</table>
+        </br>
+        <%
+            }
+        %>
+        <div style="margin-top:10px">
+
+        </div>
+    </div>
+</div>
 </body>
 </html>

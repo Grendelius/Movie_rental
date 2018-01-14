@@ -16,10 +16,12 @@
             if (inforight != null)
                 out.println(inforight + "<br><br>");
         %>
+        <div style="margin-left:10px">
         <form method="post" action="szukajFilm">
             <input type="text" name="szukanyFilm" maxlength="30"/>
             <br><br><input type="submit" value="Szukaj"/>
         </form>
+        </div>
     </div>
 </div>
 </body>

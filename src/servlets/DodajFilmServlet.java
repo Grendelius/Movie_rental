@@ -106,6 +106,6 @@ public class DodajFilmServlet extends HttpServlet {
         if(request.getAttribute("czyDodajFilm")==null) {
             request.setAttribute("czyDodajFilm", "true");
         }
-        request.getRequestDispatcher("/stronaGlowna").forward(request, response);
+        request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
     }
 }
