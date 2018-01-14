@@ -45,13 +45,13 @@ public class EdycjaProfiluServlet extends HttpServlet {
                     if (Pattern.matches(patternNumerTelefonu, numerTelefonu)) {
                         if (Pattern.matches(patternEmail, email)) {
                             UzytkownicyDAO dao = new UzytkownicyDAO();
-                            if (dao.isLogin(login)) {
+                            if (dao.isLogin(login) && !uzytkownik.getLogin().equals(login)) {
                                 request.setAttribute("blad", "Ten login jest już zajęty!");
                                 doGet(request, response);
-                            } else if (dao.isNumerTelefonu(Integer.parseInt(numerTelefonu))) {
+                            } else if (dao.isNumerTelefonu(Integer.parseInt(numerTelefonu)) && uzytkownik.getNumerTelefonu() != Integer.parseInt(numerTelefonu)) {
                                 request.setAttribute("blad", "Ten numer telefonu jest już zajęty!");
                                 doGet(request, response);
-                            } else if (dao.isEmail(email)) {
+                            } else if (dao.isEmail(email) && !uzytkownik.getEmail().equals(email)) {
                                 request.setAttribute("blad", "Ten e-mail jest już zajęty!");
                                 doGet(request, response);
                             } else {
@@ -63,7 +63,7 @@ public class EdycjaProfiluServlet extends HttpServlet {
                                 uzytkownik.setMiejsceZamieszkania(miejsceZamieszkania);
                                 uzytkownik.setEmail(email);
                                 if (dao.updateUzytkownika(uzytkownik)) {
-                                    request.setAttribute("info", "<br> Zmiany zostały wprowadzone!");
+                                    request.setAttribute("info", "Zmiany zostały wprowadzone!");
                                     request.setAttribute("czyEdytujProfil", "true");
                                     request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
                                 } else

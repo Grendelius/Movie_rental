@@ -21,10 +21,10 @@
             String blad = (String) request.getAttribute("blad");
             String info = (String) request.getAttribute("info");
             if (blad != null) {
-                out.println(blad);
+                out.println("<br>" + blad);
             }
             if (info != null) {
-                out.println(info);
+                out.println("<br>" + info);
             }
         %>
         </br>

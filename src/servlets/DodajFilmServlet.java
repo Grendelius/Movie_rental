@@ -94,7 +94,7 @@ public class DodajFilmServlet extends HttpServlet {
                         gatunekFilmDAO.addGatunekFilm(newGatunekFilm);
                     }
                 }
-                request.setAttribute("info", "<br> Film został dodany!");
+                request.setAttribute("info", "Film został dodany!");
                 request.setAttribute("czyDodajFilm", "false");
             } else
                 request.setAttribute("blad", "Podałeś błędne dane!");
