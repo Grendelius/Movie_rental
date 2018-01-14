@@ -45,6 +45,7 @@
             </td>
             <td>
                 <form method="post" action="edytujSklep" style="display:inline">
+                    <input type="hidden" name="czyEdytujSklep" value="true"/>
                     <input type="hidden" name="idSklepu" value="<%=sf.getIdSklepu()%>"/>
                     <input type="hidden" name="idFilmu" value="<%=sf.getIdFilmu()%>"/>
                     <input type="submit" name="value" value="+"></input>
@@ -60,6 +61,7 @@
     <form method="post" action="/edytujSklep">
         Dodaj film:
         <br><br><input type="hidden" name="idSklepu" value="<%=idSklepu%>"/>
+        <input type="hidden" name="czyEdytujSklep" value="true"/>
         <select name="idFilmu" size="1">
             <%
                 boolean flag = false;

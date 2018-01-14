@@ -33,7 +33,7 @@ public class EdycjaSklepuServlet extends HttpServlet {
         SklepFilmDAO sklepFilmDAO = new SklepFilmDAO();
         SklepFilm sklepFilm = new SklepFilm();
 
-        if (request.getParameter("czyWyborSklepu") != null) {
+        if (request.getParameter("czyEdytujSklep") != null) {
             // Pominięcie edycji jeśli wchodzimy w edycje pierwszy raz
             if (idFilmu != null) {
                 try {
@@ -63,7 +63,6 @@ public class EdycjaSklepuServlet extends HttpServlet {
                     }
                 }
             }
-            request.setAttribute("czyWyborSklepu", "false");
         } else {
             request.setAttribute("czyWyborSklepu", "true");
             request.getRequestDispatcher("/stronaGlowna").forward(request, response);

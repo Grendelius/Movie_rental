@@ -21,7 +21,7 @@
             for (Sklep s : sklepList) {
         %>
         <form method="post" action="edytujSklep">
-            <input type="hidden" name="czyWyborSklepu" value="true"/>
+            <input type="hidden" name="czyEdytujSklep" value="true"/>
             <input type="hidden" name="idSklepu" value="<%=s.getIdSklepu()%>"/>
             <input type="submit" value="<%=s.getNazwaSklepu()%> <%=s.getUlica()%>"
                    style="width:180px;height:40px;background-color:red;border-color:#720805;"></input>
