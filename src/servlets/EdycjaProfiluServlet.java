@@ -45,18 +45,30 @@ public class EdycjaProfiluServlet extends HttpServlet {
                     if (Pattern.matches(patternNumerTelefonu, numerTelefonu)) {
                         if (Pattern.matches(patternEmail, email)) {
                             UzytkownicyDAO dao = new UzytkownicyDAO();
-                            uzytkownik.setLogin(login);
-                            uzytkownik.setImie(imie);
-                            uzytkownik.setNazwisko(nazwisko);
-                            uzytkownik.setNumerTelefonu(Integer.parseInt(numerTelefonu));
-                            uzytkownik.setMiejsceZamieszkania(miejsceZamieszkania);
-                            uzytkownik.setEmail(email);
-                            if (dao.updateUzytkownika(uzytkownik)) {
-                                request.setAttribute("info", "<br> Zmiany zostały wprowadzone!");
-                                request.setAttribute("czyEdytujProfil", "true");
-                                request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
-                            } else
-                                request.setAttribute("blad", "Nie udało się zakończyć edycji!");
+                            if (dao.isLogin(login)) {
+                                request.setAttribute("blad", "Ten login jest już zajęty!");
+                                doGet(request, response);
+                            } else if (dao.isNumerTelefonu(Integer.parseInt(numerTelefonu))) {
+                                request.setAttribute("blad", "Ten numer telefonu jest już zajęty!");
+                                doGet(request, response);
+                            } else if (dao.isEmail(email)) {
+                                request.setAttribute("blad", "Ten e-mail jest już zajęty!");
+                                doGet(request, response);
+                            } else {
+                                dao = new UzytkownicyDAO();
+                                uzytkownik.setLogin(login);
+                                uzytkownik.setImie(imie);
+                                uzytkownik.setNazwisko(nazwisko);
+                                uzytkownik.setNumerTelefonu(Integer.parseInt(numerTelefonu));
+                                uzytkownik.setMiejsceZamieszkania(miejsceZamieszkania);
+                                uzytkownik.setEmail(email);
+                                if (dao.updateUzytkownika(uzytkownik)) {
+                                    request.setAttribute("info", "<br> Zmiany zostały wprowadzone!");
+                                    request.setAttribute("czyEdytujProfil", "true");
+                                    request.getRequestDispatcher("/panelUzytkownika").forward(request, response);
+                                } else
+                                    request.setAttribute("blad", "Nie udało się zakończyć edycji!");
+                            }
                         } else {
                             request.setAttribute("blad", "Błędny adres e-mail!");
                             doGet(request, response);
