@@ -21,12 +21,18 @@
         List<Gatunek> gatunek = (List<Gatunek>) request.getAttribute("gatunek");
         List<GatunekFilm> gatunekFilm = (List<GatunekFilm>) request.getAttribute("gatunekFilm");
         List<Recenzja> recenzja = (List<Recenzja>) request.getAttribute("recenzja");
-        //List<Zapowiedz> zapowiedz = (List<Zapowiedz>) request.getAttribute("zapowiedz");
         UzytkownicyDAO uzytkownicyDAO = new UzytkownicyDAO();
         ZapowiedzDAO zapowiedzDAO = new ZapowiedzDAO();
+        List<Zapowiedz> zapowiedz = zapowiedzDAO.getAllZapowiedz(film.getIdFilmu());
 
         Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
         OcenaDAO ocenaDAO = new OcenaDAO();
+
+        boolean temp = false;
+
+        for(Zapowiedz z2: zapowiedz){
+            temp = true;
+        }
 
     %>
 
@@ -131,6 +137,7 @@
         <td><%=film.getOpis()%>
         </td>
     </div>
+    <% if(temp == true){ %>
     <div style="background-color:darkred;margin-top:5px;height:22px">
         <div style="margin-left:10px">
             <b>Zapowiedzi:</b>
@@ -138,24 +145,21 @@
     </div>
     <div style="margin-left:10px">
         <%
-            //zapowiedz = zapowiedzDAO.getAllZapowiedz(film.getIdFilmu());
-            List<Zapowiedz> zapowiedz = zapowiedzDAO.getAllZapowiedz(film.getIdFilmu());
-
             for(Zapowiedz z: zapowiedz){
-
         %>
-        <div style="margin-left:10px;margin-top:20px">
-            <video width="450" height="252" controls>
-                <source src="C://Users/Laptop Vaio/Desktop/Piotrek/Projekt To/Wypozyczalnia/web/WEB-INF/views/MAH05038">
-            </video>
+        <div style="margin-left:10px;margin-top:20px" >
+
+            <%=z.getLinkZapowiedzi()%>
         </div>
         <%
             }
         %>
         <div style="margin-bottom:20px">
-
         </div>
     </div>
+    <%
+        }
+    %>
     <div style="background-color:darkred;margin-top:5px;height:22px">
         <div style="margin-left:10px">
             <b>Recenzje użytkowników:</b>

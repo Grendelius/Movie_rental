@@ -15,23 +15,23 @@
         List<Film> filmList = filmDAO.getNajnowszeFilmyList();
         List<SklepFilm> sklepFilmList = sklepFilmDAO.getWybranySklepFilmList(Integer.parseInt(idSklepu));
 
-        boolean temp = true;
+        boolean temp = false;
         boolean temp2 = false;
 
         for (Film f : filmList) {
-           temp2 = false;
+            temp=false;
             for (SklepFilm sf : sklepFilmList) {
                 if (f.getIdFilmu() == sf.getIdFilmu()) {
-                    temp2 = true;
-                    break;
+                    temp = true;
                 }
+
             }
 
-            if(temp2==false){
-                temp = true;
+            if(temp!=true){
+                temp2 = true;
             }
         }
-    %>
+
     %>
 </head>
 <body>
@@ -50,7 +50,7 @@
     %>
     </div>
     <form method="post" action="/edytujSklep" style="margin-top:15px">
-        <% if(temp==true){ %>
+        <% if(temp2==true){ %>
         <div style="display:inline-block;margin-left:10px;margin-right:10px">
             Dodaj film:
         </div>

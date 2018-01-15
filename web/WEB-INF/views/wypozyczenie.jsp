@@ -14,7 +14,7 @@
             <center><font size="4" face="serif">Wybór sklepu:</font></center>
         </b>
     </div>
-    <div style="margin-top:5px;margin-left:10px;">
+    <div style="margin-top:5px;margin-left:10px;margin-bottom:10px;">
         <%
             List<SklepFilm> sklepFilmList = (List<SklepFilm>) request.getAttribute("sklepFilmList");
             SklepDAO sklepDAO = new SklepDAO();
@@ -26,22 +26,27 @@
                 if (s.getIloscDostepnychFilmow() > 0) {
                     out.println("<br>Ilość dostępnych sztuk: " + s.getIloscDostepnychFilmow());
         %>
-        <form method="post" action="wypozycz" style="display:inline">
-            <input type="hidden" name="idSklepu" value="<%=s.getIdSklepu()%>"/>
-            <input type="hidden" name="idFilmu" value="<%=s.getIdFilmu()%>"/>
-            <input type="submit" value="Wypożycz!"
-                   style="width:90px;height:30px;background-color:lightgrey;border-color:lightgrey;"></input>
-        </form>
+
+        <div style="margin-left:10px;display:inline">
+            <form method="post" action="wypozycz" style="display:inline">
+                <input type="hidden" name="idSklepu" value="<%=s.getIdSklepu()%>"/>
+                <input type="hidden" name="idFilmu" value="<%=s.getIdFilmu()%>"/>
+                <input type="submit" value="Wypożycz!"
+                       style="width:90px;height:30px;background-color:lightgrey;border-color:lightgrey;"></input>
+            </form>
+        </div>
         <%
         } else {
             out.println("<br>Wszystkie sztuki wypożyczone");
         %>
+        <div style="margin-left:10px; display:inline">
         <form method="post" action="zamow" style="display:inline">
             <input type="hidden" name="idSklepu" value="<%=s.getIdSklepu()%>"/>
             <input type="hidden" name="idFilmu" value="<%=s.getIdFilmu()%>"/>
             <input type="submit" value="Zamów!"
                    style="width:90px;height:30px;background-color:lightgrey;border-color:lightgrey;"></input>
         </form>
+        </div>
         <%
                 }
             }

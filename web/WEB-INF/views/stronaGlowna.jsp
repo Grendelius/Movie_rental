@@ -73,6 +73,12 @@
         %>
         <jsp:include page="right-menu.jsp"></jsp:include>
     </div>
+
 </div>
 </body>
+<footer>
+    <div style="width:600px;height: 200px">
+    <jsp:include page="stopka.jsp"></jsp:include>
+    </div>
+</footer>
 </html>

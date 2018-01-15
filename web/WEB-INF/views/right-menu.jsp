@@ -11,12 +11,13 @@
     <div>
         <center><font size="4" face="serif">Szybkie wyszukiwanie:</font></center>
         <br>
+        <div style="margin-left:10px">
         <%
             String inforight = (String) request.getAttribute("inforight");
             if (inforight != null)
                 out.println(inforight + "<br><br>");
         %>
-        <div style="margin-left:10px">
+
         <form method="post" action="szukajFilm">
             <input type="text" name="szukanyFilm" maxlength="30"/>
             <br><br><input type="submit" value="Szukaj"/>

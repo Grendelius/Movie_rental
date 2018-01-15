@@ -11,7 +11,7 @@
                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/DVD_logo.svg/1200px-DVD_logo.svg.png"
                                 alt="logo"></a>
     <div style="position:absolute;display:inline;margin:5px">
-        <form method="post" action="panelUzytkownika" style="display:inline;">
+        <form method="post" action="panelUzytkownika" style="display:inline;margin-left:40px">
             <input type="submit" value="Panel Użytkownika"
                    style="width:140px;height:40px;background-color:lightgrey;border-color:lightgrey;"></input>
         </form>
@@ -19,7 +19,7 @@
             Uzytkownik uzytkownik = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
             if (uzytkownik != null) {
         %>
-        <form action="wyloguj" style="display:inline;">
+        <form action="wyloguj" style="display:inline;margin-right:20px">
             <input type="submit" value="Wyloguj"
                    style="width:120px;height:40px;background-color:lightgrey;border-color:lightgrey;"></input>
         </form>
