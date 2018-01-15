@@ -13,6 +13,7 @@
         <class>models.Wypozyczenie</class>
         <class>models.Zamowienie</class>
         <class>models.GatunekFilm</class>
+        <class>models.Zapowiedz</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/wypozyczalnia"/>
             <property name="hibernate.connection.characterEncoding" value="UTF-8"/>

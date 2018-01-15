@@ -11,13 +11,10 @@
                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/DVD_logo.svg/1200px-DVD_logo.svg.png"
                                 alt="logo"></a>
     <div style="position:absolute;display:inline;margin:5px">
-        <form method="post" action="panelUzytkownika" style="display:inline">
+        <form method="post" action="panelUzytkownika" style="display:inline;">
             <input type="submit" value="Panel Użytkownika"
-                   style="width:140px;height:40px;background-color:red;border-color:red;"></input>
+                   style="width:140px;height:40px;background-color:lightgrey;border-color:lightgrey;"></input>
         </form>
-        <button type="button" style="width:120px;height:40px;background-color:red;border-color:red;">cos</button>
-        <button type="button" style="width:120px;height:40px;background-color:red;border-color:red;">cos</button>
-        <button type="button" style="width:100px;height:40px;background-color:red;border-color:red;">cos</button>
         <%
             Uzytkownik uzytkownik = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
             if (uzytkownik != null) {
@@ -47,6 +44,7 @@
         <%
             }
         %>
+
     </div>
 </div>
 <img src="http://media.comicbook.com/2017/09/avengers-3-infinity-war-banner-story-spoliers-clues-1022009.jpg"

@@ -2,6 +2,7 @@
 <%@ page import="dao.UzytkownicyDAO" %>
 <%@ page import="dao.OcenaDAO" %>
 <%@ page import="models.*" %>
+<%@ page import="dao.ZapowiedzDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,7 +21,9 @@
         List<Gatunek> gatunek = (List<Gatunek>) request.getAttribute("gatunek");
         List<GatunekFilm> gatunekFilm = (List<GatunekFilm>) request.getAttribute("gatunekFilm");
         List<Recenzja> recenzja = (List<Recenzja>) request.getAttribute("recenzja");
+        //List<Zapowiedz> zapowiedz = (List<Zapowiedz>) request.getAttribute("zapowiedz");
         UzytkownicyDAO uzytkownicyDAO = new UzytkownicyDAO();
+        ZapowiedzDAO zapowiedzDAO = new ZapowiedzDAO();
 
         Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
         OcenaDAO ocenaDAO = new OcenaDAO();
@@ -105,7 +108,7 @@
                 } else {
                     out.print("Twoja ocena: " + ocenaDAO.getOcene(zalogowany.getIdUzytkownika(), film.getIdFilmu()).getOcena());
                 %>
-                <form method="post" action="filmInfo" style="display:inline">
+                <form method="post" action="filmInfo" style="display:inline;margin-left:10px">
                     <input type="hidden" name="idFilmu" value="<%=film.getIdFilmu()%>"/>
                     <input type="submit" name="zmienOcene" value="Zmień ocene">
                 </form>
@@ -115,7 +118,7 @@
                 %>
             </td>
             <td>
-                <form method="post" action="wypozycz">
+                <form method="post" action="wypozycz" style="margin-top:10px">
                     <input type="hidden" name="idFilmu" value="<%=film.getIdFilmu()%>"/>
                     <input type="submit" value="Wypożycz!"
                            style="width:90px;height:30px;background-color:lightgrey;border-color:lightgrey;"></input>
@@ -124,14 +127,34 @@
             </br>
         </div>
     </div>
-    <div style="margin:5px;margin-left:10px">
+    <div style="margin:5px;margin-left:10px;margin-bottom:10px">
         <td><%=film.getOpis()%>
         </td>
     </div>
-    <div style="background-color:darkred;margin-top:5px;height:10px">
+    <div style="background-color:darkred;margin-top:5px;height:22px">
+        <div style="margin-left:10px">
+            <b>Zapowiedzi:</b>
+        </div>
     </div>
     <div style="margin-left:10px">
-        trolorlololo
+        <%
+            //zapowiedz = zapowiedzDAO.getAllZapowiedz(film.getIdFilmu());
+            List<Zapowiedz> zapowiedz = zapowiedzDAO.getAllZapowiedz(film.getIdFilmu());
+
+            for(Zapowiedz z: zapowiedz){
+
+        %>
+        <div style="margin-left:10px;margin-top:20px">
+            <video width="450" height="252" controls>
+                <source src="C://Users/Laptop Vaio/Desktop/Piotrek/Projekt To/Wypozyczalnia/web/WEB-INF/views/MAH05038">
+            </video>
+        </div>
+        <%
+            }
+        %>
+        <div style="margin-bottom:20px">
+
+        </div>
     </div>
     <div style="background-color:darkred;margin-top:5px;height:22px">
         <div style="margin-left:10px">

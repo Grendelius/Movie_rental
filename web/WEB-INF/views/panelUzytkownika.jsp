@@ -16,6 +16,7 @@
         String czyDodajFilm = (String) request.getAttribute("czyDodajFilm");
         String czyEdytujSklep = (String) request.getAttribute("czyEdytujSklep");
         String czyListaUzytkownikow = (String) request.getAttribute("czyListaUzytkownikow");
+        String czyWyborSklepu = (String) request.getAttribute("czyWyborSklepu");
         Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
 
     %>
@@ -51,7 +52,7 @@
                 <form method="post" action="dodajFilm">
                     <input type="submit" value="Dodaj Film" style="width:150px;height:50px;">
                 </form>
-                <form method="post" action="edytujSklep">
+                <form method="post" action="wybierzSklep">
                     <input type="submit" value="Edytuj Sklep" style="width:150px;height:50px;">
                 </form>
                 <form method="post" action="historiaWypozyczen">
@@ -108,9 +109,13 @@
     %>
         <jsp:include page="dodajFilm.jsp"></jsp:include>
     <%
+        }else if(czyWyborSklepu == "true"){
+    %>
+        <jsp:include page="wyborSklepu.jsp"></jsp:include>
+    <%
         }else if(czyEdytujSklep == "true"){
     %>
-        <jsp:include page="edycjaSklepu.jsp"></jsp:include>
+         <jsp:include page="edycjaSklepu.jsp"></jsp:include>
     <%
         }else if(czyListaUzytkownikow == "true"){
     %>

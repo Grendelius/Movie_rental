@@ -14,6 +14,24 @@
         FilmDAO filmDAO = new FilmDAO();
         List<Film> filmList = filmDAO.getNajnowszeFilmyList();
         List<SklepFilm> sklepFilmList = sklepFilmDAO.getWybranySklepFilmList(Integer.parseInt(idSklepu));
+
+        boolean temp = true;
+        boolean temp2 = false;
+
+        for (Film f : filmList) {
+           temp2 = false;
+            for (SklepFilm sf : sklepFilmList) {
+                if (f.getIdFilmu() == sf.getIdFilmu()) {
+                    temp2 = true;
+                    break;
+                }
+            }
+
+            if(temp2==false){
+                temp = true;
+            }
+        }
+    %>
     %>
 </head>
 <body>
@@ -23,134 +41,106 @@
             <center><font size="5" face="serif">Lista filmów w sklepie:</font></center>
         </b>
     </div>
-    <table border="1">
-        <tr>
-            <th>Nazwa Filmu</th>
-            <th>Id Filmu</th>
-            <th>Ilość Sztuk</th>
-            <th>Ilość Dostępnych Sztuk</th>
-            <th>Dodaj/Odejmij Ilość Sztuk</th>
-        </tr>
+    <div style="margin-left:10px">
+    <%
+        String blad = (String) request.getAttribute("blad");
+        if (blad != null) {
+            out.println(blad);
+        }
+    %>
+    </div>
+    <form method="post" action="/edytujSklep" style="margin-top:15px">
+        <% if(temp==true){ %>
+        <div style="display:inline-block;margin-left:10px;margin-right:10px">
+            Dodaj film:
+        </div>
+        <div style="display:inline-block;width:150px;margin-right:20px">
+            <input type="hidden" name="idSklepu" value="<%=idSklepu%>"/>
+            <select name="idFilmu" size="1">
+                <%
+                    boolean flag = false;
+                    for (Film f : filmList) {
+                        for (SklepFilm sf : sklepFilmList) {
+                            if (f.getIdFilmu() == sf.getIdFilmu()) {
+                                flag = true;
+                                break;
+                            }
+                        }
+
+                        if (!flag) {
+                %>
+                <option value="<%=f.getIdFilmu()%>"><%=f.getTytul()%>
+                </option>
+                <%
+                        }
+                        flag = false;
+                    }
+                %>
+            </select>
+        </div>
+        <div style="display:inline-block;margin-right:10px">
+             Ilość Filmów:
+        </div>
+        <div style="display:inline-block">
+            <input type="text" name="iloscFilmow" maxlength="30"/>
+        </div>
+        <div style="display:inline-block">
+            <input type="submit" value="Dodaj">
+        </div>
+        <%
+            } else {
+                //out.println("Wszystkie filmy dodane do sklepu.");
+            }
+        %>
+    </form>
+    <div style="height:365px;overflow-y:auto;margin-right:6px;margin-left:6px;white-space:nowrap;">
+        <div style="margin-top:10px;margin-bottom:10px">
+            <div style="display:inline-block;width:200px;">
+                Nazwa Filmu
+            </div>
+            <div style="display:inline-block;width:60px;">
+                Id Filmu
+            </div>
+            <div style="display:inline-block;width:80px;">
+                Ilość Sztuk
+            </div>
+            <div style="display:inline-block;width:160px;">
+                Ilość Dostępnych Sztuk
+            </div>
+            <div style="display:inline-block;">
+                Dodaj/Odejmij Ilość Sztuk
+            </div>
+        </div>
         <%
             for (SklepFilm sf : sklepFilmList) {
         %>
-        <tr>
-            <td><%=filmDAO.getWybranyFilm(sf.getIdFilmu()).getTytul()%>
-            </td>
-            <td><%=sf.getIdFilmu()%>
-            </td>
-            <td><%=sf.getIloscFilmow()%>
-            </td>
-            <td><%=sf.getIloscDostepnychFilmow()%>
-            </td>
-            <td>
-                <form method="post" action="edytujSklep" style="display:inline">
-                    <input type="hidden" name="czyEdytujSklep" value="true"/>
-                    <input type="hidden" name="idSklepu" value="<%=sf.getIdSklepu()%>"/>
-                    <input type="hidden" name="idFilmu" value="<%=sf.getIdFilmu()%>"/>
-                    <input type="submit" name="value" value="+"></input>
-                    <input type="submit" name="value" value="-"></input>
-                </form>
-            </td>
-        </tr>
-        <%
-            }
-        %>
-    </table>
-    &lt;%&ndash;<br><br>
-    <form method="post" action="/edytujSklep">
-        Dodaj film:
-        <br><br><input type="hidden" name="idSklepu" value="<%=idSklepu%>"/>
-        <input type="hidden" name="czyEdytujSklep" value="true"/>
-        <select name="idFilmu" size="1">
-            <%
-                boolean flag = false;
-                for (Film f : filmList) {
-                    for (SklepFilm sf : sklepFilmList) {
-                        if (f.getIdFilmu() == sf.getIdFilmu()) {
-                            flag = true;
-                            break;
-                        }
-                    }
-
-                    if (!flag) {
-            %>
-            <option value="<%=f.getIdFilmu()%>"><%=f.getTytul()%>
-            </option>
-            <%
-                    }
-                    flag = false;
-                }
-            %>
-        </select>
-        <p>Ilość Filmów:</p>
-        <input type="text" name="iloscFilmow" maxlength="30"/>
-        <br><br><input type="submit" value="Dodaj">&ndash;%&gt;
-    </form>
-</div>
-
-
-<%--<table border="1">
-    <tr>
-        <th>Nazwa Filmu</th>
-        <th>Id Filmu</th>
-        <th>Ilość Sztuk</th>
-        <th>Ilość Dostępnych Sztuk</th>
-        <th>Dodaj/Odejmij Ilość Sztuk</th>
-    </tr>
-    <%
-        for (SklepFilm sf : sklepFilmList) {
-    %>
-    <tr>
-        <td><%=filmDAO.getWybranyFilm(sf.getIdFilmu()).getTytul()%>
-        </td>
-        <td><%=sf.getIdFilmu()%>
-        </td>
-        <td><%=sf.getIloscFilmow()%>
-        </td>
-        <td><%=sf.getIloscDostepnychFilmow()%>
-        </td>
-        <td>
+        <div style="display:inline-block;width:222px;">
+            <%=filmDAO.getWybranyFilm(sf.getIdFilmu()).getTytul()%>
+        </div>
+        <div style="display:inline-block;width:70px">
+            <%=sf.getIdFilmu()%>
+        </div>
+        <div style="display:inline-block;width:115px">
+            <%=sf.getIloscFilmow()%>
+        </div>
+        <div style="display:inline-block;width:150px">
+            <%=sf.getIloscDostepnychFilmow()%>
+        </div>
+        <div style="display:inline-block;">
             <form method="post" action="edytujSklep" style="display:inline">
                 <input type="hidden" name="idSklepu" value="<%=sf.getIdSklepu()%>"/>
                 <input type="hidden" name="idFilmu" value="<%=sf.getIdFilmu()%>"/>
                 <input type="submit" name="value" value="+"></input>
                 <input type="submit" name="value" value="-"></input>
             </form>
-        </td>
-    </tr>
-    <%
-        }
-    %>
-</table>
-&lt;%&ndash;<br><br>
-<form method="post" action="/edytujSklep">
-    Dodaj film:
-    <br><br><input type="hidden" name="idSklepu" value="<%=idSklepu%>"/>
-    <select name="idFilmu" size="1">
+        </div>
+        </br>
         <%
-            boolean flag = false;
-            for (Film f : filmList) {
-                for (SklepFilm sf : sklepFilmList) {
-                    if (f.getIdFilmu() == sf.getIdFilmu()) {
-                        flag = true;
-                        break;
-                    }
-                }
-
-                if (!flag) {
-        %>
-        <option value="<%=f.getIdFilmu()%>"><%=f.getTytul()%>
-        </option>
-        <%
-                }
-                flag = false;
             }
         %>
-    </select>
-    <p>Ilość Filmów:</p>
-    <input type="text" name="iloscFilmow" maxlength="30"/>
-    <br><br><input type="submit" value="Dodaj">&ndash;%&gt;
-</form>--%>
+        <div style="margin-top:10px">
+        </div>
+    </div>
+</div>
 </body>
 </html>
