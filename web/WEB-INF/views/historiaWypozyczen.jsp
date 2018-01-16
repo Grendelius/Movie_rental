@@ -1,9 +1,9 @@
 <%@ page import="models.Uzytkownik" %>
 <%@ page import="models.Wypozyczenie" %>
-<%@ page import="models.Film" %>
 <%@ page import="dao.FilmDAO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="dao.SklepDAO" %>
+<%@ page import="dao.UzytkownicyDAO" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -12,6 +12,7 @@
     <title>Wypozyczalnia</title>
     <%
         Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
+        UzytkownicyDAO uzytkownicyDAO = new UzytkownicyDAO();
         List<Wypozyczenie> wypozyczenie = (List<Wypozyczenie>) request.getAttribute("wypozyczenie");
         FilmDAO filmDAO = new FilmDAO();
         SklepDAO sklepDAO = new SklepDAO();
@@ -30,15 +31,25 @@
             <div style="display:inline-block;width:195px;">
                 Nazwa Filmu
             </div>
+            <%if (zalogowany.getRola().equals("klient")) {%>
             <div style="display:inline-block;width:105px;">
                 Nazwa Sklepu
             </div>
             <div style="display:inline-block;width:113px;">
                 Nazwa Ulicy
             </div>
+            <%
+                }
+            %>
             <%if (zalogowany.getRola().equals("pracownik")) {%>
             <div style="display:inline-block;width:20px;">
                 Id
+            </div>
+            <div style="display:inline-block;width:155px;">
+                Imię
+            </div>
+            <div style="display:inline-block;width:155px;">
+                Nazwisko
             </div>
             <% } %>
             <div style="display:inline-block;width:155px;">
@@ -50,29 +61,41 @@
         </div>
         <%
             for (Wypozyczenie w : wypozyczenie) {
+                if ((zalogowany.getRola().equals("klient")) || (zalogowany.getRola().equals("pracownik") && zalogowany.getIdSklepu() == w.getIdSklepu())) {
         %>
-            <div style="display:inline-block;width:210px;">
-                <%=(filmDAO.getWybranyFilm(w.getIdFilmu()).getTytul())%>
-            </div>
-            <div style="display:inline-block;width:90px">
-                <%=(sklepDAO.getSklep(w.getIdSklepu()).getNazwaSklepu())%>
-            </div>
-            <div style="display:inline-block;width:115px">
-                <%=(sklepDAO.getSklep(w.getIdSklepu()).getUlica())%>
-            </div>
-            <%if (zalogowany.getRola().equals("pracownik")) {%>
-            <div style="display:inline-block;width:20px">
-                <%=w.getIdUzytkownika()%>
-            </div>
-            <%}%>
-            <div style="display:inline-block;width:155px">
-                <%=w.getDataWypozyczenia()%>
-            </div>
-            <div style="display:inline-block;margin-right:10px">
-                <%=w.getDataZwrotu()%>
-            </div>
-            </br>
+        <div style="display:inline-block;width:210px;">
+            <%=(filmDAO.getWybranyFilm(w.getIdFilmu()).getTytul())%>
+        </div>
+        <%if (zalogowany.getRola().equals("klient")) {%>
+        <div style="display:inline-block;width:90px">
+            <%=(sklepDAO.getSklep(w.getIdSklepu()).getNazwaSklepu())%>
+        </div>
+        <div style="display:inline-block;width:115px">
+            <%=(sklepDAO.getSklep(w.getIdSklepu()).getUlica())%>
+        </div>
         <%
+            }
+            if (zalogowany.getRola().equals("pracownik")) {
+        %>
+        <div style="display:inline-block;width:20px">
+            <%=w.getIdUzytkownika()%>
+        </div>
+        <div style="display:inline-block;width:155px">
+            <%=uzytkownicyDAO.getUzytkownikPoId(w.getIdUzytkownika()).getImie()%>
+        </div>
+        <div style="display:inline-block;width:155px">
+            <%=uzytkownicyDAO.getUzytkownikPoId(w.getIdUzytkownika()).getNazwisko()%>
+        </div>
+        <%}%>
+        <div style="display:inline-block;width:155px">
+            <%=w.getDataWypozyczenia().toString().split(" ")[0]%>
+        </div>
+        <div style="display:inline-block;margin-right:10px">
+            <%=w.getDataZwrotu().toString().split(" ")[0]%>
+        </div>
+        </br>
+        <%
+                }
             }
         %>
         <div style="margin-top:10px">

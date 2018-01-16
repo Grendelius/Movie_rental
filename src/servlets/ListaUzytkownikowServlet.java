@@ -1,5 +1,4 @@
 package servlets;
-
 import dao.UzytkownicyDAO;
 import models.Uzytkownik;
 
@@ -28,6 +27,9 @@ public class ListaUzytkownikowServlet extends HttpServlet {
                 uzytkownicyDAO.updateUzytkownika(uzytkownik);
             } else if (akcja.equals("Usuń konto")) {
                 uzytkownicyDAO.deleteUzytkownika(uzytkownik);
+            } else if (isNumber(akcja)){
+                uzytkownik.setIdSklepu(Integer.parseInt(akcja));
+                uzytkownicyDAO.updateUzytkownika(uzytkownik);
             } else {
                 // Zmiana roli
                 uzytkownik.setRola(akcja);
@@ -44,5 +46,16 @@ public class ListaUzytkownikowServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/views/panelUzytkownika.jsp").forward(request, response);
     }
 
-
+    private boolean isNumber(String input)
+    {
+        try
+        {
+            Integer.parseInt(input);
+        }
+        catch(NumberFormatException ex)
+        {
+            return false;
+        }
+        return true;
+    }
 }
