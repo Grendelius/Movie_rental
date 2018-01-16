@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 10 Sty 2018, 15:53
+-- Czas generowania: 16 Sty 2018, 23:45
 -- Wersja serwera: 10.1.28-MariaDB
 -- Wersja PHP: 7.1.11
 
@@ -56,7 +56,7 @@ INSERT INTO `film` (`idFilmu`, `tytul`, `rokProdukcji`, `opis`, `sredniaOcena`, 
 (9, 'Władca Pierścieni: Powrót króla', 2003, 'Zwieńczenie filmowej trylogii wg powieści Tolkiena. Aragorn jednoczy siły Śródziemia, szykując się do bitwy, która ma odwrócić uwagę Saurona od podążających w kierunku Góry Przeznaczenia hobbitów.', 8.2, '2017-12-14', 'http://1.fwcdn.pl/po/18/41/11841/7494142.3.jpg', 'Peter Jackson', 201),
 (10, 'Pulp Fiction', 1994, 'Przemoc i odkupienie w opowieści o dwóch płatnych mordercach pracujących na zlecenie mafii, żonie gangstera, bokserze i parze okradającej ludzi w restauracji.', 8.8, '2017-12-14', 'http://1.fwcdn.pl/po/10/39/1039/7517880.6.jpg', 'Quentin Tarantino', 154),
 (11, 'Incepcja', 2010, 'Czasy, gdy technologia pozwala na wchodzenie w świat snów. Złodziej Cobb ma za zadanie wszczepić myśl do śpiącego umysłu.', 9, '2017-12-14', 'http://1.fwcdn.pl/po/08/91/500891/7354571.3.jpg', 'Christopher Nolan', 148),
-(12, 'Django', 2012, 'Łowca nagród Schultz i czarnoskóry niewolnik Django wyruszają w podróż, aby odbić żonę tego drugiego z rąk bezlitosnego Calvina Candie\'ego.', 7.6, '2017-12-20', 'http://1.fwcdn.pl/po/05/41/620541/7517014.3.jpg', 'Quentin Tarantino', 165);
+(12, 'Django', 2012, 'Łowca nagród Schultz i czarnoskóry niewolnik Django wyruszają w podróż, aby odbić żonę tego drugiego z rąk bezlitosnego Calvina Candie\'ego.', 8.4, '2017-12-20', 'http://1.fwcdn.pl/po/05/41/620541/7517014.3.jpg', 'Quentin Tarantino', 165);
 
 -- --------------------------------------------------------
 
@@ -143,7 +143,6 @@ CREATE TABLE `ocena` (
 --
 
 INSERT INTO `ocena` (`idOceny`, `wartosc`, `idFilmu`, `idUzytkownika`) VALUES
-(28, 7, 12, 4),
 (29, 9, 1, 4),
 (30, 10, 2, 4),
 (31, 8, 3, 4),
@@ -191,7 +190,6 @@ INSERT INTO `ocena` (`idOceny`, `wartosc`, `idFilmu`, `idUzytkownika`) VALUES
 (73, 9, 9, 1),
 (74, 9, 10, 1),
 (75, 7, 11, 1),
-(76, 8, 12, 3),
 (77, 8, 1, 3),
 (78, 10, 2, 3),
 (79, 8, 3, 3),
@@ -202,7 +200,9 @@ INSERT INTO `ocena` (`idOceny`, `wartosc`, `idFilmu`, `idUzytkownika`) VALUES
 (84, 7, 8, 3),
 (85, 8, 9, 3),
 (86, 9, 10, 3),
-(87, 10, 11, 3);
+(87, 10, 11, 3),
+(88, 9, 12, 4),
+(90, 10, 12, 3);
 
 -- --------------------------------------------------------
 
@@ -230,6 +230,18 @@ CREATE TABLE `recenzja` (
   `idFilmu` int(10) NOT NULL,
   `idUzytkownika` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Zrzut danych tabeli `recenzja`
+--
+
+INSERT INTO `recenzja` (`idRecenzji`, `tresc`, `data`, `idFilmu`, `idUzytkownika`) VALUES
+(1, 'Mamy przed sobą  kolejny film skazany na szufladkę \"kultowe\". \"Django\" bowiem to Quentin w pełnej krasie – dobry, zły i brzydki. Dokładnie taki, jakiego lubimy najbardziej. ', '2018-01-13 10:52:27', 12, 4),
+(2, 'Tak jak w przypadku \"Bękartów wojny\", tak i tym razem inspiracji poszukał Tarantino u Włochów. Jego \"Django\" to hołd dla spaghetti westernów: tytuł (oraz piosenka tytułowa) zaczerpnięte zostały z obrazu Sergio Corbucciego. ', '2018-01-13 10:55:19', 12, 5),
+(3, 'Po tak pozytywnych recenzjach i opiniach widzów spodziewałem się filmu świetnego, ale nie tak wybitnego. To nie jest obraz, przy którym trzeba przesadnie wysilać szare komórki, ale to nie przeszkadza, aby \"Django\" był filmem genialnym. ', '2018-01-13 10:58:02', 12, 5),
+(4, 'Jeżeli jakiś film może czuć się pokrzywdzony brakiem Oscara na swoim koncie, to właśnie jest to obraz Franka Darabonta pt. \"Skazani na Shawshank\". Obok tego filmu nie można przejść obojętnie. ', '2018-01-13 21:27:08', 1, 4),
+(5, 'Pozycja absolutnie obligatoryjna dla wszystkich kinomanów, bo o coś bardziej wzruszającego i przepełnionego emocjami po prostu trudno, szczególnie dzisiaj, gdy większość filmów to super produkcje robione za ogromne pieniądze. ', '2018-01-13 21:27:36', 1, 5),
+(6, 'Uważam, że dla każdego, nawet zwykłego \"połykacza\" kina, powinna być to lektura obowiązkowa. Polecam! ', '2018-01-13 21:28:39', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -270,21 +282,21 @@ CREATE TABLE `sklep_film` (
 --
 
 INSERT INTO `sklep_film` (`idSklepu`, `idFilmu`, `iloscFilmow`, `iloscDostepnychFilmow`) VALUES
-(1, 1, 1, 1),
-(1, 2, 2, 2),
+(1, 1, 1, 0),
+(1, 2, 2, 0),
 (1, 3, 5, 5),
 (1, 6, 4, 4),
 (1, 7, 3, 3),
-(1, 8, 5, 5),
+(1, 8, 6, 6),
 (1, 9, 5, 5),
 (1, 10, 3, 3),
 (1, 11, 6, 6),
-(2, 12, 1, 1),
-(2, 1, 1, 0),
+(2, 12, 1, 0),
+(2, 1, 1, 1),
 (2, 2, 11, 11),
 (2, 3, 2, 2),
 (2, 4, 4, 4),
-(2, 5, 1, 1),
+(2, 5, 1, 0),
 (2, 6, 8, 8),
 (2, 7, 7, 7),
 (2, 8, 6, 6),
@@ -300,12 +312,11 @@ INSERT INTO `sklep_film` (`idSklepu`, `idFilmu`, `iloscFilmow`, `iloscDostepnych
 (3, 9, 4, 4),
 (3, 10, 5, 5),
 (3, 11, 6, 6),
-(1, 12, 3, 3),
 (3, 12, 1, 1),
-(1, 5, 2, 2),
-(1, 4, 3, 3),
 (3, 7, 34, 34),
-(3, 1, 2, 2);
+(3, 1, 2, 2),
+(1, 4, 4, 4),
+(1, 5, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -323,19 +334,23 @@ CREATE TABLE `uzytkownik` (
   `miejsceZamieszkania` varchar(255) COLLATE utf8_bin NOT NULL,
   `email` varchar(255) COLLATE utf8_bin NOT NULL,
   `rola` varchar(255) COLLATE utf8_bin NOT NULL,
-  `zablokowany` tinyint(1) NOT NULL
+  `zablokowany` tinyint(1) NOT NULL,
+  `idSklepu` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Zrzut danych tabeli `uzytkownik`
 --
 
-INSERT INTO `uzytkownik` (`idUzytkownika`, `login`, `haslo`, `imie`, `nazwisko`, `numerTelefonu`, `miejsceZamieszkania`, `email`, `rola`, `zablokowany`) VALUES
-(1, 'pracownik', 'a03d603193c93860b74fb3839bc62716', 'pracownik', 'pracownik', '777555333', 'pracownik', 'pracownik@gmail.com', 'pracownik', 0),
-(3, 'admin1', '0192023a7bbd73250516f069df18b500', 'admin1', 'admin1', '111222333', 'admin1', 'admin@gmail.com', 'administrator', 0),
-(4, 'user12345', '80ec08504af83331911f5882349af59d', 'user12345', 'user12345', '987654321', 'user12345', 'user12345@gmail.com', 'klient', 0),
-(5, 'user23456', 'b6a02b73d239c9b22e74c406b6b53fbc', 'user23456', 'user23456', '111111111', 'user23456', 'user23456@gmail.com', 'klient', 0),
-(6, 'user54321', '62d45781b210f9961097d1cfe90fbac5', 'user54321', 'user54321', '222222222', 'user54321', 'user54321@gmail.com', 'klient', 0);
+INSERT INTO `uzytkownik` (`idUzytkownika`, `login`, `haslo`, `imie`, `nazwisko`, `numerTelefonu`, `miejsceZamieszkania`, `email`, `rola`, `zablokowany`, `idSklepu`) VALUES
+(1, 'pracownik', 'a03d603193c93860b74fb3839bc62716', 'pracownik', 'pracownik', '777555333', 'pracownik', 'pracownik@gmail.com', 'pracownik', 0, 1),
+(3, 'admin1', '0192023a7bbd73250516f069df18b500', 'admin1', 'admin1', '111222333', 'admin1', 'admin@gmail.com', 'administrator', 0, 0),
+(4, 'user12345', '80ec08504af83331911f5882349af59d', 'Jan', 'Kowalski', '987654321', 'user12345', 'user12345@gmail.com', 'klient', 0, 0),
+(5, 'user23456', 'b6a02b73d239c9b22e74c406b6b53fbc', 'Stefan', 'Bugno', '111111111', 'user23456', 'user23456@gmail.com', 'klient', 0, 0),
+(6, 'user54321', '62d45781b210f9961097d1cfe90fbac5', 'Ilona', 'Domagała', '222222222', 'user54321', 'user54321@gmail.com', 'klient', 0, 0),
+(7, 'user123456', '4da49c16db42ca04538d629ef0533fe8', 'user123456', 'user123456', '333879845', 'user123456', 'user123456@gmail.com', 'klient', 0, 0),
+(8, 'pracownik2', 'b6d6eaef51cbe3abd95cdc336edd5086', 'pracownik2', 'pracownik2', '239567237', 'pracownik2', 'pracownik2@op.pl', 'pracownik', 0, 2),
+(9, 'pracownik3', '81937a09792938cedcab5d6d8fbde1a9', 'pracownik3', 'pracownik3', '397456231', 'pracownik3', 'pracownik3@o2.pl', 'pracownik', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -373,7 +388,17 @@ INSERT INTO `wypozyczenie` (`idWypozyczenia`, `dataWypozyczenia`, `dataZwrotu`, 
 (13, '2018-01-10 10:41:31', '2018-01-10 10:43:17', 4, 4, 3, NULL, NULL, 'Zakończony'),
 (14, '2018-01-09 17:43:41', '2018-01-10 10:43:27', 6, 12, 2, NULL, NULL, 'Zakończony'),
 (15, '2018-01-10 10:41:46', '2018-01-10 10:43:29', 5, 12, 2, NULL, NULL, 'Zakończony'),
-(17, '2018-01-10 10:45:06', NULL, 4, 1, 2, NULL, NULL, 'W trakcie realizacji');
+(19, '2018-01-14 16:05:54', '2018-01-14 22:54:10', 5, 2, 1, NULL, NULL, 'Zakończony'),
+(20, '2018-01-14 16:05:48', '2018-01-14 22:53:45', 5, 12, 2, NULL, NULL, 'Zakończony'),
+(21, '2018-01-14 16:06:12', '2018-01-14 22:53:50', 6, 2, 1, NULL, NULL, 'Zakończony'),
+(22, '2018-01-14 16:06:03', '2018-01-14 22:53:54', 6, 12, 2, NULL, NULL, 'Zakończony'),
+(23, '2018-01-14 16:05:51', '2018-01-14 22:54:14', 5, 1, 1, NULL, NULL, 'Zakończony'),
+(24, '2018-01-14 16:06:07', '2018-01-14 22:54:19', 6, 1, 1, NULL, NULL, 'Zakończony'),
+(25, '2018-01-14 22:54:33', NULL, 4, 12, 2, NULL, NULL, 'Wypożyczony'),
+(26, '2018-01-14 22:54:37', NULL, 4, 1, 1, NULL, NULL, 'Wypożyczony'),
+(27, '2018-01-14 22:54:40', NULL, 4, 2, 1, NULL, NULL, 'Do odbioru w sklepie'),
+(28, '2018-01-14 22:54:54', NULL, 5, 2, 1, NULL, NULL, 'Wypożyczony'),
+(29, '2018-01-16 07:46:46', NULL, 4, 5, 2, NULL, NULL, 'W trakcie realizacji');
 
 -- --------------------------------------------------------
 
@@ -389,6 +414,15 @@ CREATE TABLE `zamowienie` (
   `idFilmu` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Zrzut danych tabeli `zamowienie`
+--
+
+INSERT INTO `zamowienie` (`idZamowienia`, `dataZamowienia`, `idUzytkownika`, `idSklepu`, `idFilmu`) VALUES
+(1, '2018-01-14 22:55:02', 6, 2, 12),
+(2, '2018-01-14 22:55:05', 6, 1, 1),
+(3, '2018-01-14 22:55:08', 6, 1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -400,6 +434,15 @@ CREATE TABLE `zapowiedz` (
   `linkZapowiedzi` varchar(255) COLLATE utf8_bin NOT NULL,
   `czasTrwania` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Zrzut danych tabeli `zapowiedz`
+--
+
+INSERT INTO `zapowiedz` (`idFilmu`, `linkZapowiedzi`, `czasTrwania`) VALUES
+(1, '<iframe width=\"450\" height=\"252\" src=\"https://www.youtube-nocookie.com/embed/Crx0JKcSt-U?rel=0&amp;controls=0\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>', '00:02:07'),
+(2, '<iframe width=\"450\" height=\"252\" src=\"https://www.youtube-nocookie.com/embed/UppQaEffPOI?rel=0&amp;controls=0\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>', '00:00:30'),
+(12, '<iframe width=\"450\" height=\"252\" src=\"https://www.youtube-nocookie.com/embed/fmwcCsS0-YM?rel=0&amp;controls=0\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>', '00:02:35');
 
 -- --------------------------------------------------------
 
@@ -552,7 +595,7 @@ ALTER TABLE `gatunek`
 -- AUTO_INCREMENT dla tabeli `ocena`
 --
 ALTER TABLE `ocena`
-  MODIFY `idOceny` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `idOceny` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT dla tabeli `platnosc`
@@ -564,7 +607,7 @@ ALTER TABLE `platnosc`
 -- AUTO_INCREMENT dla tabeli `recenzja`
 --
 ALTER TABLE `recenzja`
-  MODIFY `idRecenzji` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `idRecenzji` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT dla tabeli `sklep`
@@ -576,19 +619,19 @@ ALTER TABLE `sklep`
 -- AUTO_INCREMENT dla tabeli `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
-  MODIFY `idUzytkownika` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idUzytkownika` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT dla tabeli `wypozyczenie`
 --
 ALTER TABLE `wypozyczenie`
-  MODIFY `idWypozyczenia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idWypozyczenia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienie`
 --
 ALTER TABLE `zamowienie`
-  MODIFY `idZamowienia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idZamowienia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ograniczenia dla zrzutów tabel
