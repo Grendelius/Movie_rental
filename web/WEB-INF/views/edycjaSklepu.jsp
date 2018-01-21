@@ -15,16 +15,15 @@
         List<Film> filmList = filmDAO.getNajnowszeFilmyList();
         List<SklepFilm> sklepFilmList = sklepFilmDAO.getWybranySklepFilmList(Integer.parseInt(idSklepu));
 
-        boolean temp = false;
+        boolean temp;
         boolean temp2 = false;
 
         for (Film f : filmList) {
-            temp=false;
+            temp = false;
             for (SklepFilm sf : sklepFilmList) {
                 if (f.getIdFilmu() == sf.getIdFilmu()) {
                     temp = true;
                 }
-
             }
 
             if(temp!=true){

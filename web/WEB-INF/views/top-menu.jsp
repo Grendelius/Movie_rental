@@ -47,6 +47,6 @@
 
     </div>
 </div>
-<img src="http://media.comicbook.com/2017/09/avengers-3-infinity-war-banner-story-spoliers-clues-1022009.jpg"
+<img src="http://bohmtheatre.org/wp-content/uploads/2015/09/film-banner.jpg"
      width="900px" height="378px">
 </body>
