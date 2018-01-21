@@ -40,9 +40,9 @@
                 }
             %>
             <%if (zalogowany.getRola().equals("pracownik")) {%>
-            <div style="display:inline-block;width:23px;">
+            <%--<div style="display:inline-block;width:23px;">
                 Id
-            </div>
+            </div>--%>
             <div style="display:inline-block;width:100px;">
                 Imię
             </div>
@@ -90,9 +90,9 @@
             }
             if (zalogowany.getRola().equals("pracownik")) {
         %>
-        <div style="display:inline-block;width:20px">
+        <%--<div style="display:inline-block;width:20px">
             <%=w.getIdUzytkownika()%>
-        </div>
+        </div>--%>
         <div style="display:inline-block;width:100px">
             <%=uzytkownicyDAO.getUzytkownikPoId(w.getIdUzytkownika()).getImie()%>
         </div>
@@ -144,6 +144,7 @@
             <%=w.getDataWypozyczenia().toString().split(" ")[0]%>
         </div>
         </br>
+
         <%
                 }
             }

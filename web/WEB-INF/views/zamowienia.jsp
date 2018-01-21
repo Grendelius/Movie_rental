@@ -40,9 +40,9 @@
                 }
             %>
             <%if (zalogowany.getRola().equals("pracownik")) {%>
-            <div style="display:inline-block;width:20px;">
+            <%--<div style="display:inline-block;width:20px;">
                 Id
-            </div>
+            </div>--%>
             <div style="display:inline-block;width:80px;">
                 Imię
             </div>
@@ -75,9 +75,9 @@
             }
             if (zalogowany.getRola().equals("pracownik")) {
         %>
-        <div style="display:inline-block;width:20px">
+        <%--<div style="display:inline-block;width:20px">
             <%=z.getIdUzytkownika()%>
-        </div>
+        </div>--%>
         <div style="display:inline-block;width:80px">
             <%=uzytkownicyDAO.getUzytkownikPoId(z.getIdUzytkownika()).getImie()%>
         </div>
