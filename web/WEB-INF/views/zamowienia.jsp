@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dao.FilmDAO" %>
 <%@ page import="dao.SklepDAO" %>
+<%@ page import="dao.UzytkownicyDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,6 +12,7 @@
     <%
         Uzytkownik zalogowany = (Uzytkownik) request.getSession().getAttribute("uzytkownik");
         List<Zamowienie> zamowienie = (List<Zamowienie>) request.getAttribute("zamowienie");
+        UzytkownicyDAO uzytkownicyDAO = new UzytkownicyDAO();
         FilmDAO filmDAO = new FilmDAO();
         SklepDAO sklepDAO = new SklepDAO();
     %>
@@ -27,15 +29,25 @@
             <div style="display:inline-block;width:195px;">
                 Nazwa Filmu
             </div>
+            <%if (zalogowany.getRola().equals("klient")) {%>
             <div style="display:inline-block;width:105px;">
                 Nazwa Sklepu
             </div>
             <div style="display:inline-block;width:113px;">
                 Nazwa Ulicy
             </div>
+            <%
+                }
+            %>
             <%if (zalogowany.getRola().equals("pracownik")) {%>
             <div style="display:inline-block;width:20px;">
                 Id
+            </div>
+            <div style="display:inline-block;width:155px;">
+                Imię
+            </div>
+            <div style="display:inline-block;width:155px;">
+                Nazwisko
             </div>
             <% } %>
             <div style="display:inline-block;width:155px;">
@@ -46,24 +58,35 @@
             </div>
         </div>
         <%
-            for (Zamowienie z: zamowienie) {
+            for (Zamowienie z : zamowienie) {
+                if ((zalogowany.getRola().equals("klient")) || (zalogowany.getRola().equals("pracownik") && zalogowany.getIdSklepu() == z.getIdSklepu())) {
         %>
         <div style="display:inline-block;width:210px;">
             <%=(filmDAO.getWybranyFilm(z.getIdFilmu()).getTytul())%>
         </div>
+        <%if (zalogowany.getRola().equals("klient")) {%>
         <div style="display:inline-block;width:90px">
             <%=(sklepDAO.getSklep(z.getIdSklepu()).getNazwaSklepu())%>
         </div>
         <div style="display:inline-block;width:115px">
             <%=(sklepDAO.getSklep(z.getIdSklepu()).getUlica())%>
         </div>
-        <%if (zalogowany.getRola().equals("pracownik")) {%>
+        <%
+            }
+            if (zalogowany.getRola().equals("pracownik")) {
+        %>
         <div style="display:inline-block;width:20px">
             <%=z.getIdUzytkownika()%>
         </div>
+        <div style="display:inline-block;width:155px">
+            <%=uzytkownicyDAO.getUzytkownikPoId(z.getIdUzytkownika()).getImie()%>
+        </div>
+        <div style="display:inline-block;width:155px">
+            <%=uzytkownicyDAO.getUzytkownikPoId(z.getIdUzytkownika()).getNazwisko()%>
+        </div>
         <%}%>
         <div style="display:inline-block;width:155px">
-            <%=z.getDataZamowienia()%>
+            <%=z.getDataZamowienia().toString().split(" ")[0]%>
         </div>
         <div style="display:inline-block;margin-right:10px;margin-left:15px">
             <form method="post" action="zamowienia">
@@ -73,6 +96,7 @@
         </div>
         </br>
         <%
+                }
             }
         %>
         <div style="margin-top:10px">

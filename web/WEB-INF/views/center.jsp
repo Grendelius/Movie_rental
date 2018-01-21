@@ -16,9 +16,10 @@
     String wybranyGatunek = request.getParameter("wybranyGatunek");
     List<Film> film = (List<Film>) request.getAttribute("film");
     GatunekFilmDAO gatunekFilmDAO = new GatunekFilmDAO();
+    List<GatunekFilm> gatunekFilmList = gatunekFilmDAO.getAllGatunekFilm();
+    GatunekDAO gatunekDAO = new GatunekDAO();
     if (wybranyGatunek != null) {
         List<GatunekFilm> gatunekFilm = gatunekFilmDAO.getGatunekFilmPoGatunkuList(Integer.parseInt(wybranyGatunek));
-        GatunekDAO gatunekDAO = new GatunekDAO();
         Gatunek gatunek = gatunekDAO.getWybranyGatunekPoId(Integer.parseInt(wybranyGatunek));
 %>
 <div id="center" style="background-color:red;width:490px;float:left; margin-left:5px;margin-right:5px">
@@ -42,9 +43,11 @@
     <div style="margin-top:5px;margin-left:10px;">
         <a href=""><img style="width:130px;height:170px;" src="<%=f.getOkladka()%>"></a>
         <div style="margin-left:10px;position:absolute;display:inline">
-            <td>Reżyser: <%=f.getRezyser()%></td>
+            <td>Reżyser: <%=f.getRezyser()%>
+            </td>
             </br>
-            <td>Czas trwania: <%=f.getCzasTrwania()%></td>
+            <td>Czas trwania: <%=f.getCzasTrwania()%>
+            </td>
             </br>
             <td>Rok produkcji: <%=f.getRokProdukcji()%>
             </td>
@@ -80,14 +83,14 @@
             <center><font size="4" face="serif">Nowości:</font></center>
         </b>
         <div style="margin-left:10px">
-        <%
-            String info = (String) request.getAttribute("info");
-            String blad = (String) request.getAttribute("blad");
-            if (info != null)
-                out.println(info);
-            else if (blad != null)
-                out.println(blad);
-        %>
+            <%
+                String info = (String) request.getAttribute("info");
+                String blad = (String) request.getAttribute("blad");
+                if (info != null)
+                    out.println(info);
+                else if (blad != null)
+                    out.println(blad);
+            %>
         </div>
     </div>
     <%
@@ -104,7 +107,8 @@
         <a href=""><img style="width:130px;height:170px;" src="<%=f.getOkladka()%>"></a>
 
         <div style="margin-left:10px;position:absolute;display:inline">
-            <td>Reżyser: <%=f.getRezyser()%></td>
+            <td>Reżyser: <%=f.getRezyser()%>
+            </td>
             </br>
             <td>Czas trwania: <%=f.getCzasTrwania()%> min.</td>
             </br>
@@ -114,7 +118,14 @@
             <td>Średnia Ocena: <%=f.getSredniaOcena()%>
             </td>
             </br>
-            <td>Obejrzyj zwiastuny</td>
+            <td>Gatunek:
+                <% for (GatunekFilm gf : gatunekFilmList) {
+                    if (f.getIdFilmu() == gf.getIdFilmu()) {
+                        out.println(gatunekDAO.getWybranyGatunekPoId(gf.getIdGatunku()).getNazwa());
+                    }
+                }
+                %>
+            </td>
             </br></br>
 
             <form method="post" action="wypozycz" style="display:inline">

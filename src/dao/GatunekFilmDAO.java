@@ -14,6 +14,13 @@ public class GatunekFilmDAO {
         em = DBConfig.createEntityManager();
     }
 
+    // Metoda zwraca listę wszystkich GatunekFilm
+    public List<GatunekFilm> getAllGatunekFilm() {
+        List<GatunekFilm> g = this.em.createQuery("select g from GatunekFilm g")
+                .getResultList();
+        return g;
+    }
+
     // Metoda zwraca listę GatunekFilm dla wybranego gatunku
     public List<GatunekFilm> getGatunekFilmPoGatunkuList(int idGatunku) {
         List<GatunekFilm> g = this.em.createQuery("select g from GatunekFilm g where g.idGatunku = :idGatunku")

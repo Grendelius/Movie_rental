@@ -17,6 +17,7 @@ public class Uzytkownik {
     private String email;
     private String rola;
     private boolean zablokowany;
+    private int idSklepu;
 
     @Id
     @GenericGenerator(name="kaugen" , strategy="increment")
@@ -120,6 +121,16 @@ public class Uzytkownik {
         this.zablokowany = zablokowany;
     }
 
+    @Basic
+    @Column(name = "idSklepu")
+    public int getIdSklepu() {
+        return idSklepu;
+    }
+
+    public void setIdSklepu(int idSklepu) {
+        this.idSklepu = idSklepu;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -130,6 +141,7 @@ public class Uzytkownik {
         if (idUzytkownika != that.idUzytkownika) return false;
         if (numerTelefonu != that.numerTelefonu) return false;
         if (zablokowany != that.zablokowany) return false;
+        if (idSklepu != that.idSklepu) return false;
         if (login != null ? !login.equals(that.login) : that.login != null) return false;
         if (haslo != null ? !haslo.equals(that.haslo) : that.haslo != null) return false;
         if (imie != null ? !imie.equals(that.imie) : that.imie != null) return false;
@@ -152,6 +164,9 @@ public class Uzytkownik {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (rola != null ? rola.hashCode() : 0);
         result = 31 * result + (zablokowany ? 1 : 0);
+        result = 31 * result + idSklepu;
         return result;
     }
+
 }
+

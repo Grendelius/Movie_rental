@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 15 Sty 2018, 23:43
+-- Czas generowania: 16 Sty 2018, 23:45
 -- Wersja serwera: 10.1.28-MariaDB
 -- Wersja PHP: 7.1.11
 
@@ -296,7 +296,7 @@ INSERT INTO `sklep_film` (`idSklepu`, `idFilmu`, `iloscFilmow`, `iloscDostepnych
 (2, 2, 11, 11),
 (2, 3, 2, 2),
 (2, 4, 4, 4),
-(2, 5, 1, 1),
+(2, 5, 1, 0),
 (2, 6, 8, 8),
 (2, 7, 7, 7),
 (2, 8, 6, 6),
@@ -334,20 +334,23 @@ CREATE TABLE `uzytkownik` (
   `miejsceZamieszkania` varchar(255) COLLATE utf8_bin NOT NULL,
   `email` varchar(255) COLLATE utf8_bin NOT NULL,
   `rola` varchar(255) COLLATE utf8_bin NOT NULL,
-  `zablokowany` tinyint(1) NOT NULL
+  `zablokowany` tinyint(1) NOT NULL,
+  `idSklepu` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Zrzut danych tabeli `uzytkownik`
 --
 
-INSERT INTO `uzytkownik` (`idUzytkownika`, `login`, `haslo`, `imie`, `nazwisko`, `numerTelefonu`, `miejsceZamieszkania`, `email`, `rola`, `zablokowany`) VALUES
-(1, 'pracownik', 'a03d603193c93860b74fb3839bc62716', 'pracownik', 'pracownik', '777555333', 'pracownik', 'pracownik@gmail.com', 'pracownik', 0),
-(3, 'admin1', '0192023a7bbd73250516f069df18b500', 'admin1', 'admin1', '111222333', 'admin1', 'admin@gmail.com', 'administrator', 0),
-(4, 'user12345', '80ec08504af83331911f5882349af59d', 'user12345', 'user12345', '987654321', 'user12345', 'user12345@gmail.com', 'klient', 0),
-(5, 'user23456', 'b6a02b73d239c9b22e74c406b6b53fbc', 'user23456', 'user23456', '111111111', 'user23456', 'user23456@gmail.com', 'klient', 0),
-(6, 'user54321', '62d45781b210f9961097d1cfe90fbac5', 'user54321', 'user54321', '222222222', 'user54321', 'user54321@gmail.com', 'klient', 0),
-(7, 'user123456', '4da49c16db42ca04538d629ef0533fe8', 'user123456', 'user123456', '333879845', 'user123456', 'user123456@gmail.com', 'klient', 0);
+INSERT INTO `uzytkownik` (`idUzytkownika`, `login`, `haslo`, `imie`, `nazwisko`, `numerTelefonu`, `miejsceZamieszkania`, `email`, `rola`, `zablokowany`, `idSklepu`) VALUES
+(1, 'pracownik', 'a03d603193c93860b74fb3839bc62716', 'pracownik', 'pracownik', '777555333', 'pracownik', 'pracownik@gmail.com', 'pracownik', 0, 1),
+(3, 'admin1', '0192023a7bbd73250516f069df18b500', 'admin1', 'admin1', '111222333', 'admin1', 'admin@gmail.com', 'administrator', 0, 0),
+(4, 'user12345', '80ec08504af83331911f5882349af59d', 'Jan', 'Kowalski', '987654321', 'user12345', 'user12345@gmail.com', 'klient', 0, 0),
+(5, 'user23456', 'b6a02b73d239c9b22e74c406b6b53fbc', 'Stefan', 'Bugno', '111111111', 'user23456', 'user23456@gmail.com', 'klient', 0, 0),
+(6, 'user54321', '62d45781b210f9961097d1cfe90fbac5', 'Ilona', 'Domagała', '222222222', 'user54321', 'user54321@gmail.com', 'klient', 0, 0),
+(7, 'user123456', '4da49c16db42ca04538d629ef0533fe8', 'user123456', 'user123456', '333879845', 'user123456', 'user123456@gmail.com', 'klient', 0, 0),
+(8, 'pracownik2', 'b6d6eaef51cbe3abd95cdc336edd5086', 'pracownik2', 'pracownik2', '239567237', 'pracownik2', 'pracownik2@op.pl', 'pracownik', 0, 2),
+(9, 'pracownik3', '81937a09792938cedcab5d6d8fbde1a9', 'pracownik3', 'pracownik3', '397456231', 'pracownik3', 'pracownik3@o2.pl', 'pracownik', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -391,10 +394,11 @@ INSERT INTO `wypozyczenie` (`idWypozyczenia`, `dataWypozyczenia`, `dataZwrotu`, 
 (22, '2018-01-14 16:06:03', '2018-01-14 22:53:54', 6, 12, 2, NULL, NULL, 'Zakończony'),
 (23, '2018-01-14 16:05:51', '2018-01-14 22:54:14', 5, 1, 1, NULL, NULL, 'Zakończony'),
 (24, '2018-01-14 16:06:07', '2018-01-14 22:54:19', 6, 1, 1, NULL, NULL, 'Zakończony'),
-(25, '2018-01-14 22:54:33', NULL, 4, 12, 2, NULL, NULL, 'Do odbioru w sklepie'),
+(25, '2018-01-14 22:54:33', NULL, 4, 12, 2, NULL, NULL, 'Wypożyczony'),
 (26, '2018-01-14 22:54:37', NULL, 4, 1, 1, NULL, NULL, 'Wypożyczony'),
-(27, '2018-01-14 22:54:40', NULL, 4, 2, 1, NULL, NULL, 'W trakcie realizacji'),
-(28, '2018-01-14 22:54:54', NULL, 5, 2, 1, NULL, NULL, 'Wypożyczony');
+(27, '2018-01-14 22:54:40', NULL, 4, 2, 1, NULL, NULL, 'Do odbioru w sklepie'),
+(28, '2018-01-14 22:54:54', NULL, 5, 2, 1, NULL, NULL, 'Wypożyczony'),
+(29, '2018-01-16 07:46:46', NULL, 4, 5, 2, NULL, NULL, 'W trakcie realizacji');
 
 -- --------------------------------------------------------
 
@@ -615,13 +619,13 @@ ALTER TABLE `sklep`
 -- AUTO_INCREMENT dla tabeli `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
-  MODIFY `idUzytkownika` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idUzytkownika` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT dla tabeli `wypozyczenie`
 --
 ALTER TABLE `wypozyczenie`
-  MODIFY `idWypozyczenia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `idWypozyczenia` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT dla tabeli `zamowienie`
