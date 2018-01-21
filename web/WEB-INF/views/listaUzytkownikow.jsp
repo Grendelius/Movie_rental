@@ -46,20 +46,20 @@
             <div style="display:inline-block;width:180px;">
                 E-mail
             </div>
-            <div style="display:inline-block;width:100px;">
+            <div style="display:inline-block;width:110px;">
                 Rola
             </div>
-            <div style="display:inline-block;width:150px;">
-                Nazwa Sklepu
+            <div style="display:inline-block;width:215px;">
+                Zmień Role
             </div>
             <div style="display:inline-block;width:130px;">
                 Zablokowany
             </div>
-            <div style="display:inline-block;width:205px;">
+            <div style="display:inline-block;width:215px;">
                 Akcja
             </div>
-            <div style="display:inline-block;">
-                Zmień Role
+            <div style="display:inline-block;width:125px;">
+                Nazwa Sklepu
             </div>
             <div style="display:inline-block;">
                 Zmień Sklep
@@ -89,17 +89,19 @@
         <div style="display:inline-block;width:180px">
             <%=u.getEmail()%>
         </div>
-        <div style="display:inline-block;width:125px">
+        <div style="display:inline-block;width:110px">
             <%=u.getRola()%>
         </div>
-        <div style="display:inline-block;width:125px">
-            <%
-                if (u.getIdSklepu() != 0) {
-            %>
-            <%=sklepDAO.getSklep(u.getIdSklepu()).getNazwaSklepu()%>
-            <%
-                }
-            %>
+        <div style="display:inline-block;width:240px;">
+            <form method="post" action="listaUzytkownikow">
+                <select name="akcja" size="1">
+                    <option value="klient">Klient</option>
+                    <option value="pracownik">Pracownik</option>
+                    <option value="administrator">Administrator</option>
+                </select>
+                <input type="hidden" name="idUzytkownika" value="<%=u.getIdUzytkownika()%>"/>
+                <input type="submit" value="Zatwierdź">
+            </form>
         </div>
         <div style="display:inline-block;width:100px">
             <% if (u.isZablokowany() == false) { %>
@@ -111,7 +113,7 @@
         <%
             if (u.getIdUzytkownika() != zalogowany.getIdUzytkownika()) {
         %>
-        <div style="display:inline-block;width:210px">
+        <div style="display:inline-block;width:225px">
             <%
                 if (u.isZablokowany()) {
             %>
@@ -140,18 +142,16 @@
                 </form>
             </div>
         </div>
-        <div style="display:inline-block;margin-right:10px">
-            <form method="post" action="listaUzytkownikow">
-                <select name="akcja" size="1">
-                    <option value="klient">Klient</option>
-                    <option value="pracownik">Pracownik</option>
-                    <option value="administrator">Administrator</option>
-                </select>
-                <input type="hidden" name="idUzytkownika" value="<%=u.getIdUzytkownika()%>"/>
-                <input type="submit" value="Zatwierdź">
-            </form>
+        <div style="display:inline-block;width:115px">
+            <%
+                if (u.getIdSklepu() != 0) {
+            %>
+            <%=sklepDAO.getSklep(u.getIdSklepu()).getNazwaSklepu()%>
+            <%
+                }
+            %>
         </div>
-        <div style="display:inline-block;width:150px">
+        <div style="display:inline-block;width:150px;margin-right:15px">
             <%
                 if (u.getRola().equals("pracownik")) {
             %>
@@ -173,6 +173,7 @@
                 }
             %>
         </div>
+
         <%
             }
         %>

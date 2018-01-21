@@ -28,7 +28,7 @@
     </div>
     <div style="height:420px;overflow-y:auto;overflow-x:auto;margin-right:6px;margin-left:6px;white-space:nowrap;">
         <div style="margin-top:10px;margin-bottom:10px">
-            <div style="display:inline-block;width:195px;">
+            <div style="display:inline-block;width:205px;">
                 Nazwa Filmu
             </div>
             <%if (zalogowany.getRola().equals("klient")) {%>
@@ -42,20 +42,20 @@
                 }
             %>
             <%if (zalogowany.getRola().equals("pracownik")) {%>
-            <div style="display:inline-block;width:20px;">
+            <div style="display:inline-block;width:23px;">
                 Id
             </div>
-            <div style="display:inline-block;width:155px;">
+            <div style="display:inline-block;width:90px;">
                 Imię
             </div>
-            <div style="display:inline-block;width:155px;">
+            <div style="display:inline-block;width:100px;">
                 Nazwisko
             </div>
             <% } %>
             <div style="display:inline-block;width:155px;">
                 Data wypożyczenia
             </div>
-            <div style="display:inline-block">
+            <div style="display:inline-block;margin-right:20px;">
                 Data zwrotu
             </div>
         </div>
@@ -67,10 +67,10 @@
             <%=(filmDAO.getWybranyFilm(w.getIdFilmu()).getTytul())%>
         </div>
         <%if (zalogowany.getRola().equals("klient")) {%>
-        <div style="display:inline-block;width:90px">
+        <div style="display:inline-block;width:100px">
             <%=(sklepDAO.getSklep(w.getIdSklepu()).getNazwaSklepu())%>
         </div>
-        <div style="display:inline-block;width:115px">
+        <div style="display:inline-block;width:125px">
             <%=(sklepDAO.getSklep(w.getIdSklepu()).getUlica())%>
         </div>
         <%
@@ -80,20 +80,23 @@
         <div style="display:inline-block;width:20px">
             <%=w.getIdUzytkownika()%>
         </div>
-        <div style="display:inline-block;width:155px">
+        <div style="display:inline-block;width:90px;">
             <%=uzytkownicyDAO.getUzytkownikPoId(w.getIdUzytkownika()).getImie()%>
         </div>
-        <div style="display:inline-block;width:155px">
+        <div style="display:inline-block;width:110px;">
             <%=uzytkownicyDAO.getUzytkownikPoId(w.getIdUzytkownika()).getNazwisko()%>
         </div>
         <%}%>
-        <div style="display:inline-block;width:155px">
+        <div style="display:inline-block;width:145px">
             <%=w.getDataWypozyczenia().toString().split(" ")[0]%>
         </div>
-        <div style="display:inline-block;margin-right:10px">
+        <div style="display:inline-block;margin-right:20px;">
             <%=w.getDataZwrotu().toString().split(" ")[0]%>
         </div>
         </br>
+        <div>
+
+        </div></br>
         <%
                 }
             }
